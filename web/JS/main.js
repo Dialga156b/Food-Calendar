@@ -1,4 +1,4 @@
-function generateCalendar(month, indent, daysInMonth) {
+function generateCalendar(indent, daysInMonth) {
   const tbody = document.getElementById("calendar-body");
   tbody.innerHTML = "";
   let currentDay = 1;
@@ -60,11 +60,12 @@ function initSortable() {
     },
     animation: 150,
     sort: false,
+    onStart: function (event) {
+      console.log(event);
+      event.item.querySelector("p")?.classList.add("p-none");
+    },
     onEnd: function (event) {
       onMoveEnd(event);
-      if (event.to.children.length == 1) {
-        event.item.querySelector("p")?.classList.remove("p-disabled");
-      }
     },
   });
 
@@ -76,25 +77,8 @@ function initSortable() {
         put: true,
       },
       animation: 230,
-      onMove: function (event) {
-        const dropZone = event.from;
-        const realOldCt = dropZone.children.length;
-        event.dragged.classList.remove("item-placed");
-        event.dragged.querySelector("p")?.classList.remove("p-disabled");
-        if (realOldCt == 1) {
-          dropZone.querySelector("p")?.classList.remove("p-disabled");
-          dropZone.querySelector("p")?.classList.remove("p-none");
-        }
-      },
       onEnd: function (event) {
         onMoveEnd(event);
-        if (event.to.children.length == 1) {
-          event.item.querySelector("p")?.classList.remove("p-disabled");
-          event.item.querySelector("p")?.classList.remove("p-none");
-        } else {
-          event.item.querySelector("p")?.classList.add("p-disabled");
-        }
-        event.item.classList.add("item-placed");
       },
     });
   });
@@ -113,12 +97,13 @@ function populateCalendar() {
             const foodEl = document.getElementById(food).cloneNode(true);
             if (zoneEl && foodEl) {
               foodEl.classList = "item item-placed";
+              foodEl.querySelector("p").classList.add("p-none");
               zoneEl.appendChild(foodEl);
-              if (foodGroups.length > 1) {
+              /*if (foodGroups.length > 1) {
                 zoneEl.querySelectorAll("p").forEach((p) => {
                   p.classList.add("p-none");
                 });
-              }
+              }*/
             }
           });
         });
@@ -135,28 +120,6 @@ function onMoveEnd(event) {
   const oldIndex = event.from.id;
   const newIndex = event.to.id;
   var clone = event.clone;
-  const oldCount = event.from.children.length;
-  const h2Text =
-    item.querySelector("div").querySelector("h2").textContent.trim() ||
-    "Unnamed item";
-
-  if (newIndex !== "recipe-list") {
-    item.classList.add("item-placed");
-    const dropZoneOld = event.from;
-    const dropZone = item.parentElement;
-    if (dropZone && dropZone.classList.contains("drop-zone")) {
-      if (dropZone.children.length > 1) {
-        dropZone.querySelectorAll("p").forEach((p) => {
-          p.classList.add("p-disabled");
-        });
-      }
-    }
-    if (oldCount == 1) {
-      dropZoneOld.querySelectorAll("p").forEach((p) => {
-        p.classList.remove("p-disabled");
-      });
-    }
-  }
   if (clone && item && item.id) {
     clone.id = item.id;
   }
@@ -229,7 +192,7 @@ function handleMonthOffset(int) {
   var firstDayIndex = firstDate.getDay();
   console.log(m);
   newMonth = m;
-  generateCalendar(m, firstDayIndex, daysInMonth);
+  generateCalendar(firstDayIndex, daysInMonth);
   populateCalendar();
   updateMonthName(m);
 }
@@ -240,7 +203,5 @@ const currentMonth = currentDate.getMonth();
 newMonth = currentMonth;
 
 addEventListener("DOMContentLoaded", (event) => {
-  generateCalendar(currentMonth, 1, 31);
-  updateMonthName(newMonth);
-  populateCalendar();
+  handleMonthOffset(0);
 });
