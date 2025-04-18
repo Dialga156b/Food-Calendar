@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <title>Sidebar Calendar Layout</title>
+  <script src="https://cdn.jsdelivr.net/npm/node-chatgpt@1.0.0/build/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+  <script src="/Food-Calendar/web/JS/main.js"></script>
+
+  <link rel="stylesheet" href="/Food-Calendar/web/CSS/calendar.css">
+  <link rel="stylesheet" href="/Food-Calendar/web/CSS/items.css">
+  <link rel="stylesheet" href="/Food-Calendar/web/CSS/sidebar/sidebar.css">
+
+  <script>
+    function dragStartHandler(ev) {
+      ev.dataTransfer.setData("text/plain", ev.target.id); const img = new Image();
+      img.src = "/web/IMG/Blank.png";
+      ev.dataTransfer.setDragImage(img, 10, 10);
+    }
+  </script>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>Recipe Book</h2>
+    <div class="recipe-list" id="recipe-list">
+      <div class="item" ondragstart="dragStartHandler(event);" id="food_1">
+        <img src="/Food-Calendar/web/IMG/Cookie.jpg" class="food-img"></img>
+        <div style="display: flex; flex-direction: column;" class="recipe-schedule">
+          <h2>Chocolate Chip Cookies</h2>
+          <p id="p">Here's where you'd keep a short description of the food. Bla Bla Bla....</p>
+        </div>
+      </div>
+      <div class="item" ondragstart="dragStartHandler(event);" id="food_2">
+        <img src="/Food-Calendar/web/IMG/Placeholder.png" class="food-img"></img>
+        <div style="display: flex; flex-direction: column;" class="recipe-schedule">
+          <h2>Spaghetti Bolognese</h2>
+          <p id="p">The best pasta you'll ever have!! grahh!!</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>New Recipe</h2>
+      <h3>Recipe Description</h3>
+      <textarea type="text" class="recipe-gen-box" id="rdesc" name="rdesc"
+        placeholder="Here, you put your recipe's name, instructions, and ingredients. Based on these instructions, a new recipe will be generated and added to the book."></textarea><br><br>
+      <button class="gen-btn" id="gen-btn" onclick="genRecipe()">generate recipe</button>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="title">
+      <ion-icon name="chevron-back-outline" onclick="handleMonthOffset(-1)"></ion-icon>
+      <h3 id="monthName">May 2025</h3>
+      <ion-icon name="chevron-forward-outline" onclick="handleMonthOffset(1)"></ion-icon>
+    </div>
+
+    <div class="calendar">
+      <table>
+        <thead>
+          <tr class="weekdays">
+            <th>
+              <div>Sun</div>
+            </th>
+            <th>
+              <div>Mon</div>
+            </th>
+            <th>
+              <div>Tue</div>
+            </th>
+            <th>
+              <div>Wed</div>
+            </th>
+            <th>
+              <div>Thu</div>
+            </th>
+            <th>
+              <div>Fri</div>
+            </th>
+            <th>
+              <div>Sat</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="calendar-body"></tbody>
+      </table>
+    </div>
+  </div>
+  <script src="/Food-Calendar/web/JS/main.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

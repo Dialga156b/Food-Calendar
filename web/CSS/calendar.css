@@ -1,0 +1,154 @@
+:root {
+  --main-bg: #ffffff;
+  --main-text: #222222;
+  --accent-color: #525252;
+  --sidebar-bg: #f4f4f465;
+  --calendar-bg: #ffffff;
+  --calendar-border: #dddddd;
+  --event-color: #f3f3f3;
+  --calendar-top: #dfdfdf;
+  --calendar-blank: #ebebeb;
+  --calendar-top-dropshadow: #b6b6b6;
+}
+
+body {
+  margin: 0;
+  font-family: Lato, sans-serif;
+  background: linear-gradient(#efefef, transparent), linear-gradient(to top left, #0c0c0c, transparent), linear-gradient(to top right, #939eab, transparent);
+  color: var(--main-text);
+  display: flex;
+  height: 100vh;
+  background-blend-mode: screen;
+  user-select: none;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1rem;
+  align-content: center;
+}
+
+.calendar {
+  border: 1px solid var(--calendar-border);
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+  align-self: center;
+  width: fit-content;
+  background-color: var(--calendar-bg);
+  box-shadow: 2px 12px 20px 0px #868686;
+}
+
+.main-content h3 {
+  text-align: center;
+  color: rgb(87, 87, 87);
+  font-size: 2.5rem;
+  margin: 26px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  width: 110px;
+  height: 100px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid var(--calendar-border);
+  border-radius: 4px;
+  font-family: Lato;
+  font-size: 1.2rem;
+  padding: 6px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeInSlide 0.3s forwards;
+  border-top: none;
+  min-width: 100px;
+  min-height: 200px;
+}
+
+td .day-number {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #555;
+  position: absolute;
+  top: 4px;
+  left: 6px;
+}
+
+.day-blank,
+.day-lbl {
+  background: var(--calendar-blank);
+  border: none;
+  border-radius: 0px;
+}
+
+.weekdays th {
+  background: var(--calendar-top);
+  border-radius: 0;
+  border: none;
+  z-index: 15;
+}
+
+.weekdays {
+  box-shadow: 1px 5px 12px 3px #b6b6b6;
+  z-index: 15;
+  position: relative;
+}
+
+.weekdays div {
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  top: 35%;
+  position: relative;
+  font-size: 24px;
+}
+
+.day-blank {
+  z-index: inherit
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title ion-icon {
+  margin: 0;
+  width: 2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  transition: all 0.5s ease;
+
+}
+
+.title ion-icon:hover {
+  height: 2rem;
+  opacity: 1;
+}
+
+#monthName {
+  width: 200px;
+}
+
+@keyframes fadeInSlide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chevronAnim {
+  to {
+    opacity: 1;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}

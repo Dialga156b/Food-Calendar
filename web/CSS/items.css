@@ -1,0 +1,163 @@
+.recipe-list .item {
+    padding: 8px 8px;
+    background-color: #ffffffc4;
+    border-radius: 12px;
+    margin-bottom: 6px;
+    cursor: grab;
+    height: fit-content;
+    font-weight: 600;
+    display: flex;
+    gap: 5px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #bfbfbf;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.2s ease-out;
+    transform-origin: 100% 100%;
+}
+
+.recipe-list h2 {
+    margin: 0;
+    height: 30px;
+    z-index: 5;
+}
+
+.recipe-list .item p,
+.recipe-list .item h2 {
+    margin: 0;
+    margin-left: 5px;
+}
+
+.recipe-list .item p {
+    font-size: 0.9rem;
+    height: fit-content;
+}
+
+.recipe-list .food-img {
+    aspect-ratio: 1;
+    border-radius: 5px;
+    height: 68px;
+}
+
+.drop-zone .food-img {
+    display: none;
+}
+
+.drop-zone .item {
+    position: relative;
+    background-color: var(--event-color);
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 8px;
+    cursor: grab;
+    box-shadow: -3px 3px 13px 0px #8f8f8f;
+    max-width: 100%;
+    height: fit-content;
+    width: 100%;
+    z-index: 2;
+    overflow: hidden;
+    transition: background-color 0.4s ease-out;
+    box-sizing: border-box;
+    min-width: fit-content;
+}
+
+.drop-zone .item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(3.5) grayscale(1) blur(1px);
+    opacity: 1;
+    transition: opacity 0.8s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.drop-zone .item>* {
+    position: relative;
+    z-index: 1;
+}
+
+.recipe-schedule p,
+.recipe-schedule h2 {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.item-placed::before {
+    animation: fadeOutBackground 0.8s forwards;
+}
+
+.drop-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 1.2rem;
+    height: calc(100% - 1.2rem);
+    min-height: 40px;
+}
+
+@keyframes fadeOutBackground {
+    to {
+        opacity: 0;
+    }
+}
+
+.item-placed {
+    animation: placementTransform 0.8s forwards;
+    cursor: grab;
+}
+
+
+@keyframes placementTransform {
+    to {
+        background-color: var(--calendar-bg);
+        box-shadow: 0px 0px 0px 0px #b49a9a;
+        padding: 0px 0px;
+        cursor: default;
+        border-radius: 0px;
+        font-size: 8px;
+    }
+}
+
+.item h2 {
+    margin: 0 1px 1px 0;
+}
+
+.drop-zone h2 {
+    font-size: .8rem;
+}
+
+.item p {
+    font-size: 9px;
+}
+
+.item {
+    min-height: fit-content;
+}
+
+.p-disabled {
+    animation: pDisabled 0.6s forwards;
+}
+
+.p-none {
+    font-size: 1px;
+    opacity: 0;
+    display: none;
+}
+
+.recipe-list .item:hover {
+    transform: rotateZ(1deg);
+    transform-origin: 0% 50%;
+    z-index: 5;
+}
+
+@keyframes pDisabled {
+    to {
+        font-size: 1px;
+        opacity: 0;
+        display: none;
+    }
+}
