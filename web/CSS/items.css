@@ -29,11 +29,6 @@
     margin-left: 5px;
 }
 
-.recipe-list .item p {
-    font-size: 0.9rem;
-    height: fit-content;
-}
-
 .recipe-list .food-img {
     aspect-ratio: 1;
     border-radius: 5px;
@@ -127,6 +122,11 @@
     }
 }
 
+td p {
+    display: none;
+}
+
+
 .item h2 {
     margin: 0 1px 1px 0;
 }
@@ -135,14 +135,11 @@
     font-size: .8rem;
 }
 
+
+/*
 .item p {
     font-size: 9px;
 }
-
-.item {
-    min-height: fit-content;
-}
-
 .p-disabled {
     animation: pDisabled 0.6s forwards;
 }
@@ -152,6 +149,13 @@
     opacity: 0;
     display: none;
 }
+*/
+
+.item {
+    min-height: fit-content;
+}
+
+
 
 .recipe-list .item:hover {
     transform: rotateZ(1deg);

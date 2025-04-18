@@ -60,10 +60,6 @@ function initSortable() {
     },
     animation: 150,
     sort: false,
-    onStart: function (event) {
-      console.log(event);
-      event.item.querySelector("p")?.classList.add("p-none");
-    },
     onEnd: function (event) {
       onMoveEnd(event);
     },
@@ -92,18 +88,12 @@ function populateCalendar() {
         const foodGroups = zones[zone];
         foodGroups?.forEach((group) => {
           group.forEach((food) => {
-            //console.log(`Key: ${month}, Zone: ${zone}, Food: ${food}`);
             const zoneEl = document.getElementById(zone);
             const foodEl = document.getElementById(food).cloneNode(true);
             if (zoneEl && foodEl) {
               foodEl.classList = "item item-placed";
-              foodEl.querySelector("p").classList.add("p-none");
+              //foodEl.querySelector("p").classList.add("p-none");
               zoneEl.appendChild(foodEl);
-              /*if (foodGroups.length > 1) {
-                zoneEl.querySelectorAll("p").forEach((p) => {
-                  p.classList.add("p-none");
-                });
-              }*/
             }
           });
         });
