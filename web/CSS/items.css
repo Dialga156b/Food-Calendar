@@ -106,8 +106,13 @@
 }
 
 .item-placed {
-    animation: placementTransform 0.8s forwards;
-    cursor: grab;
+    /* animation: placementTransform 0.8s forwards; */
+    background-color: var(--calendar-bg);
+    box-shadow: 0px 0px 0px 0px #b49a9a;
+    padding: 0px 0px;
+    cursor: default;
+    border-radius: 0px;
+    font-size: 8px;
 }
 
 

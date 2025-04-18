@@ -78,13 +78,19 @@ function initSortable() {
       animation: 230,
       onMove: function (event) {
         const dropZone = event.from;
+        const realOldCt = dropZone.children.length;
         event.dragged.classList.remove("item-placed");
         event.dragged.querySelector("p")?.classList.remove("p-disabled");
+        if (realOldCt == 1) {
+          dropZone.querySelector("p")?.classList.remove("p-disabled");
+          dropZone.querySelector("p")?.classList.remove("p-none");
+        }
       },
       onEnd: function (event) {
         onMoveEnd(event);
         if (event.to.children.length == 1) {
           event.item.querySelector("p")?.classList.remove("p-disabled");
+          event.item.querySelector("p")?.classList.remove("p-none");
         } else {
           event.item.querySelector("p")?.classList.add("p-disabled");
         }
@@ -110,7 +116,7 @@ function populateCalendar() {
               zoneEl.appendChild(foodEl);
               if (foodGroups.length > 1) {
                 zoneEl.querySelectorAll("p").forEach((p) => {
-                  p.classList.add("p-disabled");
+                  p.classList.add("p-none");
                 });
               }
             }
@@ -222,6 +228,7 @@ function handleMonthOffset(int) {
   var firstDate = new Date(y, m, 1);
   var firstDayIndex = firstDate.getDay();
   console.log(m);
+  newMonth = m;
   generateCalendar(m, firstDayIndex, daysInMonth);
   populateCalendar();
   updateMonthName(m);
