@@ -38,8 +38,14 @@ function createDayCell(day) {
   const cell = document.createElement("td");
   const dayLabel = document.createElement("div");
   const today = new Date();
-  if (day == today.getDate() && currentMonth == today.getMonth()) {
+  if (day == today.getDate() && newMonth == today.getMonth()) {
+    mon = today.getMonth();
     cell.className = "today";
+    const star = document.createElement("ion-icon");
+    star.className = "star";
+    star.name = "star";
+    cell.className = "today";
+    cell.appendChild(star);
   }
 
   dayLabel.className = "day-number";
@@ -62,6 +68,7 @@ function initSortable() {
       name: "shared",
       pull: "clone",
       put: false,
+      zIndex: 10000,
     },
     animation: 150,
     sort: false,
@@ -76,6 +83,7 @@ function initSortable() {
         ghostClass: "item",
         pull: true,
         put: true,
+        zIndex: 10000,
       },
       animation: 230,
       onEnd: function (event) {
@@ -97,7 +105,6 @@ function populateCalendar() {
             const foodEl = document.getElementById(food).cloneNode(true);
             if (zoneEl && foodEl) {
               foodEl.classList = "item item-placed";
-              //foodEl.querySelector("p").classList.add("p-none");
               zoneEl.appendChild(foodEl);
             }
           });

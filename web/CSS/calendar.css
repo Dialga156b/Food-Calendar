@@ -4,6 +4,7 @@
   --accent-color: #525252;
   --sidebar-bg: #f4f4f465;
   --calendar-bg: #ffffff;
+  --calendar-today: #fffbda85;
   --calendar-border: #dddddd;
   --event-color: #f3f3f3;
   --calendar-top: #dfdfdf;
@@ -64,13 +65,13 @@ td {
   font-size: 1.2rem;
   padding: 6px;
   position: relative;
+  z-index: 1;
   opacity: 0;
   transform: translateY(-10px);
   animation: fadeInSlide 0.3s forwards;
   border-top: none;
   min-width: 100px;
   min-height: 200px;
-  z-index: inherit;
 }
 
 td .day-number {
@@ -140,9 +141,27 @@ td .day-number {
 }
 
 .today {
-  z-index: 0;
-  background-color: rgb(255, 251, 233);
-  border: #525252 solid 1px
+  background-color: var(--calendar-today);
+}
+
+.star {
+  display: flex;
+  justify-content: right;
+}
+
+.star {
+  position: fixed;
+  right: 0;
+  top: 0;
+  /* or set as needed */
+  width: 15px;
+  height: 15px;
+  aspect-ratio: 1;
+  padding: 5px;
+  /* optional */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes fadeInSlide {
