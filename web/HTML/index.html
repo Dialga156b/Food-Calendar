@@ -15,7 +15,8 @@
 
   <link rel="stylesheet" href="/Food-Calendar/web/CSS/calendar.css">
   <link rel="stylesheet" href="/Food-Calendar/web/CSS/items.css">
-  <link rel="stylesheet" href="/Food-Calendar/web/CSS/sidebar/sidebar.css">
+  <link rel="stylesheet" href="/Food-Calendar/web/CSS/sidebar/sb_main.css">
+  <link rel="stylesheet" href="/Food-Calendar/web/CSS/sidebar/sb_right.css">
 
   <script>
     function dragStartHandler(ev) {
@@ -27,7 +28,7 @@
 </head>
 
 <body>
-  <div class="sidebar">
+  <div class="sidebar" id="sidebarL">
     <h2>Recipe Book</h2>
     <div class="recipe-list" id="recipe-list">
       <div class="item" ondragstart="dragStartHandler(event);" id="food_1">
@@ -52,7 +53,13 @@
         placeholder="Here, you put your recipe's name, instructions, and ingredients. Based on these instructions, a new recipe will be generated and added to the book."></textarea><br><br>
       <button class="gen-btn" id="gen-btn" onclick="genRecipe()">generate recipe</button>
     </div>
+    <div class="flag" id="lToggle" onclick="toggleLeftSidebar()">
+      <ion-icon name="chevron-back-sharp" id="leftSidebarIcon" class="sidebar-hide"></ion-icon>
+    </div>
   </div>
+
+
+
 
   <div class="main-content">
     <div class="title">
@@ -92,7 +99,13 @@
       </table>
     </div>
   </div>
+  <div class="sidebarRight" id="sidebarR">
+    <div class="flag-right" id="rToggle" onclick="toggleRightSidebar()">
+      <ion-icon name="chevron-forward-sharp" id="rightSidebarIcon" class="sidebar-hide"></ion-icon>
+    </div>
+  </div>
   <script src="/Food-Calendar/web/JS/main.js"></script>
+  <script src="/Food-Calendar/web/JS/sidebars.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

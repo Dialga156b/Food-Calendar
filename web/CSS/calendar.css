@@ -12,6 +12,13 @@
   --calendar-top-dropshadow: #b6b6b6;
 }
 
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
+}
+
 body {
   margin: 0;
   font-family: Lato, sans-serif;
@@ -160,6 +167,7 @@ td .day-number {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #4e4e4e;
 }
 
 @keyframes fadeInSlide {

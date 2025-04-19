@@ -1,0 +1,35 @@
+.sidebarRight {
+    width: 400px;
+    background-color: var(--sidebar-bg);
+    padding: 1rem;
+    box-shadow: 5px 0 17px 0px rgb(171 171 171);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-right: 0;
+    transition: margin-right .6s ease;
+}
+
+.flag-right {
+    position: absolute;
+    left: -40px;
+    height: 40px;
+    width: 40px;
+    top: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--sidebar-bg);
+    backdrop-filter: opacity(0);
+    cursor: pointer;
+}
+
+.sidebar-hide {
+    height: 80%;
+    width: 80%;
+}
+
+.sidebar-right-disabled {
+    margin-right: -420px;
+}

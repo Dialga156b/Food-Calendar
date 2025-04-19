@@ -43,7 +43,7 @@ function createDayCell(day) {
     cell.className = "today";
     const star = document.createElement("ion-icon");
     star.className = "star";
-    star.name = "star";
+    star.name = "location-sharp";
     cell.className = "today";
     cell.appendChild(star);
   }
