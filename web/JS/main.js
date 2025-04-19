@@ -37,6 +37,10 @@ function generateCalendar(indent, daysInMonth) {
 function createDayCell(day) {
   const cell = document.createElement("td");
   const dayLabel = document.createElement("div");
+  const today = new Date();
+  if (day == today.getDate() && currentMonth == today.getMonth()) {
+    cell.className = "today";
+  }
 
   dayLabel.className = "day-number";
   dayLabel.textContent = day;
@@ -48,6 +52,7 @@ function createDayCell(day) {
   dropZone.id = `zone_${day}`;
   cell.appendChild(dayLabel);
   cell.appendChild(dropZone);
+
   return cell;
 }
 
@@ -106,50 +111,54 @@ function onMoveEnd(event) {
   if (event.from === event.to) {
     return; // no change
   }
+
   const item = event.item;
   const oldIndex = event.from.id;
   const newIndex = event.to.id;
-  var clone = event.clone;
-  if (clone && item && item.id) {
-    clone.id = item.id;
+  const foodID = item.id;
+  const clone = event.clone;
+
+  if (clone && item && foodID) {
+    clone.id = foodID;
   }
 
-  var foods = JSON.parse(localStorage.getItem("schedule"));
-  if (!foods) {
-    foods = {
-      [newMonth]: {
-        [newIndex]: [[item.id]],
-      },
-    };
-  } else {
-    //add the item to the day, make the month or the day if either doesnt exist
+  let foods = JSON.parse(localStorage.getItem("schedule")) || {};
+  const month = newMonth;
+  const oldDay = oldIndex;
+  const newDay = newIndex;
 
-    if (foods[newMonth] && foods[newMonth][oldIndex]) {
-      foods[newMonth][oldIndex] = foods[newMonth][oldIndex].filter(
-        (entry) => entry[0] !== item.id
-      );
-
-      if (foods[newMonth][oldIndex].length === 0) {
-        delete foods[newMonth][oldIndex];
-      }
-    }
-
-    if (!foods[newMonth]) {
-      foods[newMonth] = {};
-    }
-
-    if (!foods[newMonth][newIndex]) {
-      foods[newMonth][newIndex] = [];
-    }
-
-    const dayEntries = foods[newMonth][newIndex];
-    dayEntries.push([item.id]);
+  if (!foods[month]) {
+    foods[month] = {};
+    //create month
   }
+
+  if (foods[month][oldDay]) {
+    const indexToRemove = foods[month][oldDay].findIndex(
+      (entry) => entry[0] === foodID
+    );
+
+    if (indexToRemove !== -1) {
+      foods[month][oldDay].splice(indexToRemove, 1);
+      // only delete first occurence, this was a problem before
+    }
+
+    if (foods[month][oldDay].length === 0) {
+      delete foods[month][oldDay];
+      //delete day if it's empty
+    }
+  }
+
+  if (!foods[month][newDay]) {
+    foods[month][newDay] = [];
+    //create day
+  }
+
+  foods[month][newDay].push([foodID]);
   localStorage.setItem("schedule", JSON.stringify(foods));
 }
 
 function updateMonthName(index) {
-  const monthNames = [
+  monthNames = [
     "January",
     "February",
     "March",
@@ -192,6 +201,6 @@ const currentDate = new Date();
 const currentMonth = currentDate.getMonth();
 newMonth = currentMonth;
 
-addEventListener("DOMContentLoaded", (event) => {
+addEventListener("DOMContentLoaded", () => {
   handleMonthOffset(0);
 });

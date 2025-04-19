@@ -70,6 +70,7 @@ td {
   border-top: none;
   min-width: 100px;
   min-height: 200px;
+  z-index: inherit;
 }
 
 td .day-number {
@@ -136,6 +137,12 @@ td .day-number {
 
 #monthName {
   width: 200px;
+}
+
+.today {
+  z-index: 0;
+  background-color: rgb(255, 251, 233);
+  border: #525252 solid 1px
 }
 
 @keyframes fadeInSlide {
