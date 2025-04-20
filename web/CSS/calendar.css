@@ -98,7 +98,7 @@ td .day-number {
 }
 
 .weekdays th {
-  background: var(--calendar-top);
+  background-color: var(--calendar-top);
   border-radius: 0;
   border: none;
   z-index: 15;
@@ -108,6 +108,7 @@ td .day-number {
   box-shadow: 1px 5px 12px 3px #b6b6b6;
   z-index: 15;
   position: relative;
+  background-color: var(--calendar-top);
 }
 
 .weekdays div {

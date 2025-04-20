@@ -5,7 +5,7 @@ const rToggleBtn = document.getElementById("rightSidebarIcon");
 const sidebarRight = document.getElementById("sidebarR");
 
 let leftIsHidden = false;
-let rightIsHidden = true;
+let rightIsHidden = false;
 
 function setLeftSidebarState(hidden) {
   leftIsHidden = hidden;
@@ -16,7 +16,7 @@ function setLeftSidebarState(hidden) {
 function setRightSidebarState(hidden) {
   rightIsHidden = hidden;
   sidebarRight.classList.toggle("sidebar-right-disabled", hidden);
-  rToggleBtn.name = hidden ? "chevron-forward-sharp" : "chevron-back-sharp";
+  rToggleBtn.name = hidden ? "chevron-back-sharp" : "chevron-forward-sharp";
 }
 
 function toggleLeftSidebar() {
@@ -27,5 +27,7 @@ function toggleRightSidebar() {
   setRightSidebarState(!rightIsHidden);
 }
 
-setLeftSidebarState(false);
+function setSidebarTab(tab) {}
+
+setLeftSidebarState(true);
 setRightSidebarState(true);

@@ -12,11 +12,9 @@
 }
 
 .flag-right {
-    position: absolute;
-    left: -40px;
+    position: relative;
     height: 40px;
     width: 40px;
-    top: 7%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,4 +30,14 @@
 
 .sidebar-right-disabled {
     margin-right: -420px;
+}
+
+.tab-list {
+    display: flex;
+    position: absolute;
+    gap: 5px;
+    top: 7%;
+    left: -40px;
+    height: fit-content;
+    flex-direction: column;
 }
