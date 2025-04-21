@@ -1,0 +1,25 @@
+.recipe-gen-box {
+    height: 150px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: inset 0px 0px 0px 2px #9d9d9d;
+    border-radius: 5px;
+    padding: 8px;
+    font-family: Lato;
+    box-sizing: border-box;
+}
+
+.gen-btn {
+    height: 40px;
+    width: 130px;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #f8f8f8, transparent), linear-gradient(to top right, #c5c5c5, transparent);
+    font-family: Lato;
+    font-weight: 600;
+}
+
+textarea {
+    resize: none;
+}

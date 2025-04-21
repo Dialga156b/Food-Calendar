@@ -22,7 +22,17 @@ function setRightSidebarState(hidden) {
   rightIsHidden = hidden;
   sidebarRight.classList.toggle("sidebar-right-disabled", hidden);
   rToggleBtn.name = hidden ? "chevron-back-sharp" : "chevron-forward-sharp";
-  rHideDiv.style.display = hidden ? "none" : "flex";
+  //rHideDiv.classList.remove("animate-enter", "animate-exit");
+  void rHideDiv.offsetWidth; // restart anim
+  if (!hidden) {
+    rHideDiv.classList.remove("animate-exit");
+    if (!rHideDiv.classList.contains("animate-enter")) {
+      rHideDiv.classList.add("animate-enter");
+    }
+  } else {
+    rHideDiv.classList.remove("animate-enter");
+    rHideDiv.classList.add("animate-exit");
+  }
 }
 
 function toggleLeftSidebar() {
