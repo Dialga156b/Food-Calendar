@@ -46,21 +46,10 @@
         </div>
       </div>
     </div>
-    <div>
-      <h2>New Recipe</h2>
-      <h3>Recipe Description</h3>
-      <textarea type="text" class="recipe-gen-box" id="rdesc" name="rdesc"
-        placeholder="Here, you put your recipe's name, instructions, and ingredients. Based on these instructions, a new recipe will be generated and added to the book."></textarea><br><br>
-      <button class="gen-btn" id="gen-btn" onclick="genRecipe()">generate recipe</button>
-    </div>
     <div class="flag" id="lToggle" onclick="toggleLeftSidebar()">
       <ion-icon name="chevron-back-sharp" id="leftSidebarIcon" class="sidebar-hide"></ion-icon>
     </div>
   </div>
-
-
-
-
   <div class="main-content">
     <div class="title">
       <ion-icon name="chevron-back-outline" onclick="handleMonthOffset(-1)"></ion-icon>
@@ -104,12 +93,34 @@
       <div class="flag-right" id="rToggle" onclick="toggleRightSidebar()">
         <ion-icon name="chevron-back-sharp" id="rightSidebarIcon" class="sidebar-hide"></ion-icon>
       </div>
-      <div class="flag-right" id="newRecipe" onclick="toggleRightSidebar()">
-        <ion-icon name="add-circle-outline" id="rightSidebarIcon" class="sidebar-hide"></ion-icon>
+      <div class="flag-right" id="newRecipe" onclick="setSidebarTab('newRecipe')">
+        <ion-icon name="add-circle-outline" id="newRecipeTabBtn" class="sidebar-hide"></ion-icon>
       </div>
+      <div class="flag-right" id="todaysRecipe" onclick="setSidebarTab('todaysRecipe')">
+        <ion-icon name="today-outline" id="todayTabBtn" class="sidebar-hide"></ion-icon>
+      </div>
+      <div class="flag-right" id="settings" onclick="setSidebarTab('settings')">
+        <ion-icon name="settings-outline" id="settingsTabBtn" class="sidebar-hide"></ion-icon>
+      </div>
+    </div>
+    <div class="newRecipeTab" id="newRecipeTab">
+      <div>
+        <h2>New Recipe</h2>
+        <h3>Recipe Description</h3>
+        <textarea type="text" class="recipe-gen-box" id="rdesc" name="rdesc"
+          placeholder="Paste your recipe's name, instructions, and ingredients here. Based on these instructions, a new recipe will be generated and added to the book (left)."></textarea><br><br>
+        <button class="gen-btn" id="gen-btn" onclick="genRecipe()">generate recipe</button>
+      </div>
+    </div>
+    <div class="todaysRecipeTab" id="todaysRecipeTab">
+      <p>Today's recipe Tab. Nothing here yet!</p>
+    </div>
+    <div class="settingsTab" id="settingsTab">
+      <p>Settings tab. Nothing here yet!</p>
     </div>
   </div>
   <script src="/Food-Calendar/web/JS/main.js"></script>
+  <script src="/Food-Calendar/web/JS/recipes.js"></script>
   <script src="/Food-Calendar/web/JS/sidebars.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

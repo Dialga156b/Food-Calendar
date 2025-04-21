@@ -3,6 +3,11 @@ const sidebarLeft = document.getElementById("sidebarL");
 
 const rToggleBtn = document.getElementById("rightSidebarIcon");
 const sidebarRight = document.getElementById("sidebarR");
+const rHideDiv = document.getElementById("rToggle");
+
+const newRecipeTab = document.getElementById("newRecipeTab");
+const todaysRecipeTab = document.getElementById("todaysRecipeTab");
+const settingsTab = document.getElementById("settingsTab");
 
 let leftIsHidden = false;
 let rightIsHidden = false;
@@ -17,6 +22,7 @@ function setRightSidebarState(hidden) {
   rightIsHidden = hidden;
   sidebarRight.classList.toggle("sidebar-right-disabled", hidden);
   rToggleBtn.name = hidden ? "chevron-back-sharp" : "chevron-forward-sharp";
+  rHideDiv.style.display = hidden ? "none" : "flex";
 }
 
 function toggleLeftSidebar() {
@@ -27,7 +33,14 @@ function toggleRightSidebar() {
   setRightSidebarState(!rightIsHidden);
 }
 
-function setSidebarTab(tab) {}
+function setSidebarTab(tab) {
+  setRightSidebarState(false);
+  todaysRecipeTab.style.display = "none";
+  settingsTab.style.display = "none";
+  newRecipeTab.style.display = "none";
+  console.log(`${tab}Tab`);
+  document.getElementById(`${tab}Tab`).style.display = "block";
+}
 
 setLeftSidebarState(true);
 setRightSidebarState(true);

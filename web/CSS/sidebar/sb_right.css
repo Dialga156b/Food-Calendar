@@ -24,8 +24,8 @@
 }
 
 .sidebar-hide {
-    height: 80%;
-    width: 80%;
+    height: 75%;
+    width: 75%;
 }
 
 .sidebar-right-disabled {
@@ -40,4 +40,16 @@
     left: -40px;
     height: fit-content;
     flex-direction: column;
+}
+
+.newRecipeTab {
+    display: none;
+}
+
+.todaysMenuTab {
+    display: none;
+}
+
+.settingsTab {
+    display: none;
 }
