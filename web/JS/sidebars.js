@@ -22,7 +22,6 @@ function setRightSidebarState(hidden) {
   rightIsHidden = hidden;
   sidebarRight.classList.toggle("sidebar-right-disabled", hidden);
   rToggleBtn.name = hidden ? "chevron-back-sharp" : "chevron-forward-sharp";
-  //rHideDiv.classList.remove("animate-enter", "animate-exit");
   void rHideDiv.offsetWidth; // restart anim
   if (!hidden) {
     rHideDiv.classList.remove("animate-exit");
