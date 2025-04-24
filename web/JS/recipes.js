@@ -32,7 +32,8 @@ async function genRecipe() {
             properties: {
               recipe_name: {
                 type: "string",
-                description: "The most basic, commonly known name of the recipe.",
+                description:
+                  "The most basic, commonly known name of the recipe.",
               },
               ingredients: {
                 type: "array",
@@ -72,7 +73,11 @@ async function genRecipe() {
               },
               calories: { type: "string", description: "Total calories" },
               servings: { type: "string", description: "Number of servings" },
-              notes: { type: "string", description: "Simple description of the food in less than 10 words." },
+              notes: {
+                type: "string",
+                description:
+                  "Simple description of the food in less than 10 words OR 70 characters.",
+              },
             },
             required: [
               "recipe_name",
@@ -96,8 +101,71 @@ async function genRecipe() {
 
   const args = JSON.parse(
     //return recipe if response is good
-    data.choices?.[0]?.message?.function_call?.arguments || "{}"
+    data.choices?.[0]?.message?.function_call?.arguments || false
   );
+  if (args) {
+    console.log("Recipe JSON:", args);
+    const recipeImgBox = document.getElementById("recipeimgbox");
+    const recipeImgLink = recipeImgBox.value;
+    // heres the fun stuff! basically a copy of the stuff in main.js tho
+    let foods = JSON.parse(localStorage.getItem("recipes")) || {};
+    const recipeID = Object.keys(foods).length || 0;
 
-  console.log("Recipe JSON:", args);
+    foods[recipeID] = {
+      recipe_name: args.recipe_name,
+      ingredients: args.ingredients,
+      cook_time_minutes: args.cook_time_minutes,
+      prep_time_minutes: args.prep_time_minutes,
+      instructions: args.instructions,
+      calories: args.calories,
+      servings: args.servings,
+      notes: args.notes,
+      image: recipeImgLink,
+      id: recipeID,
+    };
+
+    localStorage.setItem("recipes", JSON.stringify(foods));
+
+    reloadRecipes(foods);
+  } else {
+    console.log("Recipe generation failed!");
+  }
+}
+
+function reloadRecipes() {
+  recipes = JSON.parse(localStorage.getItem("recipes")) || {};
+  const rList = document.getElementById("recipe-list");
+  while (rList.firstChild) {
+    rList.removeChild(rList.firstChild);
+  }
+  let recipeCount = Object.keys(recipes).length;
+  for (let index = 0; index < recipeCount; index++) {
+    const recipe = recipes[index];
+    let imgLink = recipe.image;
+    if (imgLink == "") {
+      imgLink = "../IMG/FoodIcon.png";
+    }
+
+    const item = document.createElement("div");
+    const img = document.createElement("img");
+    const container = document.createElement("div");
+    const title = document.createElement("h2");
+    const paragraph = document.createElement("p");
+
+    item.classList.add("item");
+    item.id = recipe.id;
+    img.src = imgLink;
+    img.classList.add("food-img");
+    container.classList.add("recipe-schedule");
+    title.textContent = recipe.recipe_name;
+    paragraph.id = "p";
+    paragraph.textContent = recipe.notes;
+
+    rList.appendChild(item);
+    item.appendChild(img);
+    item.appendChild(container);
+    container.appendChild(title);
+    container.appendChild(paragraph);
+  }
+  return true;
 }

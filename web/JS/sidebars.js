@@ -8,6 +8,7 @@ const rHideDiv = document.getElementById("rToggle");
 const newRecipeTab = document.getElementById("newRecipeTab");
 const todaysRecipeTab = document.getElementById("todaysRecipeTab");
 const settingsTab = document.getElementById("settingsTab");
+const shoppingListTab = document.getElementById("shoppingListTab");
 
 let leftIsHidden = false;
 let rightIsHidden = false;
@@ -21,7 +22,7 @@ function setLeftSidebarState(hidden) {
 function setRightSidebarState(hidden) {
   rightIsHidden = hidden;
   sidebarRight.classList.toggle("sidebar-right-disabled", hidden);
-  rToggleBtn.name = hidden ? "chevron-back-sharp" : "chevron-forward-sharp";
+  rToggleBtn.name = "chevron-forward-sharp";
   void rHideDiv.offsetWidth; // restart anim
   if (!hidden) {
     rHideDiv.classList.remove("animate-exit");
@@ -46,8 +47,9 @@ function setSidebarTab(tab) {
   setRightSidebarState(false);
   todaysRecipeTab.style.display = "none";
   settingsTab.style.display = "none";
+  shoppingListTab.style.display = "none";
   newRecipeTab.style.display = "none";
-  console.log(`${tab}Tab`);
+  //console.log(`${tab}Tab`);
   document.getElementById(`${tab}Tab`).style.display = "block";
 }
 

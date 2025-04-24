@@ -92,23 +92,26 @@ function initSortable() {
     });
   });
 }
-function populateCalendar() {
-  const foods = JSON.parse(localStorage.getItem("schedule"));
-  for (const monthIndex in foods) {
-    if (monthIndex == newMonth) {
-      const zones = foods[monthIndex];
-      for (const zone in zones) {
-        const foodGroups = zones[zone];
-        foodGroups?.forEach((group) => {
-          group.forEach((food) => {
-            const zoneEl = document.getElementById(zone);
-            const foodEl = document.getElementById(food).cloneNode(true);
-            if (zoneEl && foodEl) {
-              foodEl.classList = "item item-placed";
-              zoneEl.appendChild(foodEl);
-            }
+async function populateCalendar() {
+  const done = await reloadRecipes();
+  if (done) {
+    const foods = JSON.parse(localStorage.getItem("schedule"));
+    for (const monthIndex in foods) {
+      if (monthIndex == newMonth) {
+        const zones = foods[monthIndex];
+        for (const zone in zones) {
+          const foodGroups = zones[zone];
+          foodGroups?.forEach((group) => {
+            group.forEach((food) => {
+              const zoneEl = document.getElementById(zone);
+              const foodEl = document.getElementById(food).cloneNode(true);
+              if (zoneEl && foodEl) {
+                foodEl.classList = "item item-placed";
+                zoneEl.appendChild(foodEl);
+              }
+            });
           });
-        });
+        }
       }
     }
   }
@@ -211,3 +214,13 @@ newMonth = currentMonth;
 addEventListener("DOMContentLoaded", () => {
   handleMonthOffset(0);
 });
+document.addEventListener(
+  "dragstart",
+  function (event) {
+    var img = new Image();
+    img.src =
+      "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=";
+    event.dataTransfer.setDragImage(img, 0, 0);
+  },
+  false
+);
