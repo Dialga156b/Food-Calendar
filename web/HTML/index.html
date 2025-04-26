@@ -19,6 +19,7 @@
 
   <link rel="stylesheet" href="/Food-Calendar/web/CSS/sidebar/sb_right.css">
   <link rel="stylesheet" href="/Food-Calendar/web/CSS/sidebar/right/newRecipe.css">
+  <link rel="stylesheet" href="/Food-Calendar/web/CSS/sidebar/right/todaysRecipe.css">
 </head>
 
 <body>
@@ -107,9 +108,33 @@
       </div>
     </div>
     <div class="todaysRecipeTab" id="todaysRecipeTab">
-      <p>Today's recipe Tab. Nothing here yet!</p>
+      <h2>Today</h2>
+      <div class="todays-recipe">
+        <div class="flex-row">
+          <img src="../IMG/FoodIcon.png"></img>
+          <div>
+            <h3 id="">Recipe Name</h3>
+            <p>Recipe Description</p>
+          </div>
+        </div>
+        <div class="flex-row" style="margin-top: 5px;">
+          <textarea placeholder="No Notes"></textarea>
+        </div>
+        <div class="ingredients">
+          <h3>Ingredients</h3>
+          <ul>
+            <li id="ingredient">(Half Cup) Flour</li>
+          </ul>
+        </div>
+        <div class="recipe-steps">
+          <div class="step flex-row" id="step">
+            <h3>1</h3>
+            <p>Recipe goooooooooooooooooooooooooooby</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="shoppingListTab" id="shoppingListTab">
+    <div class=" shoppingListTab" id="shoppingListTab">
       <p>Shopping List. Nothing here yet!</p>
     </div>
     <div class="settingsTab" id="settingsTab">
@@ -118,6 +143,7 @@
   </div>
   <script src="/Food-Calendar/web/JS/recipes.js"></script>
   <script src="/Food-Calendar/web/JS/main.js"></script>
+  <script src="/Food-Calendar/web/JS/todaysRecipe.js"></script>
   <script src="/Food-Calendar/web/JS/sidebars.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

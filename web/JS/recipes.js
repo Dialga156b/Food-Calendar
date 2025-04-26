@@ -73,7 +73,7 @@ async function genRecipe() {
               },
               calories: { type: "string", description: "Total calories" },
               servings: { type: "string", description: "Number of servings" },
-              notes: {
+              desc: {
                 type: "string",
                 description:
                   "Simple description of the food in less than 10 words OR 70 characters.",
@@ -87,7 +87,7 @@ async function genRecipe() {
               "instructions",
               "calories",
               "servings",
-              "notes",
+              "desc",
             ],
             additionalProperties: false,
           },
@@ -119,7 +119,7 @@ async function genRecipe() {
       instructions: args.instructions,
       calories: args.calories,
       servings: args.servings,
-      notes: args.notes,
+      desc: args.desc,
       image: recipeImgLink,
       id: recipeID,
     };
@@ -159,7 +159,7 @@ function reloadRecipes() {
     container.classList.add("recipe-schedule");
     title.textContent = recipe.recipe_name;
     paragraph.id = "p";
-    paragraph.textContent = recipe.notes;
+    paragraph.textContent = recipe.desc;
 
     rList.appendChild(item);
     item.appendChild(img);
