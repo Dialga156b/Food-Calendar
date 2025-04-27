@@ -58,11 +58,11 @@ export default async function handler(req, res) {
                 },
                 cook_time_minutes: {
                   type: "number",
-                  description: "Cooking time in minutes",
+                  description: "Cooking time in minutes, as a number only",
                 },
                 prep_time_minutes: {
                   type: "number",
-                  description: "Prep time in minutes",
+                  description: "Prep time in minutes, as a number only",
                 },
                 instructions: {
                   type: "array",
@@ -79,8 +79,14 @@ export default async function handler(req, res) {
                     additionalProperties: false,
                   },
                 },
-                calories: { type: "string", description: "Total calories" },
-                servings: { type: "string", description: "Number of servings" },
+                calories: {
+                  type: "string",
+                  description: "Total calories, as a number only",
+                },
+                servings: {
+                  type: "string",
+                  description: "Number of servings, as a number only",
+                },
                 desc: {
                   type: "string",
                   description: "Short description (under 10 words)",

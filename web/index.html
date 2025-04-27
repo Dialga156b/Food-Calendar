@@ -95,17 +95,20 @@
       </div>
     </div>
     <div class="newRecipeTab tab" id="newRecipeTab">
-      <div>
-        <h2>New Recipe</h2>
-        <h3>Recipe Description</h3>
-        <h4>Please do not use this to generate recipes!</h4>
-        <textarea type="text" class="recipe-gen-box" id="rdesc" name="rdesc"
-          placeholder="Paste your recipe's name, instructions, and ingredients here. Based on these instructions, a new recipe will be generated and added to the recipe book on the left sidebar."></textarea><br><br>
-        <h3 style="margin-top: 0;">Recipe Image (Optional)</h3>
-        <textarea type="text" class="recipe-img-box" id="recipeimgbox" name="rdesc"
-          placeholder="If you want, paste a link to an image of the recipe here."></textarea><br><br>
-        <button class="gen-btn" id="gen-btn" onclick="genRecipe()">generate recipe</button>
+      <div class="blur-border">
+        <div class="r-gen-container">
+          <h2>New Recipe</h2>
+          <h3>Recipe Description</h3>
+          <h4>Please do not use this to generate recipes!</h4>
+          <textarea type="text" class="recipe-gen-box" id="rdesc" name="rdesc"
+            placeholder="Paste your recipe's name, instructions, and ingredients here. Based on these instructions, a new recipe will be generated and added to the recipe book on the left sidebar."></textarea><br><br>
+          <h3 style="margin-top: 0;">Recipe Image (Optional)</h3>
+          <textarea type="text" class="recipe-img-box" id="recipeimgbox" name="rdesc"
+            placeholder="If you want, paste a link to an image of the recipe here."></textarea><br><br>
+          <button class="gen-btn" id="gen-btn" onclick="genRecipe()">generate recipe</button>
+        </div>
       </div>
+
     </div>
     <div class="todaysRecipeTab tab" id="todaysRecipeTab">
       <h2 id="tr-header">Today</h2>
