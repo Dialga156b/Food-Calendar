@@ -17,7 +17,7 @@ async function sendMessageToChatGPT(userMessage) {
 
     const data = await response.json();
     // Instead of updating HTML here, just return the chatbot's reply
-    return data.choices[0].message.content;
+    return data;
   } catch (error) {
     console.error("Error communicating with serverless function:", error);
     throw error; // Re-throw so the caller can also handle the error
