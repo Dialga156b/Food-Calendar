@@ -51,6 +51,13 @@ function setSidebarTab(tab) {
   newRecipeTab.style.display = "none";
   //console.log(`${tab}Tab`);
   document.getElementById(`${tab}Tab`).style.display = "block";
+  if (tab == "todaysRecipe") {
+    const currentDay = new Date().getDate();
+    const currentMonth = new Date().getMonth();
+    const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+    const recipes = schedule[currentMonth][`zone_${currentDay}`];
+    loadRecipe(recipes);
+  }
 }
 
 setLeftSidebarState(true);
