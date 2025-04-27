@@ -32,6 +32,15 @@ async function genRecipe() {
   containerInner.classList.add("generate-blur");
   containerOuter.classList.add("blur-border");
   genPopup.classList.add("popup-animated");
+  const words = [
+    "Generating..",
+    "Generating..", // more likely
+    "Generating..",
+    "Formatting..",
+    "Taste-Testing..",
+  ];
+  document.getElementById("gen-text").textContent =
+    words[Math.floor(Math.random() * words.length)];
   try {
     const chatGptReply = await sendMessageToChatGPT(input);
 
