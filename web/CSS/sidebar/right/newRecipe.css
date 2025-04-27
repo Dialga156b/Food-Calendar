@@ -65,9 +65,7 @@ textarea {
     height: 30px;
 }
 
-.popup-animated {
-    filter: opacity(1);
-}
+
 
 .generating-popup {
     display: flex;
@@ -80,6 +78,10 @@ textarea {
     gap: 10px;
     filter: opacity(0);
     transition: all .5s ease;
+}
+
+.popup-animated {
+    filter: opacity(1);
 }
 
 .generating-popup h3 {
