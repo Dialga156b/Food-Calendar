@@ -49,6 +49,9 @@ function loadRecipe(ids) {
       cook.textContent = `${recipe.cook_time_minutes}m`;
       servings.textContent = recipe.servings;
       img.src = recipe.image;
+      if (recipe.image == "") {
+        img.src = "../IMG/FoodIcon.png";
+      }
       thisRecipe.querySelector("summary").textContent = recipe.recipe_name;
 
       for (let index = 0; index < recipe.ingredients.length; index++) {

@@ -104,7 +104,7 @@ async function populateCalendar() {
           foodGroups?.forEach((group) => {
             group.forEach((food) => {
               const zoneEl = document.getElementById(zone);
-              const foodEl = document.getElementById(food).cloneNode(true);
+              const foodEl = document.getElementById(food)?.cloneNode(true);
               if (zoneEl && foodEl) {
                 foodEl.classList = "item item-placed";
                 zoneEl.appendChild(foodEl);
