@@ -1,6 +1,5 @@
 async function genRecipe() {
   const input = document.getElementById("rdesc").value;
-  const apiKey = "sk-proj-CcIx3pVjLwo6LLJDMbXPT3BlbkFJ5rxPVXzScwmHOZw43TOC";
   /* 
     If i were to make this project public i would change this file to
     be in the backend rather than frontend. Chatgpt API keys are expensive!
@@ -8,7 +7,7 @@ async function genRecipe() {
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${process.env.OPENAI_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
