@@ -164,7 +164,16 @@ function onMoveEnd(event) {
   }
 
   foods[month][newDay].push([foodID]);
+
+  const today = `zone_${new Date().getDate()}`;
   localStorage.setItem("schedule", JSON.stringify(foods));
+  if (oldDay == today || newDay == today) {
+    const currentDay = today;
+    const currentMonth = new Date().getMonth();
+    const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+    const recipes = schedule[currentMonth][currentDay];
+    loadRecipe(recipes);
+  }
 }
 
 function updateMonthName(index) {
