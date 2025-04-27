@@ -104,7 +104,7 @@ export default async function handler(req, res) {
       }),
     });
 
-    const data = await response.json();
+    const data = await response.json().choices[0].message;
     console.log(data);
     return res.status(200).json(data);
   } catch (error) {
