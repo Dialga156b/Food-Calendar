@@ -71,8 +71,14 @@ async function genRecipe() {
                   additionalProperties: false,
                 },
               },
-              calories: { type: "string", description: "Total calories" },
-              servings: { type: "string", description: "Number of servings" },
+              calories: {
+                type: "string",
+                description: "Total calories, as a number",
+              },
+              servings: {
+                type: "string",
+                description: "Number of servings, as a number",
+              },
               desc: {
                 type: "string",
                 description:
