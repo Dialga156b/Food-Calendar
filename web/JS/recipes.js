@@ -1,6 +1,6 @@
 async function sendMessageToChatGPT(userMessage) {
   try {
-    const response = await fetch("/api/chat", {
+    const response = await fetch("food-calendar-eight.vercel.app/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
