@@ -30,13 +30,8 @@ async function genRecipe() {
   try {
     const chatGptReply = await sendMessageToChatGPT(input);
     console.log("ChatGPT said:", chatGptReply);
-
-    const args = JSON.parse(
-      //return recipe if response is good
-      chatGptReply || false
-    );
-    if (args) {
-      console.log("Recipe JSON:", args);
+    if (chatGptReply) {
+      console.log("Recipe JSON:", chatGptReply);
       const recipeImgBox = document.getElementById("recipeimgbox");
       const recipeImgLink = recipeImgBox.value;
       // heres the fun stuff! basically a copy of the stuff in main.js tho
@@ -44,14 +39,14 @@ async function genRecipe() {
       const recipeID = Object.keys(foods).length || 0;
 
       foods[recipeID] = {
-        recipe_name: args.recipe_name,
-        ingredients: args.ingredients,
-        cook_time_minutes: args.cook_time_minutes,
-        prep_time_minutes: args.prep_time_minutes,
-        instructions: args.instructions,
-        calories: args.calories,
-        servings: args.servings,
-        desc: args.desc,
+        recipe_name: chatGptReply.recipe_name,
+        ingredients: chatGptReply.ingredients,
+        cook_time_minutes: chatGptReply.cook_time_minutes,
+        prep_time_minutes: chatGptReply.prep_time_minutes,
+        instructions: chatGptReply.instructions,
+        calories: chatGptReply.calories,
+        servings: chatGptReply.servings,
+        desc: chatGptReply.desc,
         image: recipeImgLink,
         id: recipeID,
       };
