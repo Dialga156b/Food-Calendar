@@ -50,5 +50,26 @@ textarea {
 
 .gen-inner,
 .gen-outer {
-    transition: all .2s ease;
+    width: 100%;
+    transition: all .5s ease;
+}
+
+.gen-outer {
+    display: flex;
+}
+
+.anim-icon {
+    display: flex;
+    position: absolute;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    z-index: 10;
+    filter: opacity(0);
+    transition: all .5s ease;
+}
+
+.icon-animated {
+    filter: opacity(1);
 }

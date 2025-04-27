@@ -28,8 +28,10 @@ async function genRecipe() {
   const input = document.getElementById("rdesc").value;
   const containerInner = document.getElementById("gen-container-inner");
   const containerOuter = document.getElementById("gen-container-outer");
+  const animIcon = document.getElementById("anim-icon");
   containerInner.classList.add("generate-blur");
   containerOuter.classList.add("blur-border");
+  animIcon.classList.add("icon-animated");
   try {
     const chatGptReply = await sendMessageToChatGPT(input);
 
@@ -66,6 +68,7 @@ async function genRecipe() {
   }
   containerInner.classList.remove("generate-blur");
   containerOuter.classList.remove("blur-border");
+  animIcon.classList.remove("icon-animated");
 }
 
 function reloadRecipes() {
