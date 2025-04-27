@@ -81,7 +81,7 @@ export default async function handler(req, res) {
                 },
                 calories: {
                   type: "string",
-                  description: "Total calories, as a number only",
+                  description: "Calories per serving, as a number only",
                 },
                 servings: {
                   type: "string",
@@ -89,7 +89,8 @@ export default async function handler(req, res) {
                 },
                 desc: {
                   type: "string",
-                  description: "Short description (under 10 words)",
+                  description:
+                    "Short description (under 10 words OR 72 characters)",
                 },
               },
               required: [

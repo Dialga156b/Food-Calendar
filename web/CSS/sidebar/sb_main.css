@@ -62,4 +62,5 @@
     overflow-y: scroll;
     scrollbar-color: #00000057 #ffffff00;
     padding-bottom: 20px;
+    overflow-x: hidden;
 }
