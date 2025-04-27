@@ -1,5 +1,6 @@
 export default async function handler(req, res) {
-  const userMessage = req.body.message;
+  const userMessage = req;
+  console.log(req);
   const key = process.env.OPENAI_KEY;
   //const key = "sk-proj-CcIx3pVjLwo6LLJDMbXPT3BlbkFJ5rxPVXzScwmHOZw43TOC";
   if (!key) {
