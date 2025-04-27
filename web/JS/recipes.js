@@ -1,139 +1,66 @@
+async function sendMessageToChatGPT(userMessage) {
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: userMessage }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    // Instead of updating HTML here, just return the chatbot's reply
+    return data.choices[0].message.content;
+  } catch (error) {
+    console.error("Error communicating with serverless function:", error);
+    throw error; // Re-throw so the caller can also handle the error
+  }
+}
+
 async function genRecipe() {
   const input = document.getElementById("rdesc").value;
-  /* 
-    If i were to make this project public i would change this file to
-    be in the backend rather than frontend. Chatgpt API keys are expensive!
-  */
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.OPENAI_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "gpt-4o",
-      messages: [
-        {
-          role: "system",
-          content: "generate a recipe in structured JSON format",
-        },
-        {
-          role: "user",
-          content: input,
-        },
-      ],
-      functions: [
-        {
-          name: "recipe",
-          description: "Structured recipe generator",
-          parameters: {
-            type: "object",
-            properties: {
-              recipe_name: {
-                type: "string",
-                description:
-                  "The most basic, commonly known name of the recipe.",
-              },
-              ingredients: {
-                type: "array",
-                description: "List of ingredients.",
-                items: {
-                  type: "object",
-                  properties: {
-                    name: { type: "string", description: "Ingredient name" },
-                    amount: { type: "string", description: "Amount required" },
-                  },
-                  required: ["name", "amount"],
-                  additionalProperties: false,
-                },
-              },
-              cook_time_minutes: {
-                type: "number",
-                description: "Cooking time in minutes",
-              },
-              prep_time_minutes: {
-                type: "number",
-                description: "Prep time in minutes",
-              },
-              instructions: {
-                type: "array",
-                description: "Step-by-step instructions",
-                items: {
-                  type: "object",
-                  properties: {
-                    description: {
-                      type: "string",
-                      description: "Step description",
-                    },
-                  },
-                  required: ["description"],
-                  additionalProperties: false,
-                },
-              },
-              calories: {
-                type: "string",
-                description: "Total calories, as a number",
-              },
-              servings: {
-                type: "string",
-                description: "Number of servings, as a number",
-              },
-              desc: {
-                type: "string",
-                description:
-                  "Simple description of the food in less than 10 words OR 70 characters.",
-              },
-            },
-            required: [
-              "recipe_name",
-              "ingredients",
-              "cook_time_minutes",
-              "prep_time_minutes",
-              "instructions",
-              "calories",
-              "servings",
-              "desc",
-            ],
-            additionalProperties: false,
-          },
-        },
-      ],
-      function_call: { name: "recipe" },
-    }),
-  });
 
-  const data = await response.json();
+  try {
+    const chatGptReply = await sendMessageToChatGPT(input);
+    console.log("ChatGPT said:", chatGptReply);
 
-  const args = JSON.parse(
-    //return recipe if response is good
-    data.choices?.[0]?.message?.function_call?.arguments || false
-  );
-  if (args) {
-    console.log("Recipe JSON:", args);
-    const recipeImgBox = document.getElementById("recipeimgbox");
-    const recipeImgLink = recipeImgBox.value;
-    // heres the fun stuff! basically a copy of the stuff in main.js tho
-    let foods = JSON.parse(localStorage.getItem("recipes")) || {};
-    const recipeID = Object.keys(foods).length || 0;
+    const args = JSON.parse(
+      //return recipe if response is good
+      chatGptReply || false
+    );
+    if (args) {
+      console.log("Recipe JSON:", args);
+      const recipeImgBox = document.getElementById("recipeimgbox");
+      const recipeImgLink = recipeImgBox.value;
+      // heres the fun stuff! basically a copy of the stuff in main.js tho
+      let foods = JSON.parse(localStorage.getItem("recipes")) || {};
+      const recipeID = Object.keys(foods).length || 0;
 
-    foods[recipeID] = {
-      recipe_name: args.recipe_name,
-      ingredients: args.ingredients,
-      cook_time_minutes: args.cook_time_minutes,
-      prep_time_minutes: args.prep_time_minutes,
-      instructions: args.instructions,
-      calories: args.calories,
-      servings: args.servings,
-      desc: args.desc,
-      image: recipeImgLink,
-      id: recipeID,
-    };
+      foods[recipeID] = {
+        recipe_name: args.recipe_name,
+        ingredients: args.ingredients,
+        cook_time_minutes: args.cook_time_minutes,
+        prep_time_minutes: args.prep_time_minutes,
+        instructions: args.instructions,
+        calories: args.calories,
+        servings: args.servings,
+        desc: args.desc,
+        image: recipeImgLink,
+        id: recipeID,
+      };
 
-    localStorage.setItem("recipes", JSON.stringify(foods));
+      localStorage.setItem("recipes", JSON.stringify(foods));
 
-    reloadRecipes(foods);
-  } else {
-    console.log("Recipe generation failed!");
+      reloadRecipes(foods);
+    } else {
+      console.log("Recipe generation failed!");
+    }
+  } catch (error) {
+    console.error("Something went wrong:", error);
   }
 }
 
