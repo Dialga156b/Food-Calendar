@@ -108,11 +108,11 @@
       </div>
     </div>
     <div class="todaysRecipeTab" id="todaysRecipeTab">
-      <h2>Today</h2>
+      <h2 id="tr-header">Today</h2>
       <div class="tr-template" id="tr-template">
         <div class="todays-recipe">
           <div class="flex-row">
-            <img src="../IMG/FoodIcon.png"></img>
+            <img src="../IMG/FoodIcon.png" id="tr-img"></img>
             <div>
               <h3 id="tr-name">Recipe Name</h3>
               <p id="tr-desc">Recipe Description</p>
@@ -138,12 +138,12 @@
           </div>
           <div class="ingredients">
             <h3>Ingredients</h3>
-            <ul>
-              <li id="ingredient">(Half Cup) Flour</li>
+            <ul id="ingredients">
+              <li id="ingredient" style="display: none; margin-bottom: 3px;">(Half Cup) Flour</li>
             </ul>
           </div>
-          <div class="recipe-steps">
-            <div class="step flex-row" id="step">
+          <div class="recipe-steps" id="instructions">
+            <div class="step flex-row" style="display: none;" id="step">
               <h3>1</h3>
               <p>Recipe Step Description</p>
             </div>

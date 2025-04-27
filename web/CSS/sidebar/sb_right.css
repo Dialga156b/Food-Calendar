@@ -91,7 +91,7 @@
     display: none;
 }
 
-.todaysMenuTab {
+.todaysRecipeTab {
     display: none;
 }
 
@@ -122,5 +122,5 @@
 .gen-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0px 7px 15px 0px #a3a3a3;
-    ;
+
 }
