@@ -26,9 +26,13 @@ async function sendMessageToChatGPT(userMessage) {
 
 async function genRecipe() {
   const input = document.getElementById("rdesc").value;
-
+  const containerInner = document.getElementById("gen-container-inner");
+  const containerOuter = document.getElementById("gen-container-outer");
+  containerInner.classList.add("generate-blur");
+  containerOuter.classList.add("blur-border");
   try {
     const chatGptReply = await sendMessageToChatGPT(input);
+
     console.log("ChatGPT said:", chatGptReply);
     if (chatGptReply) {
       console.log("Recipe JSON:", chatGptReply);
@@ -60,6 +64,8 @@ async function genRecipe() {
   } catch (error) {
     console.error("Something went wrong:", error);
   }
+  containerInner.classList.remove("generate-blur");
+  containerOuter.classList.remove("blur-border");
 }
 
 function reloadRecipes() {

@@ -112,7 +112,6 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     const args = JSON.parse(
-      //return recipe if response is good
       data.choices?.[0]?.message?.function_call?.arguments || false
     );
 

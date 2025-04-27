@@ -36,3 +36,19 @@
 textarea {
     resize: none;
 }
+
+.blur-border {
+    border: 2px solid #5252526b;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #00000042;
+}
+
+.generate-blur {
+    filter: blur(7px);
+    padding: 10px;
+}
+
+.gen-inner,
+.gen-outer {
+    transition: all .2s ease;
+}
