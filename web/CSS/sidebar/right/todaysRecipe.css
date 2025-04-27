@@ -75,6 +75,7 @@
     box-sizing: border-box;
     background-color: #cdcdcd7c;
     border: 1px solid #a7a7a7;
+    flex: 1;
 }
 
 .factoid h4,
