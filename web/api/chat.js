@@ -103,10 +103,15 @@ export default async function handler(req, res) {
         function_call: { name: "recipe" },
       }),
     });
-
     const data = await response.json();
-    console.log(data.choices[0].message.content);
-    return res.status(200).json({ message: data.choices[0].message.content });
+
+    const args = JSON.parse(
+      //return recipe if response is good
+      data.choices?.[0]?.message?.function_call?.arguments || false
+    );
+
+    console.log(args);
+    return res.status(200).json({ message: args });
   } catch (error) {
     console.error("Error calling OpenAI:", error);
     return res
