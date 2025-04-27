@@ -60,19 +60,28 @@ textarea {
 }
 
 .anim-icon {
+    aspect-ratio: 1 / 1;
+    width: 30px;
+    height: 30px;
+}
+
+.popup-animated {
+    filter: opacity(1);
+}
+
+.generating-popup {
     display: flex;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    aspect-ratio: 1 / 1;
-    width: 30px;
-    height: 30px;
     z-index: 10;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    gap: 10px;
     filter: opacity(0);
     transition: all .5s ease;
 }
 
-.icon-animated {
-    filter: opacity(1);
+.generating-popup h3 {
+    margin: 0;
 }

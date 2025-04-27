@@ -1,16 +1,4 @@
 function loadRecipe(ids) {
-  /*
-    recipe_name: args.recipe_name,
-      ingredients: args.ingredients,
-      cook_time_minutes: args.cook_time_minutes,
-      prep_time_minutes: args.prep_time_minutes,
-      instructions: args.instructions,
-      calories: args.calories,
-      servings: args.servings,
-      desc: args.desc,
-      image: recipeImgLink,
-      id: recipeID,
-    */
   recipes = JSON.parse(localStorage.getItem("recipes")) || {};
   document.querySelectorAll("#tr-active").forEach((element) => {
     element.remove();
