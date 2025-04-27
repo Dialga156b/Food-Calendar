@@ -3,6 +3,7 @@ export default async function handler(req, res) {
   console.log("Received user message:", userMessage);
 
   const key = process.env.OPENAI_KEY;
+  console.log(key);
   if (!key) {
     return res
       .status(500)
