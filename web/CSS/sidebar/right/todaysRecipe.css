@@ -86,3 +86,23 @@
 .tr-template {
     display: none;
 }
+
+.todaysRecipeTab summary {
+    margin: 5px 0;
+    padding: 5px;
+    box-sizing: border-box;
+    width: fit-content;
+    background-color: #ffffff6e;
+    border: 1px solid #a7a7a7;
+    border-radius: 5px;
+}
+
+.recipe-scroll {
+    overflow-y: scroll;
+    scrollbar-color: #00000057 #ffffff00;
+}
+
+.todaysRecipeTab {
+    height: 100vh;
+    flex-direction: column;
+}

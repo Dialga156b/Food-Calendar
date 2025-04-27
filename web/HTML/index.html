@@ -94,7 +94,7 @@
         <ion-icon name="settings-outline" id="settingsTabBtn" class="sidebar-hide"></ion-icon>
       </div>
     </div>
-    <div class="newRecipeTab" id="newRecipeTab">
+    <div class="newRecipeTab tab" id="newRecipeTab">
       <div>
         <h2>New Recipe</h2>
         <h3>Recipe Description</h3>
@@ -107,54 +107,59 @@
         <button class="gen-btn" id="gen-btn" onclick="genRecipe()">generate recipe</button>
       </div>
     </div>
-    <div class="todaysRecipeTab" id="todaysRecipeTab">
+    <div class="todaysRecipeTab tab" id="todaysRecipeTab">
       <h2 id="tr-header">Today</h2>
-      <div class="tr-template" id="tr-template">
-        <div class="todays-recipe">
-          <div class="flex-row">
-            <img src="../IMG/FoodIcon.png" id="tr-img"></img>
-            <div>
-              <h3 id="tr-name">Recipe Name</h3>
-              <p id="tr-desc">Recipe Description</p>
+      <div class="recipe-scroll" id="recipe-scroll">
+        <div class="tr-template" id="tr-template">
+          <details>
+            <summary id="summary">Recipe Name</summary>
+            <div class="todays-recipe">
+              <div class="flex-row">
+                <img src="../IMG/FoodIcon.png" id="tr-img"></img>
+                <div>
+                  <h3 id="tr-name">Recipe Name</h3>
+                  <p id="tr-desc">Recipe Description</p>
+                </div>
+              </div>
+              <div class="recipe-info flex-row">
+                <div class="factoid">
+                  <h4>Calories</h4>
+                  <p id="f-cal">500</p>
+                </div>
+                <div class="factoid">
+                  <h4>Prep Time</h4>
+                  <p id="f-prep">15m</p>
+                </div>
+                <div class="factoid">
+                  <h4>Cook Time</h4>
+                  <p id="f-cook">25m</p>
+                </div>
+                <div class="factoid">
+                  <h4>Servings</h4>
+                  <p id="f-serv">2 - 5</p>
+                </div>
+              </div>
+              <div class="ingredients">
+                <h3>Ingredients</h3>
+                <ul id="ingredients">
+                  <li id="ingredient" style="display: none; margin-bottom: 3px;">(Half Cup) Flour</li>
+                </ul>
+              </div>
+              <div class="recipe-steps" id="instructions">
+                <div class="step flex-row" style="display: none;" id="step">
+                  <h3>1</h3>
+                  <p>Recipe Step Description</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="recipe-info flex-row">
-            <div class="factoid">
-              <h4>Calories</h4>
-              <p id="f-cal">500</p>
-            </div>
-            <div class="factoid">
-              <h4>Prep Time</h4>
-              <p id="f-prep">15m</p>
-            </div>
-            <div class="factoid">
-              <h4>Cook Time</h4>
-              <p id="f-cook">25m</p>
-            </div>
-            <div class="factoid">
-              <h4>Servings</h4>
-              <p id="f-serv">2 - 5</p>
-            </div>
-          </div>
-          <div class="ingredients">
-            <h3>Ingredients</h3>
-            <ul id="ingredients">
-              <li id="ingredient" style="display: none; margin-bottom: 3px;">(Half Cup) Flour</li>
-            </ul>
-          </div>
-          <div class="recipe-steps" id="instructions">
-            <div class="step flex-row" style="display: none;" id="step">
-              <h3>1</h3>
-              <p>Recipe Step Description</p>
-            </div>
-          </div>
+          </details>
         </div>
       </div>
     </div>
-    <div class=" shoppingListTab" id="shoppingListTab">
+    <div class=" shoppingListTab tab" id="shoppingListTab">
       <p>Shopping List. Nothing here yet!</p>
     </div>
-    <div class="settingsTab" id="settingsTab">
+    <div class="settingsTab tab" id="settingsTab">
       <p>Settings tab. Nothing here yet!</p>
     </div>
   </div>

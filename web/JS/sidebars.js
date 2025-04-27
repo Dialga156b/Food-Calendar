@@ -50,7 +50,7 @@ function setSidebarTab(tab) {
   shoppingListTab.style.display = "none";
   newRecipeTab.style.display = "none";
   //console.log(`${tab}Tab`);
-  document.getElementById(`${tab}Tab`).style.display = "block";
+  document.getElementById(`${tab}Tab`).style.display = "flex";
   if (tab == "todaysRecipe") {
     const currentDay = new Date().getDate();
     const currentMonth = new Date().getMonth();

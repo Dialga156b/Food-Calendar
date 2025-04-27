@@ -20,7 +20,7 @@ function loadRecipe(ids) {
     headerLbl.textContent = "Nothing scheduled for today";
   } else {
     headerLbl.textContent = "Today";
-    const tab = document.getElementById("todaysRecipeTab");
+    const tab = document.getElementById("recipe-scroll");
     const rTemplate = document.getElementById("tr-template");
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];
@@ -49,6 +49,7 @@ function loadRecipe(ids) {
       cook.textContent = `${recipe.cook_time_minutes}m`;
       servings.textContent = recipe.servings;
       img.src = recipe.image;
+      thisRecipe.querySelector("summary").textContent = recipe.recipe_name;
 
       for (let index = 0; index < recipe.ingredients.length; index++) {
         const thisIngredientEl = ingredient.cloneNode(true);
