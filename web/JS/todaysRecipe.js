@@ -36,7 +36,7 @@ function loadRecipe(ids) {
       servings.textContent = recipe.servings;
       img.src = recipe.image;
       if (recipe.image == "") {
-        img.src = "../IMG/FoodIcon.png";
+        img.src = "IMG/FoodIcon.png";
       }
       thisRecipe.querySelector("summary").textContent = recipe.recipe_name;
 

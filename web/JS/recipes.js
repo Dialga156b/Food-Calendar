@@ -82,7 +82,7 @@ function reloadRecipes() {
     const recipe = recipes[index];
     let imgLink = recipe.image;
     if (imgLink == "") {
-      imgLink = "../IMG/FoodIcon.png";
+      imgLink = "IMG/FoodIcon.png";
     }
 
     const item = document.createElement("div");
