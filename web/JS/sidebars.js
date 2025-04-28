@@ -49,14 +49,18 @@ function setSidebarTab(tab) {
   settingsTab.style.display = "none";
   shoppingListTab.style.display = "none";
   newRecipeTab.style.display = "none";
-  //console.log(`${tab}Tab`);
   document.getElementById(`${tab}Tab`).style.display = "flex";
-  if (tab == "todaysRecipe") {
+  if (tab === "todaysRecipe") {
     const currentDay = new Date().getDate();
     const currentMonth = new Date().getMonth();
     const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
-    const recipes = schedule[currentMonth][`zone_${currentDay}`];
-    loadRecipe(recipes);
+    const monthSchedule = schedule[currentMonth];
+    const recipes = monthSchedule?.[`zone_${currentDay}`];
+    if (recipes) {
+      loadRecipe(recipes);
+    } else {
+      loadRecipe(false);
+    }
   }
 }
 

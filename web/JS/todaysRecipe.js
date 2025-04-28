@@ -14,9 +14,6 @@ function loadRecipe(ids) {
       const id = ids[index];
       const recipe = recipes[id];
       const thisRecipe = rTemplate.cloneNode(true);
-      tab.appendChild(thisRecipe);
-      thisRecipe.id = "tr-active";
-      thisRecipe.classList = "tr-active";
       const rName = thisRecipe.querySelector("#tr-name");
       const rDesc = thisRecipe.querySelector("#tr-desc");
       const img = thisRecipe.querySelector("#tr-img");
@@ -27,8 +24,9 @@ function loadRecipe(ids) {
       const ingredient = thisRecipe.querySelector("#ingredient");
       const step = thisRecipe.querySelector("#step");
 
-      const stepNum = step.children[0];
-      const stepName = step.children[1];
+      tab.appendChild(thisRecipe);
+      thisRecipe.id = "tr-active";
+      thisRecipe.classList = "tr-active";
 
       rName.textContent = recipe.recipe_name;
       rDesc.textContent = recipe.desc;
