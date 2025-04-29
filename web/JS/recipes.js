@@ -7,7 +7,7 @@ async function sendMessageToChatGPT(userMessage) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({ message: userMessage, type: "recipe" }),
       }
     );
 

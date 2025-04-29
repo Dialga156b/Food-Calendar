@@ -1,4 +1,4 @@
-export default async function handler(req, res, type) {
+export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -8,6 +8,8 @@ export default async function handler(req, res, type) {
   }
 
   const userMessage = req.body.message; // <-- FIXED HERE
+  const type = req.body.type;
+  console.log(type);
   console.log("Received user message:", userMessage);
   const key = process.env.OPENAI_KEY;
   console.log(key);
@@ -24,7 +26,7 @@ export default async function handler(req, res, type) {
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
       },
-      body: [JSON.parse(getAIInstructions())],
+      body: [JSON.parse(getAIInstructions(type))],
     });
     const data = await response.json();
 
