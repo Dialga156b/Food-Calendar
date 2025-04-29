@@ -99,7 +99,7 @@ function getAIInstructions(type, userMessage) {
             strict: true,
           },
         ],
-        function_call: { name: "recipe" },
+        function_call: { name: "shopping_list" },
       };
       break;
     default:
