@@ -1,6 +1,10 @@
-import { getDaysInMonth, getRecipeInfoFromID } from "./utility.js";
+import {
+  getDaysInMonth,
+  getRecipeInfoFromID,
+  sendMessageToChatGPT,
+} from "./utility.js";
 
-function genShoppingList(days) {
+async function genShoppingList(days) {
   const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
   let today = new Date().getDate();
   let currentMonth = new Date().getMonth();
@@ -21,7 +25,11 @@ function genShoppingList(days) {
     }
     currentDay++;
   }
-  console.log(list);
+  const response = await sendMessageToChatGPT(
+    "1/2 cup of flour",
+    "ingredients"
+  );
+  console.log(response);
 }
 
 window.genShoppingList = genShoppingList;

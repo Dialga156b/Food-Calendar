@@ -1,29 +1,4 @@
-async function sendMessageToChatGPT(userMessage) {
-  try {
-    const response = await fetch(
-      "https://food-calendar-eight.vercel.app/api/chat",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: userMessage, type: "recipe" }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    // Instead of updating HTML here, just return the chatbot's reply
-    return data.message;
-  } catch (error) {
-    console.error("Error communicating with serverless function:", error);
-    throw error; // Re-throw so the caller can also handle the error
-  }
-}
-
+import { sendMessageToChatGPT } from "./utility.js";
 async function genRecipe() {
   const input = document.getElementById("rdesc").value;
   const containerInner = document.getElementById("gen-container-inner");
@@ -33,7 +8,7 @@ async function genRecipe() {
   containerOuter.classList.add("blur-border");
   genPopup.classList.add("popup-animated");
   try {
-    const chatGptReply = await sendMessageToChatGPT(input);
+    const chatGptReply = await sendMessageToChatGPT(input, "recipe");
 
     console.log("ChatGPT said:", chatGptReply);
     if (chatGptReply) {
@@ -72,7 +47,7 @@ async function genRecipe() {
 }
 
 function reloadRecipes() {
-  recipes = JSON.parse(localStorage.getItem("recipes")) || {};
+  const recipes = JSON.parse(localStorage.getItem("recipes")) || {};
   const rList = document.getElementById("recipe-list");
   while (rList.firstChild) {
     rList.removeChild(rList.firstChild);
@@ -108,3 +83,5 @@ function reloadRecipes() {
   }
   return true;
 }
+
+export { reloadRecipes };

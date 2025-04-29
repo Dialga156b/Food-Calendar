@@ -1,3 +1,4 @@
+import { reloadRecipes } from "./recipes.js";
 function generateCalendar(indent, daysInMonth) {
   const tbody = document.getElementById("calendar-body");
   tbody.innerHTML = "";
@@ -23,7 +24,7 @@ function generateCalendar(indent, daysInMonth) {
       if (currentDay <= daysInMonth) {
         row.appendChild(createDayCell(currentDay++));
       } else {
-        cell = document.createElement("td");
+        let cell = document.createElement("td");
         cell.className = "day-blank";
         row.appendChild(cell);
       }
@@ -39,7 +40,7 @@ function createDayCell(day) {
   const dayLabel = document.createElement("div");
   const today = new Date();
   if (day == today.getDate() && newMonth == today.getMonth()) {
-    mon = today.getMonth();
+    //let mon = today.getMonth();
     cell.className = "today";
     const star = document.createElement("ion-icon");
     star.className = "star";
@@ -104,7 +105,7 @@ async function populateCalendar() {
           foodGroups?.forEach((group) => {
             group.forEach((food) => {
               const zoneEl = document.getElementById(zone);
-              const foodEl = document.getElementById(food)?.cloneNode(true);
+              const foodEl = document.getElementById(food).cloneNode(true);
               if (zoneEl && foodEl) {
                 foodEl.classList = "item item-placed";
                 zoneEl.appendChild(foodEl);
@@ -177,7 +178,7 @@ function onMoveEnd(event) {
 }
 
 function updateMonthName(index) {
-  monthNames = [
+  let monthNames = [
     "January",
     "February",
     "March",
@@ -202,8 +203,8 @@ function handleMonthOffset(int) {
 
   const tempDate = new Date();
   tempDate.setMonth(currentMonth + currentMonthOffset);
-  y = tempDate.getFullYear();
-  m = tempDate.getMonth();
+  var y = tempDate.getFullYear();
+  var m = tempDate.getMonth();
 
   var daysInMonth = new Date(y, m + 1, 0).getDate();
   var firstDate = new Date(y, m, 1);
@@ -218,7 +219,7 @@ function handleMonthOffset(int) {
 var currentMonthOffset = 0;
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth();
-newMonth = currentMonth;
+var newMonth = currentMonth; // newMonth isn't defined???? WHAT???
 
 addEventListener("DOMContentLoaded", () => {
   handleMonthOffset(0);

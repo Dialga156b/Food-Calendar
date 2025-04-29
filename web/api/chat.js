@@ -31,12 +31,10 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    console.log(data);
     const args = JSON.parse(
       data.choices?.[0]?.message?.function_call?.arguments || false
     );
 
-    console.log(args);
     return res.status(200).json({ message: args });
   } catch (error) {
     console.error("Error calling OpenAI:", error);
@@ -50,6 +48,58 @@ function getAIInstructions(type, userMessage) {
   console.log("getAIInstructions full");
   switch (type) {
     case "ingredients":
+      return {
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: "generate a shopping list in structured JSON format",
+          },
+          {
+            role: "user",
+            content: userMessage, // <-- using the real user message
+          },
+        ],
+        functions: [
+          {
+            name: "shopping_list",
+            schema: {
+              type: "object",
+              properties: {
+                ingredients: {
+                  type: "array",
+                  description: "List of ingredients required for the shopping.",
+                  items: {
+                    type: "object",
+                    properties: {
+                      item_name: {
+                        type: "string",
+                        description: "Name of the ingredient.",
+                      },
+                      quantity: {
+                        type: "number",
+                        description:
+                          "The number of bags/boxes/units needed, rounded up to the nearest whole number.",
+                      },
+                      minimum_amount: {
+                        type: "string",
+                        description:
+                          "A string stating the minimum amount of this item needed.",
+                      },
+                    },
+                    required: ["item_name", "quantity", "minimum_amount"],
+                    additionalProperties: false,
+                  },
+                },
+              },
+              required: ["ingredients"],
+              additionalProperties: false,
+            },
+            strict: true,
+          },
+        ],
+        function_call: { name: "recipe" },
+      };
       break;
     default:
       return {
