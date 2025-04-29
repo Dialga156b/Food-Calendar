@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     const args = JSON.parse(
       data.choices?.[0]?.message?.function_call?.arguments || false
     );
-    console.log(data);
+    console.log(data.choices?.[0]?.message);
     console.log(args);
     return res.status(200).json({ message: args });
   } catch (error) {
