@@ -20,16 +20,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    const instructions = JSON.parse(getAIInstructions(type, userMessage));
-    console.log(instructions);
+    const instructions = getAIInstructions(type, userMessage); // now it's an object
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
       },
-      body: instructions,
+      body: JSON.stringify(instructions), // properly stringified
     });
+
     const data = await response.json();
     console.log(data);
     const args = JSON.parse(
@@ -52,7 +52,7 @@ function getAIInstructions(type, userMessage) {
     case "ingredients":
       break;
     default:
-      return JSON.stringify({
+      return {
         model: "gpt-4o",
         messages: [
           {
@@ -144,7 +144,7 @@ function getAIInstructions(type, userMessage) {
           },
         ],
         function_call: { name: "recipe" },
-      });
+      };
       break;
   }
 }
