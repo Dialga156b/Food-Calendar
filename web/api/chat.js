@@ -36,85 +36,7 @@ export default async function handler(req, res) {
             content: userMessage, // <-- using the real user message
           },
         ],
-        functions: [
-          {
-            name: "recipe",
-            description: "Structured recipe generator",
-            parameters: {
-              type: "object",
-              properties: {
-                recipe_name: {
-                  type: "string",
-                  description:
-                    "The most basic, commonly known name of the recipe.",
-                },
-                ingredients: {
-                  type: "array",
-                  description: "List of ingredients.",
-                  items: {
-                    type: "object",
-                    properties: {
-                      name: { type: "string", description: "Ingredient name" },
-                      amount: {
-                        type: "string",
-                        description: "Amount required",
-                      },
-                    },
-                    required: ["name", "amount"],
-                    additionalProperties: false,
-                  },
-                },
-                cook_time_minutes: {
-                  type: "number",
-                  description: "Cooking time in minutes, as a number only",
-                },
-                prep_time_minutes: {
-                  type: "number",
-                  description: "Prep time in minutes, as a number only",
-                },
-                instructions: {
-                  type: "array",
-                  description: "Step-by-step instructions",
-                  items: {
-                    type: "object",
-                    properties: {
-                      description: {
-                        type: "string",
-                        description: "Step description",
-                      },
-                    },
-                    required: ["description"],
-                    additionalProperties: false,
-                  },
-                },
-                calories: {
-                  type: "string",
-                  description: "Calories per serving, as a number only",
-                },
-                servings: {
-                  type: "string",
-                  description: "Number of servings, as a number only",
-                },
-                desc: {
-                  type: "string",
-                  description:
-                    "Short description (under 10 words OR 72 characters)",
-                },
-              },
-              required: [
-                "recipe_name",
-                "ingredients",
-                "cook_time_minutes",
-                "prep_time_minutes",
-                "instructions",
-                "calories",
-                "servings",
-                "desc",
-              ],
-              additionalProperties: false,
-            },
-          },
-        ],
+        functions: [JSON.parse(getAIInstructions())],
         function_call: { name: "recipe" },
       }),
     });
@@ -131,5 +53,91 @@ export default async function handler(req, res) {
     return res
       .status(500)
       .json({ error: "Server error", detail: error.message });
+  }
+}
+
+function getAIInstructions(type) {
+  console.log("getAIInstructions");
+  switch (type) {
+    case "ingredients":
+      break;
+    default:
+      return JSON.stringify({
+        name: "recipe",
+        description: "Structured recipe generator",
+        parameters: {
+          type: "object",
+          properties: {
+            recipe_name: {
+              type: "string",
+              description: "The most basic, commonly known name of the recipe.",
+            },
+            ingredients: {
+              type: "array",
+              description: "List of ingredients.",
+              items: {
+                type: "object",
+                properties: {
+                  name: { type: "string", description: "Ingredient name" },
+                  amount: {
+                    type: "string",
+                    description: "Amount required",
+                  },
+                },
+                required: ["name", "amount"],
+                additionalProperties: false,
+              },
+            },
+            cook_time_minutes: {
+              type: "number",
+              description: "Cooking time in minutes, as a number only",
+            },
+            prep_time_minutes: {
+              type: "number",
+              description: "Prep time in minutes, as a number only",
+            },
+            instructions: {
+              type: "array",
+              description: "Step-by-step instructions",
+              items: {
+                type: "object",
+                properties: {
+                  description: {
+                    type: "string",
+                    description: "Step description",
+                  },
+                },
+                required: ["description"],
+                additionalProperties: false,
+              },
+            },
+            calories: {
+              type: "string",
+              description: "Calories per serving, as a number only",
+            },
+            servings: {
+              type: "string",
+              description: "Number of servings, as a number only",
+            },
+            desc: {
+              type: "string",
+              description:
+                "Short description (under 10 words OR 72 characters)",
+            },
+          },
+          required: [
+            "recipe_name",
+            "ingredients",
+            "cook_time_minutes",
+            "prep_time_minutes",
+            "instructions",
+            "calories",
+            "servings",
+            "desc",
+          ],
+          additionalProperties: false,
+        },
+      });
+      break;
   }
 }
