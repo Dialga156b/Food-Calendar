@@ -1,5 +1,5 @@
 function loadRecipe(ids) {
-  recipes = JSON.parse(localStorage.getItem("recipes")) || {};
+  const recipes = JSON.parse(localStorage.getItem("recipes")) || {};
   document.querySelectorAll("#tr-active").forEach((element) => {
     element.remove();
   });

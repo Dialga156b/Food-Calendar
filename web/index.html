@@ -20,6 +20,10 @@
   <link rel="stylesheet" href="CSS/sidebar/sb_right.css">
   <link rel="stylesheet" href="CSS/sidebar/right/newRecipe.css">
   <link rel="stylesheet" href="CSS/sidebar/right/todaysRecipe.css">
+  <link rel="stylesheet" href="CSS/sidebar/right/shoppingList.css">
+
+  <script type="module" src="JS/utility.js"></script>
+
 </head>
 
 <body>
@@ -166,17 +170,30 @@
         </div>
       </div>
     </div>
-    <div class=" shoppingListTab tab" id="shoppingListTab">
-      <p>Shopping List. Nothing here yet!</p>
+    <div class="shoppingListTab tab" id="shoppingListTab">
+      <h2>Shopping List</h2>
+      <div class="timeframe-form">
+        <div class="flex-row">
+          <h3>List Timeframe</h3>
+          <select id="timeframe-select">
+            <option value="7">Next 7 days</option>
+            <option value="14">Next 14 days</option>
+          </select>
+        </div>
+        <button onclick="genShoppingList(document.getElementById('timeframe-select').value);">Generate List</button>
+      </div>
     </div>
     <div class="settingsTab tab" id="settingsTab">
       <p>Settings tab. Nothing here yet!</p>
     </div>
   </div>
+
   <script src="JS/recipes.js"></script>
   <script src="JS/main.js"></script>
   <script src="JS/todaysRecipe.js"></script>
   <script src="JS/sidebars.js"></script>
+  <script type="module" src="JS/shoppinglist.js"></script>
+
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

@@ -1,0 +1,44 @@
+.timeframe-form {
+    background-color: #a0a0a01e;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid rgba(119, 119, 119, 0.5);
+}
+
+.timeframe-form .flex-row {
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+.timeframe-form h3 {
+    margin: 0;
+}
+
+.timeframe-form select {
+    flex: 1;
+    border-radius: 5px;
+    height: 30px;
+    font-family: Lato;
+    font-weight: 600;
+}
+
+
+.timeframe-form button {
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(110, 110, 110);
+    height: 40px;
+    width: 100%;
+    background: linear-gradient(to bottom, #f8f8f8, transparent), linear-gradient(to top right, #c5c5c5, transparent);
+    font-family: Lato;
+    font-weight: 600;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.timeframe-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 7px 15px 0px #a3a3a3;
+}
