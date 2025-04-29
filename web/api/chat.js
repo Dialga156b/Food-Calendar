@@ -6,10 +6,10 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
-
+  console.log(req.body);
   const userMessage = req.body.message; // <-- FIXED HERE
   const type = req.body.type;
-  console.log(type);
+
   console.log("Received user message:", userMessage);
   const key = process.env.OPENAI_KEY;
   console.log(key);
