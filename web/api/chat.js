@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
       },
-      body: [JSON.parse(getAIInstructions(type))],
+      body: [JSON.parse(getAIInstructions(type, userMessage))],
     });
     const data = await response.json();
 
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
   }
 }
 
-function getAIInstructions(type) {
+function getAIInstructions(type, userMessage) {
   console.log("getAIInstructions full");
   switch (type) {
     case "ingredients":
