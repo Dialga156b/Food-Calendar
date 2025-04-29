@@ -34,7 +34,8 @@ export default async function handler(req, res) {
     const args = JSON.parse(
       data.choices?.[0]?.message?.function_call?.arguments || false
     );
-
+    console.log(data);
+    console.log(args);
     return res.status(200).json({ message: args });
   } catch (error) {
     console.error("Error calling OpenAI:", error);
@@ -79,7 +80,7 @@ function getAIInstructions(type, userMessage) {
                       quantity: {
                         type: "number",
                         description:
-                          "The number of bags/boxes/units needed, rounded up to the nearest whole number.",
+                          "The number of store-buyable units (bags,boxes,etc) needed, rounded up to the nearest whole number.",
                       },
                       minimum_amount: {
                         type: "string",
