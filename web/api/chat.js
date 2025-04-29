@@ -96,7 +96,6 @@ function getAIInstructions(type, userMessage) {
               required: ["ingredients"],
               additionalProperties: false,
             },
-            strict: true,
           },
         ],
         function_call: { name: "shopping_list" },
