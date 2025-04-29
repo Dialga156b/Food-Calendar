@@ -64,7 +64,7 @@ function getAIInstructions(type, userMessage) {
         functions: [
           {
             name: "shopping_list",
-            schema: {
+            parameters: {
               type: "object",
               properties: {
                 ingredients: {
