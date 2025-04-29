@@ -20,13 +20,15 @@ export default async function handler(req, res) {
   }
 
   try {
+    const instructions = JSON.parse(getAIInstructions(type, userMessage));
+    console.log(instructions);
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
       },
-      body: [JSON.parse(getAIInstructions(type, userMessage))],
+      body: instructions,
     });
     const data = await response.json();
     console.log(data);
