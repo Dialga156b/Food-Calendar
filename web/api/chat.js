@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       body: [JSON.parse(getAIInstructions(type, userMessage))],
     });
     const data = await response.json();
-
+    console.log(data);
     const args = JSON.parse(
       data.choices?.[0]?.message?.function_call?.arguments || false
     );
