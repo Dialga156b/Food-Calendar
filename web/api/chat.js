@@ -87,6 +87,11 @@ function getAIInstructions(type, userMessage) {
                         description:
                           "A string stating the minimum amount of this item needed.",
                       },
+                      category: {
+                        type: "string",
+                        description:
+                          "string describing the type of ingredient (produce, meat, vegetable, spices)",
+                      },
                     },
                     required: ["item_name", "quantity", "minimum_amount"],
                     additionalProperties: false,
