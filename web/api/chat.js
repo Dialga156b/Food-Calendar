@@ -69,7 +69,8 @@ function getAIInstructions(type, userMessage) {
               properties: {
                 ingredients: {
                   type: "array",
-                  description: "List of ingredients required for the shopping.",
+                  description:
+                    "List of ingredients required for shopping consolidate all the ingredients - there should be absolutely no duplicates.",
                   items: {
                     type: "object",
                     properties: {

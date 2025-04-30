@@ -115,6 +115,16 @@
     transform: rotate(180deg);
 }
 
+.todaysRecipeTab details[open]>summary {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: -3px;
+    padding-bottom: 6px;
+    background-color: #e2e2e2;
+}
+
+
+
 .recipe-scroll {
     overflow-y: scroll;
     scrollbar-color: #00000057 #ffffff00;
