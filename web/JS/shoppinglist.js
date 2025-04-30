@@ -26,7 +26,7 @@ async function genShoppingList(days) {
     currentDay++;
   }
   const response = await sendMessageToChatGPT(
-    JSON.stringify(recipeIngredients),
+    JSON.stringify(list),
     "ingredients"
   );
   console.log(response);
