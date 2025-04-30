@@ -9,15 +9,7 @@
     padding: 8px;
     font-family: Lato;
     box-sizing: border-box;
-}
-
-.gen-btn {
-    height: 40px;
-    width: 130px;
-    border-radius: 5px;
-    background: linear-gradient(to bottom, #f8f8f8, transparent), linear-gradient(to top right, #c5c5c5, transparent);
-    font-family: Lato;
-    font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .recipe-img-box {
@@ -48,8 +40,9 @@ textarea {
     padding: 10px;
 }
 
-.gen-inner,
-.gen-outer {
+.gen-inner {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     transition: all .5s ease;
 }
@@ -57,6 +50,8 @@ textarea {
 .gen-outer {
     display: flex;
     position: relative;
+    width: 100%;
+    transition: all .5s ease;
 }
 
 .anim-icon {
@@ -65,7 +60,15 @@ textarea {
     height: 30px;
 }
 
-
+.gen-btn {
+    transform: translateY(0);
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    width: 200px;
+    align-self: center;
+    margin-top: 10px;
+}
 
 .generating-popup {
     display: flex;
@@ -88,7 +91,10 @@ textarea {
     margin: 0;
 }
 
-.gen-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 7px 15px 0px #a3a3a3;
+.gen-inner h2 {
+    margin: 0 0 6px 0;
+}
+
+.gen-inner h3 {
+    margin: 0;
 }

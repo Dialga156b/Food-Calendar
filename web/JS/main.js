@@ -234,3 +234,4 @@ document.addEventListener(
   },
   false
 );
+window.handleMonthOffset = handleMonthOffset;

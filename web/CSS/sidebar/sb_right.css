@@ -112,13 +112,26 @@
     font-size: smaller;
 }
 
-.gen-btn {
-    transform: translateY(0);
-    box-shadow: none;
+.button {
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(110, 110, 110);
+    height: 40px;
+    background: linear-gradient(to bottom, #f8f8f8, transparent), linear-gradient(to top right, #c5c5c5, transparent);
+    font-family: Lato;
+    font-weight: 600;
+    transition: all .5s;
     cursor: pointer;
-    transition: all 0.5s ease;
 }
 
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 7px 15px 0px #a3a3a3;
+}
+
+.button:active {
+    transform: translateY(2px);
+}
 
 
 .tab {

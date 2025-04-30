@@ -120,10 +120,8 @@
     border-bottom-right-radius: 0;
     margin-bottom: -3px;
     padding-bottom: 6px;
-    background-color: #e2e2e2;
+    background-color: #e6e6e6;
 }
-
-
 
 .recipe-scroll {
     overflow-y: scroll;

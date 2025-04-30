@@ -50,7 +50,7 @@ function getAIInstructions(type, userMessage) {
   switch (type) {
     case "ingredients":
       return {
-        model: "gpt-4o",
+        model: "gpt-4.1",
         messages: [
           {
             role: "system",
@@ -109,7 +109,7 @@ function getAIInstructions(type, userMessage) {
       break;
     default:
       return {
-        model: "gpt-4o",
+        model: "gpt-4.1",
         messages: [
           {
             role: "system",

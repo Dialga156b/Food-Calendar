@@ -99,6 +99,7 @@
       </div>
     </div>
     <div class="newRecipeTab tab" id="newRecipeTab">
+      <h2>New Recipe</h2>
       <div class="gen-outer" id="gen-container-outer">
         <div class="generating-popup" id="gen-popup">
           <ion-icon name="build" class="anim-icon"></ion-icon>
@@ -106,18 +107,18 @@
         </div>
 
         <div class="gen-inner" id="gen-container-inner">
-          <h2>New Recipe</h2>
+
           <h3>Recipe Description</h3>
           <div class="flex-row" style="align-items: center; gap: 5px;">
             <ion-icon name="alert-circle-outline"></ion-icon>
             <h4>Quality or safety not guaranteed if generated without a recipe.</h4>
           </div>
           <textarea type="text" class="recipe-gen-box" id="rdesc" name="rdesc"
-            placeholder="Paste your recipe's name, instructions, and ingredients here. Based on these instructions, a new recipe will be generated and added to the recipe book on the left sidebar."></textarea><br><br>
-          <h3 style="margin-top: 0;">Recipe Image (Optional)</h3>
+            placeholder="Paste your recipe's name, instructions, and ingredients here. Based on these instructions, a new recipe will be generated and added to the recipe book on the left sidebar."></textarea>
+          <h3 style="margin: 5px 0 5px 0">Recipe Image (Optional)</h3>
           <textarea type="text" class="recipe-img-box" id="recipeimgbox" name="rdesc"
-            placeholder="If you want, paste a link to an image of the recipe here."></textarea><br><br>
-          <button class="gen-btn" id="gen-btn" onclick="genRecipe()">generate recipe</button>
+            placeholder="If you want, paste a link to an image of the recipe here."></textarea>
+          <button class="gen-btn button" id="gen-btn" onclick="genRecipe()">generate recipe</button>
         </div>
       </div>
     </div>
@@ -170,6 +171,7 @@
         </div>
       </div>
     </div>
+
     <div class="shoppingListTab tab" id="shoppingListTab">
       <h2>Shopping List</h2>
       <div class="timeframe-form">
@@ -180,7 +182,28 @@
             <option value="14">Next 14 days</option>
           </select>
         </div>
-        <button onclick="genShoppingList(document.getElementById('timeframe-select').value);">Generate List</button>
+        <button class="button" onclick="genShoppingList(document.getElementById('timeframe-select').value);">Generate
+          List</button>
+      </div>
+      <div class="tabs">
+        <button>Unchecked</button>
+        <button>Checked</button>
+      </div>
+      <div class=" shoppingListBorder">
+        <div class="shoppingList">
+          <div class="ingredient flex-row">
+
+            <div>
+              <h3>Ingredient</h3>
+              <h4>Ingredient Amount ( >Minimum )</h4>
+            </div>
+            <div class="checkbox-div">
+              <h4>Already Have</h4>
+              <input type="checkbox"></input>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
     <div class="settingsTab tab" id="settingsTab">

@@ -83,5 +83,5 @@ function reloadRecipes() {
   }
   return true;
 }
-
+window.genRecipe = genRecipe;
 export { reloadRecipes };

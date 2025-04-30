@@ -25,11 +25,27 @@ async function genShoppingList(days) {
     }
     currentDay++;
   }
-  const response = await sendMessageToChatGPT(
-    JSON.stringify(list),
-    "ingredients"
-  );
-  console.log(response);
+  if (JSON.stringify(list) != "[]") {
+    /*
+     GPT will hallucinate a list if there's nothing. 
+     don't send request if no recipes present.
+    */
+    const response = await sendMessageToChatGPT(
+      JSON.stringify(list),
+      "ingredients"
+    );
+    loadShoppingList(response);
+  } else {
+    console.log("No recipes present");
+  }
 }
 
+function loadShoppingList(list) {
+  console.log(list);
+  list = list.ingredients;
+  for (let index = 0; index < list.length; index++) {
+    const thisIngredient = list[index];
+    console.log(thisIngredient);
+  }
+}
 window.genShoppingList = genShoppingList;
