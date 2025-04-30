@@ -78,9 +78,9 @@ function getAIInstructions(type, userMessage) {
                         description: "Name of the ingredient.",
                       },
                       quantity: {
-                        type: "number",
+                        type: "string",
                         description:
-                          "The number of store-buyable units (bags,boxes,etc) needed, rounded up to the nearest whole number.",
+                          "The number of store-buyable units (bags,boxes,etc) needed. (ex: 3 whole white onions, or 2 bags of flour)",
                       },
                       minimum_amount: {
                         type: "string",
