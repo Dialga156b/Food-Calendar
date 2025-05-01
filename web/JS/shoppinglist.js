@@ -10,14 +10,15 @@ async function genShoppingList(days) {
   let currentMonth = new Date().getMonth();
   let currentDay = today;
   let list = [];
+
   for (let i = 0; i < days; i++) {
     const daysInMonth = getDaysInMonth(currentMonth);
     if (currentDay > daysInMonth) {
       currentDay = 1;
       currentMonth += 1;
     }
-    const recipes = schedule[currentMonth]?.[`zone_${currentDay}`];
 
+    const recipes = schedule[currentMonth]?.[`zone_${currentDay}`];
     for (let foodIndex = 0; foodIndex < recipes?.length; foodIndex++) {
       const recipeID = recipes[foodIndex][0];
       var recipeIngredients = getRecipeInfoFromID(recipeID).ingredients;
@@ -25,21 +26,17 @@ async function genShoppingList(days) {
     }
     currentDay++;
   }
+
   if (JSON.stringify(list) != "[]") {
-    /*
-     GPT will hallucinate a list if there's nothing. 
-     don't send request if no recipes present.
-    */
     const response = await sendMessageToChatGPT(
       JSON.stringify(list),
       "ingredients"
     );
-    loadShoppingList(response);
+    await loadShoppingList(response);
   } else {
     console.log("No recipes present");
   }
 }
-
 async function loadShoppingList(list) {
   console.log(list);
   list = list.ingredients;

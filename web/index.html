@@ -9,7 +9,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
     rel="stylesheet">
-  <title>Sidebar Calendar Layout</title>
+  <title>Food Calendar</title>
   <script src="https://cdn.jsdelivr.net/npm/node-chatgpt@1.0.0/build/index.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css">
@@ -17,7 +17,9 @@
 
   <link rel="stylesheet" href="CSS/calendar.css">
   <link rel="stylesheet" href="CSS/items.css">
+  <link rel="stylesheet" href="CSS/qr.css">
   <link rel="stylesheet" href="CSS/sidebar/sb_main.css">
+
 
   <link rel="stylesheet" href="CSS/sidebar/sb_right.css">
   <link rel="stylesheet" href="CSS/sidebar/right/newRecipe.css">
@@ -45,12 +47,17 @@
     </div>
   </div>
   <div class="main-content">
+    <div class="qr-container" id="qr-container">
+      <ion-icon onclick="QRCode(false)" name="close-outline"></ion-icon>
+      <img id="qr-code" src="/Food-Calendar/web/IMG/exampleQR.png"></img>
+      <h3>This is your example QR Code.</h3>
+      <h4>Use this wisely! or something</h4>
+    </div>
     <div class="title">
       <ion-icon name="chevron-back-outline" onclick="handleMonthOffset(-1)"></ion-icon>
       <h3 id="monthName">May 2025</h3>
       <ion-icon name="chevron-forward-outline" onclick="handleMonthOffset(1)"></ion-icon>
     </div>
-
     <div class="calendar">
       <table>
         <thead>
@@ -107,9 +114,7 @@
           <ion-icon name="build" class="anim-icon"></ion-icon>
           <h3 id="gen-text">Generating..</h3>
         </div>
-
         <div class="gen-inner" id="gen-container-inner">
-
           <h3>Recipe Description</h3>
           <div class="flex-row" style="align-items: center; gap: 5px;">
             <ion-icon name="alert-circle-outline"></ion-icon>
@@ -173,7 +178,6 @@
         </div>
       </div>
     </div>
-
     <div class="shoppingListTab tab" id="shoppingListTab">
       <h2>Shopping List</h2>
       <div class="timeframe-form">
@@ -184,12 +188,12 @@
             <option value="14">Next 14 days</option>
           </select>
         </div>
-        <button class="button" onclick="genShoppingList(document.getElementById('timeframe-select').value);">Generate
+        <button class="button listGenBtn"
+          onclick="genShoppingList(document.getElementById('timeframe-select').value);">Generate
           List</button>
       </div>
-      <div class="tabs">
-        <button>Unchecked</button>
-        <button>Checked</button>
+      <div>
+        <button class="qrGenBtn" onclick="QRCode(true)">Generate Mobile QR Code</button>
       </div>
       <div class="shoppingListBorder">
         <div class="shoppingList" id="ingredient-list">
@@ -201,10 +205,9 @@
                 <h4 id="i-amt">Ingredient Amount ( >Minimum )</h4>
               </div>
             </div>
-
             <div class="checkbox-div">
               <h4>Already Have:</h4>
-              <input type="checkbox"></input>
+              <input style="cursor: pointer;" type="checkbox"></input>
             </div>
           </div>
         </div>
@@ -220,6 +223,7 @@
   <script src="JS/todaysRecipe.js"></script>
   <script src="JS/sidebars.js"></script>
   <script type="module" src="JS/shoppinglist.js"></script>
+  <script type="module" src="JS/qr.js"></script>
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
