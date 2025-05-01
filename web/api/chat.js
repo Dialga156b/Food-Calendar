@@ -91,7 +91,7 @@ function getAIInstructions(type, userMessage) {
                       category: {
                         type: "string",
                         description:
-                          "string describing the type of ingredient (produce, meat, vegetable, spices)",
+                          "string describing the type of ingredient: dairy, produce, meat, spice, other",
                       },
                     },
                     required: ["item_name", "quantity", "minimum_amount"],

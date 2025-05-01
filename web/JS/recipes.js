@@ -9,13 +9,11 @@ async function genRecipe() {
   genPopup.classList.add("popup-animated");
   try {
     const chatGptReply = await sendMessageToChatGPT(input, "recipe");
-
-    console.log("ChatGPT said:", chatGptReply);
     if (chatGptReply) {
       console.log("Recipe JSON:", chatGptReply);
       const recipeImgBox = document.getElementById("recipeimgbox");
       const recipeImgLink = recipeImgBox.value;
-      // heres the fun stuff! basically a copy of the stuff in main.js tho
+      // fun stuff! basically a copy of the stuff in main.js though
       let foods = JSON.parse(localStorage.getItem("recipes")) || {};
       const recipeID = Object.keys(foods).length || 0;
 

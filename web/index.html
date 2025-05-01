@@ -12,7 +12,12 @@
   <title>Sidebar Calendar Layout</title>
   <script src="https://cdn.jsdelivr.net/npm/node-chatgpt@1.0.0/build/index.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-
+  <script src="
+  https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js
+  "></script>
+  <link href="
+  https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/fontawesome.min.css
+  " rel="stylesheet">
   <link rel="stylesheet" href="CSS/calendar.css">
   <link rel="stylesheet" href="CSS/items.css">
   <link rel="stylesheet" href="CSS/sidebar/sb_main.css">
@@ -189,19 +194,21 @@
         <button>Unchecked</button>
         <button>Checked</button>
       </div>
-      <div class=" shoppingListBorder">
-        <div class="shoppingList">
-          <div class="ingredient flex-row">
-
-            <div>
-              <h3>Ingredient</h3>
-              <h4>Ingredient Amount ( >Minimum )</h4>
+      <div class="shoppingListBorder">
+        <div class="shoppingList" id="ingredient-list">
+          <div class="ingredient flex-row i-template" id="i-template">
+            <div class="i-left">
+              <i class="fa-solid" id="i-icon"></i>
+              <div>
+                <h3 id="i-name">Ingredient</h3>
+                <h4 id="i-amt">Ingredient Amount ( >Minimum )</h4>
+              </div>
             </div>
+
             <div class="checkbox-div">
-              <h4>Already Have</h4>
+              <h4>Already Have:</h4>
               <input type="checkbox"></input>
             </div>
-
           </div>
         </div>
       </div>
@@ -219,6 +226,7 @@
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </body>
 
 </html>
