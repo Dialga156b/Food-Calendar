@@ -12,12 +12,9 @@
   <title>Sidebar Calendar Layout</title>
   <script src="https://cdn.jsdelivr.net/npm/node-chatgpt@1.0.0/build/index.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-  <script src="
-  https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js
-  "></script>
-  <link href="
-  https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/fontawesome.min.css
-  " rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js" defer></script>
+
   <link rel="stylesheet" href="CSS/calendar.css">
   <link rel="stylesheet" href="CSS/items.css">
   <link rel="stylesheet" href="CSS/sidebar/sb_main.css">
@@ -198,7 +195,7 @@
         <div class="shoppingList" id="ingredient-list">
           <div class="ingredient flex-row i-template" id="i-template">
             <div class="i-left">
-              <i class="fa-solid" id="i-icon"></i>
+              <span id="icon-placeholder"></span>
               <div>
                 <h3 id="i-name">Ingredient</h3>
                 <h4 id="i-amt">Ingredient Amount ( >Minimum )</h4>

@@ -40,10 +40,12 @@ async function genShoppingList(days) {
   }
 }
 
-function loadShoppingList(list) {
+async function loadShoppingList(list) {
   console.log(list);
   list = list.ingredients;
   const ingredientList = document.getElementById("ingredient-list");
+
+  // Remove existing non-template children
   let child = ingredientList.firstChild;
   while (child) {
     const next = child.nextSibling;
@@ -53,45 +55,60 @@ function loadShoppingList(list) {
     child = next;
   }
 
-  for (let index = 0; index < list.length; index++) {
-    const thisIngredient = list[index];
-    console.log(thisIngredient);
-    const category = thisIngredient.category;
-    const itemName = thisIngredient.item_name;
-    const minimum = thisIngredient.minimum_amount;
-    const quantity = thisIngredient.quantity;
+  // Wait until Font Awesome is ready
+  await waitForFontAwesome();
 
-    const ingredientElement = document
-      .getElementById("i-template")
-      .cloneNode(true);
+  FontAwesome.config.missing = (icon) => console.warn("Missing icon:", icon);
 
-    ingredientElement.classList.remove("i-template");
-    ingredientElement.id = "i-active";
-    const nameElement = ingredientElement.querySelector("#i-name");
-    const amountElement = ingredientElement.querySelector("#i-amt");
+  const iconMap = {
+    dairy: "egg",
+    produce: "lemon",
+    meat: "bacon",
+    spice: "pepper-hot",
+  };
 
-    const icon = ingredientElement.querySelector("#i-icon");
-    switch (category) {
-      case "dairy":
-        icon.classList.add("fa-mortar-pestle");
-        break;
-      case "produce":
-        icon.classList.add("fa-lemon");
-        break;
-      case "meat":
-        icon.classList.add("fa-bacon");
-        break;
-      case "spice":
-        icon.classList.add("fa-pepper-hot");
-        break;
-      default:
-        icon.classList.add("fa-star");
-        break;
-    }
-    nameElement.textContent = itemName;
-    //amountElement.textContent = "";
+  const fragment = document.createDocumentFragment();
 
-    ingredientList.appendChild(ingredientElement);
+  for (const item of list) {
+    const clone = document.getElementById("i-template").cloneNode(true);
+    clone.classList.remove("i-template");
+    clone.removeAttribute("id");
+
+    clone.querySelector("#i-name").textContent = item.item_name;
+    clone.querySelector(
+      "#i-amt"
+    ).textContent = `${item.quantity} ( > ${item.minimum_amount} )`;
+
+    const iconName = iconMap[item.category] || "star";
+    const iconPlaceholder = clone.querySelector("#icon-placeholder");
+
+    const icon = document.createElement("i");
+    icon.classList.add("fa-solid");
+
+    icon.classList.add(`fa-${iconMap[item.category] || "star"}`);
+    iconPlaceholder.replaceWith(icon);
+
+    fragment.appendChild(clone);
   }
+
+  // Append all at once to the DOM
+  ingredientList.appendChild(fragment);
+
+  // Convert all inserted icons in one pass
+  FontAwesome.dom.i2svg({ node: ingredientList });
 }
+
+function waitForFontAwesome(timeout = 2000) {
+  return new Promise((resolve, reject) => {
+    const start = performance.now();
+    const check = () => {
+      if (window.FontAwesome?.dom?.i2svg) return resolve();
+      if (performance.now() - start > timeout)
+        return reject("FontAwesome not ready");
+      requestAnimationFrame(check);
+    };
+    check();
+  });
+}
+
 window.genShoppingList = genShoppingList;

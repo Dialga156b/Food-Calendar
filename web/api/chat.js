@@ -99,7 +99,7 @@ function getAIInstructions(type, userMessage) {
                   },
                 },
               },
-              required: ["ingredients"],
+              required: ["ingredients", "category"],
               additionalProperties: false,
             },
           },
