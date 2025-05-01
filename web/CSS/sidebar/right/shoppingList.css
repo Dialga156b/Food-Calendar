@@ -138,3 +138,23 @@
     width: 20px;
     height: 20px;
 }
+
+.justify-center {
+    justify-content: center;
+}
+
+.qrGenBtn {
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(148, 148, 148);
+    padding: 5px;
+    box-sizing: border-box;
+    transition: all .3s;
+    width: 200px;
+    cursor: pointer;
+}
+
+.qrGenBtn:hover {
+    background-color: #dddddd;
+    width: 215px;
+}

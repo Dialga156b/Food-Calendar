@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function getParams() {
+            var idx = document.URL.indexOf('?');
+            var params = new Array();
+            if (idx != -1) {
+                var pairs = document.URL.substring(idx + 1, document.URL.length).split('&');
+                for (var i = 0; i < pairs.length; i++) {
+                    nameVal = pairs[i].split('=');
+                    params[nameVal[0]] = nameVal[1];
+                }
+            }
+            var para1 = document.getElementById('element1');
+            para1.textContent = unescape(params["var1"]);
+        }
+    </script>
+</head>
+
+<body onload="getParams()">
+
+    <h3 id="element1">hi</h3>
+</body>
+
+</html>
