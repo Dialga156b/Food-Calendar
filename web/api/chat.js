@@ -99,7 +99,12 @@ function getAIInstructions(type, userMessage) {
                   },
                 },
               },
-              required: ["ingredients", "category"],
+              required: [
+                "ingredients",
+                "category",
+                "minimum_amount",
+                "quantity",
+              ],
               additionalProperties: false,
             },
           },
