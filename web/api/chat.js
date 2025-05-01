@@ -85,8 +85,8 @@ function getAIInstructions(type, userMessage) {
                       },
                       minimum_amount: {
                         type: "string",
-                        description:
-                          "A string stating the PRECISE, minimum amount of this item needed.",
+                        description: "the word 'hello'",
+                        //"A string stating the PRECISE, minimum amount of this item needed.",
                       },
                       category: {
                         type: "string",
