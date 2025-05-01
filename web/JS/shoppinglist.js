@@ -79,7 +79,6 @@ async function loadShoppingList(list) {
       "#i-amt"
     ).textContent = `${item.quantity} ( > ${item.minimum_amount} )`;
 
-    const iconName = iconMap[item.category] || "star";
     const iconPlaceholder = clone.querySelector("#icon-placeholder");
 
     const icon = document.createElement("i");
@@ -91,10 +90,7 @@ async function loadShoppingList(list) {
     fragment.appendChild(clone);
   }
 
-  // Append all at once to the DOM
   ingredientList.appendChild(fragment);
-
-  // Convert all inserted icons in one pass
   FontAwesome.dom.i2svg({ node: ingredientList });
 }
 
