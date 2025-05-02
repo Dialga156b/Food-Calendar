@@ -49,6 +49,7 @@ async function shorten(long_url, token) {
   });
 
   if (!res.ok) throw new Error(await res.text());
+  console.log(res);
   const data = await res.json();
   return data.id;
 }
@@ -62,7 +63,7 @@ async function createQRCode(bitlink_id, token) {
     },
     body: JSON.stringify({ bitlink_id }),
   });
-
+  console.log(res);
   if (!res.ok) throw new Error(await res.text());
   const data = await res.json();
   return data.qr_code?.link;
