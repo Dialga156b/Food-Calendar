@@ -32,15 +32,11 @@ async function genShoppingList(days) {
       JSON.stringify(list),
       "ingredients"
     );
+    // put shoppinglist in localstorage to be able to generate qr code
+
+    localStorage.setItem("shoppinglist", JSON.stringify(response));
     await loadShoppingList(response);
-
-    const minimal = response.ingredients.map(
-      (item) => `${item.item_name}:${item.quantity}`
-    );
-    console.log(minimal);
-    const queryString = encodeURIComponent(JSON.stringify(minimal));
-
-    showQRCode(true, queryString);
+    const queryString = minimizeList(response.ingredients);
   } else {
     console.log("No recipes present");
   }
@@ -50,7 +46,6 @@ async function loadShoppingList(list) {
   list = list.ingredients;
   const ingredientList = document.getElementById("ingredient-list");
 
-  // Remove existing non-template children
   let child = ingredientList.firstChild;
   while (child) {
     const next = child.nextSibling;
@@ -60,7 +55,6 @@ async function loadShoppingList(list) {
     child = next;
   }
 
-  // Wait until Font Awesome is ready
   await waitForFontAwesome();
 
   FontAwesome.config.missing = (icon) => console.warn("Missing icon:", icon);
@@ -94,7 +88,6 @@ async function loadShoppingList(list) {
 
     fragment.appendChild(clone);
   }
-
   ingredientList.appendChild(fragment);
   FontAwesome.dom.i2svg({ node: ingredientList });
 }
@@ -110,6 +103,12 @@ function waitForFontAwesome(timeout = 2000) {
     };
     check();
   });
+}
+
+function minimizeList(list) {
+  const minimal = list.map((item) => `${item.item_name}:${item.quantity}`);
+  console.log(minimal);
+  return encodeURIComponent(JSON.stringify(minimal));
 }
 
 window.genShoppingList = genShoppingList;
