@@ -24,7 +24,6 @@ async function shorten(long_url, token) {
   }
 
   const data = await res.json();
-  console.log(data);
   return data.id; // e.g., "bit.ly/abc123"
 }
 
@@ -51,7 +50,7 @@ async function createQRCode(bitlink_id, token) {
 
   const data = await res.json();
   console.log(data);
-  return data.qr_code?.link;
+  return data.qrcode_id;
 }
 
 export default async function handler(req, res) {
@@ -79,14 +78,17 @@ export default async function handler(req, res) {
 
   try {
     const bitlink_id = await shorten(long_url, BITLY_TOKEN);
-    const qr_code_url = await createQRCode(bitlink_id, BITLY_TOKEN);
-
-    return res.status(200).json({
-      success: true,
-      bitlink_id,
-      bitlink_url: `https://${bitlink_id}`,
-      qr_code_url,
-    });
+    const qr_code_id = await createQRCode(bitlink_id, BITLY_TOKEN);
+    const res = fetch(
+      `https://api-ssl.bitly.com/v4/qr-codes/${qr_code_id}/image?format=`,
+      {
+        headers: {
+          Authorization: `Bearer ${BITLY_TOKEN}`,
+          Accept: "image/png+xml",
+        },
+      }
+    );
+    console.log(res);
   } catch (err) {
     console.error("Handler error:", err.message);
     return res.status(500).json({ error: err.message });
