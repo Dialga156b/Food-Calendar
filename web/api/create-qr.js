@@ -51,7 +51,7 @@ async function shorten(long_url, token) {
     }),
   });
 
-  //if (!res.ok) throw new Error(await res.text());
+  if (!res.ok) throw new Error(await res.text());
   console.log(res);
   const data = await res.json();
   return data.id;
