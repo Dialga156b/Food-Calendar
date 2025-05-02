@@ -73,7 +73,6 @@ async function createQRCode(bitlink_id, token) {
       title: "Default QR Code",
       group_guid: "Bj7giWMNNfg",
       destination: { bitlink_id: bitlink_id },
-      archived: false,
     }),
   });
 
@@ -84,5 +83,6 @@ async function createQRCode(bitlink_id, token) {
   }
 
   const data = await res.json();
+  console.log(res.json());
   return data.qr_code?.link;
 }
