@@ -39,6 +39,7 @@ async function createQRCode(bitlink_id, token) {
       title: "Default QR Code",
       group_guid: group_guid,
       destination: { bitlink_id: bitlink_id },
+      render_customizations: { dot_pattern_type: "horizontal" },
     }),
   });
 
