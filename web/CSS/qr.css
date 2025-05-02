@@ -13,11 +13,13 @@
     justify-items: center;
     transition: all .3s;
     opacity: 0;
+    z-index: 0;
 }
 
 .qr-frame.visible {
     transform: translate(-50%, -50%);
     opacity: 1;
+    z-index: 100;
 }
 
 .qr-frame img {

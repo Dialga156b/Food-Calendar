@@ -70,7 +70,7 @@ function getAIInstructions(type, userMessage) {
                 ingredients: {
                   type: "array",
                   description:
-                    "List of ingredients required for shopping consolidate all the ingredients - there should be absolutely no duplicates.",
+                    "List of ingredients required for shopping. All ingredients must be **uniquely named** — do not repeat ingredients like 'salt' or 'onion'. Merge duplicates by combining their quantities into one item.",
                   items: {
                     type: "object",
                     properties: {
