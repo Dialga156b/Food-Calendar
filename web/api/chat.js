@@ -81,7 +81,7 @@ function getAIInstructions(type, userMessage) {
                       quantity: {
                         type: "string",
                         description:
-                          "The number of units needed that are STORE BUYABLE. this should be bags, boxes, jars, etc. NO MEASUREMENTS! (ex: 2 BAGS of flour, or one BOTTLE of wine)",
+                          "The amount of this item needed, that are STORE BUYABLE. this should be bags, boxes, jars, etc. NO MEASUREMENTS! (ex: 2 bags of flour, or one bott of wine, or three stalks of celery)",
                       },
                       // minimum_amount: {
                       //   type: "string",
