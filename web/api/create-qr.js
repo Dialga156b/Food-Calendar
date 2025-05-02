@@ -37,8 +37,9 @@ async function createQRCode(bitlink_id, token) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      title: "Default QR Code",
       group_guid: group_guid,
-      destination: bitlink_id,
+      destination: { bitlink_id: bitlink_id },
     }),
   });
 
