@@ -48,12 +48,13 @@ async function shorten(long_url, token) {
     body: JSON.stringify({
       long_url,
       domain: "bit.ly",
+      group_guid: "Bj7giWMNNfg",
     }),
   });
 
   if (!res.ok) {
     const text = await res.text();
-    console.error("Response Error:", text);
+    console.error("Shortener Response Error:", text);
     throw new Error(text);
   }
 
@@ -69,14 +70,16 @@ async function createQRCode(bitlink_id, token) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      bitlink_id,
-      // Optionally add: title, download, etc.
+      title: "Default QR Code",
+      group_guid: "Bj7giWMNNfg",
+      destination: { bitlink_id: bitlink_id },
+      archived: false,
     }),
   });
 
   if (!res.ok) {
     const text = await res.text();
-    console.error("Response Error:", text);
+    console.error("QR Response Error:", text);
     throw new Error(text);
   }
 
