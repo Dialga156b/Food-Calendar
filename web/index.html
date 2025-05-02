@@ -14,6 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js" defer></script>
 
   <link rel="stylesheet" href="CSS/calendar.css">
   <link rel="stylesheet" href="CSS/items.css">
@@ -34,22 +35,16 @@
   <div class="sidebar" id="sidebarL">
     <h2>Recipe Book</h2>
     <div class="recipe-list" id="recipe-list">
-      <!-- <div class="item" ondragstart="dragStartHandler(event);" id="food_1">
-        <img src="./web/IMG/Cookie.jpg" class="food-img"></img>
-        <div style="display: flex; flex-direction: column;" class="recipe-schedule">
-          <h2>Chocolate Chip Cookies</h2>
-          <p id="p">Here's where you'd keep a short description of the food. Bla Bla Bla....</p>
-        </div>
-      </div> -->
     </div>
     <div class="flag" id="lToggle" onclick="toggleLeftSidebar()">
       <ion-icon name="chevron-back-sharp" id="leftSidebarIcon" class="sidebar-hide"></ion-icon>
     </div>
   </div>
   <div class="main-content">
-    <div class="qr-container" id="qr-container">
-      <ion-icon onclick="QRCode(false)" name="close-outline"></ion-icon>
-      <img id="qr-code" src="/Food-Calendar/web/IMG/exampleQR.png"></img>
+    <div class="qr-frame" id="qr-frame">
+      <ion-icon onclick="showQRCode(false)" name="close-outline"></ion-icon>
+      <div id="qr-container" class="qr-container">
+      </div>
       <h3>This is your example QR Code.</h3>
       <h4>Use this wisely! or something</h4>
     </div>
@@ -194,7 +189,7 @@
       </div>
 
       <div class="flex-row justify-center">
-        <button class="qrGenBtn" onclick="QRCode(true)">Generate Mobile QR Code</button>
+        <button class="qrGenBtn" onclick="showQRCode(true)">Generate Mobile QR Code</button>
       </div>
       <div class="shoppingListBorder">
         <div class="shoppingList" id="ingredient-list">

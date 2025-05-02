@@ -1,4 +1,4 @@
-.qr-container {
+.qr-frame {
     position: fixed;
     background-color: rgb(230, 230, 230);
     top: 50%;
@@ -15,26 +15,26 @@
     opacity: 0;
 }
 
-.qr-container.visible {
+.qr-frame.visible {
     transform: translate(-50%, -50%);
     opacity: 1;
 }
 
-.qr-container img {
+.qr-frame img {
     width: 100%;
     height: 100%;
 }
 
-.qr-container h3 {
+.qr-frame h3 {
     margin: 5px;
     font-size: 25px;
 }
 
-.qr-container h4 {
+.qr-frame h4 {
     margin: 0;
 }
 
-.qr-container ion-icon {
+.qr-frame ion-icon {
     position: fixed;
     top: 0%;
     left: 100%;
@@ -43,4 +43,12 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
+}
+
+.qr-container {
+    padding: 5%;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
 }

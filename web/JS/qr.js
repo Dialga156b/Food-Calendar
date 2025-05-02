@@ -1,10 +1,18 @@
-function QRCode(mode) {
+function showQRCode(mode, ingredients) {
+  const QRFrame = document.getElementById("qr-frame");
   const QRContainer = document.getElementById("qr-container");
-  const QRElement = document.getElementById("qr-code");
+  while (QRContainer.firstChild) {
+    QRContainer.removeChild(QRContainer.firstChild);
+  }
+  console.log(ingredients);
   if (mode) {
-    QRContainer.classList.add("visible");
+    const qrcode = new QRCode(
+      QRContainer,
+      `https://food-calendar-eight.vercel.app/mobileShopping.html?data=${ingredients}`
+    );
+    QRFrame.classList.add("visible");
   } else {
-    QRContainer.classList.remove("visible");
+    QRFrame.classList.remove("visible");
   }
 }
-window.QRCode = QRCode;
+window.showQRCode = showQRCode;

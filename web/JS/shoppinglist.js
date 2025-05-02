@@ -33,6 +33,14 @@ async function genShoppingList(days) {
       "ingredients"
     );
     await loadShoppingList(response);
+
+    const minimal = response.ingredients.map(
+      (item) => `${item.item_name}:${item.quantity}`
+    );
+    console.log(minimal);
+    const queryString = encodeURIComponent(JSON.stringify(minimal));
+
+    showQRCode(true, queryString);
   } else {
     console.log("No recipes present");
   }
