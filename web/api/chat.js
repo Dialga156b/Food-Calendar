@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
   console.log(req.body);
-  const userMessage = req.body.message; // <-- FIXED HERE
+  const userMessage = req.body.message;
   const type = req.body.type;
 
   console.log("Received user message:", userMessage);
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(instructions), // properly stringified
+      body: JSON.stringify(instructions),
     });
 
     const data = await response.json();
@@ -50,7 +50,7 @@ function getAIInstructions(type, userMessage) {
   switch (type) {
     case "ingredients":
       return {
-        model: "gpt-4.1-nano",
+        model: "gpt-4.1-mini",
         messages: [
           {
             role: "system",
@@ -58,7 +58,7 @@ function getAIInstructions(type, userMessage) {
           },
           {
             role: "user",
-            content: userMessage, // <-- using the real user message
+            content: userMessage,
           },
         ],
         functions: [
@@ -81,13 +81,13 @@ function getAIInstructions(type, userMessage) {
                       quantity: {
                         type: "string",
                         description:
-                          "The number of units needed that are STORE BUYABLE. this should be bags, boxes, jars, etc. NO MEASUREMENTS! (ex: 3 whole white onions, or 2 bags of flour)",
+                          "The number of units needed that are STORE BUYABLE. this should be bags, boxes, jars, etc. NO MEASUREMENTS! (ex: 2 BAGS of flour, or one BOTTLE of wine)",
                       },
-                      minimum_amount: {
-                        type: "string",
-                        description:
-                          "A string stating the PRECISE, minimum amount of this item needed.",
-                      },
+                      // minimum_amount: {
+                      //   type: "string",
+                      //   description:
+                      //     "A string stating the PRECISE, minimum amount of this item needed (100g, 2/3 cup, 300ml, etc).",
+                      // },
                       category: {
                         type: "string",
                         description:
@@ -114,7 +114,7 @@ function getAIInstructions(type, userMessage) {
       break;
     default:
       return {
-        model: "gpt-4.1-nano",
+        model: "gpt-4.1-mini",
         messages: [
           {
             role: "system",
@@ -122,7 +122,7 @@ function getAIInstructions(type, userMessage) {
           },
           {
             role: "user",
-            content: userMessage, // <-- using the real user message
+            content: userMessage,
           },
         ],
         functions: [

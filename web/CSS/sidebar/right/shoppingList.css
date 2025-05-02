@@ -59,6 +59,8 @@
     width: 20px;
     border: 1px solid black;
     height: 100%;
+    max-width: 20px;
+    min-width: 20px;
 }
 
 .shoppingListTab {
@@ -122,6 +124,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    justify-content: space-between;
 }
 
 .i-template {

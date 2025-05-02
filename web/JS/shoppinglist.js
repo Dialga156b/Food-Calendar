@@ -74,9 +74,7 @@ async function loadShoppingList(list) {
     clone.removeAttribute("id");
 
     clone.querySelector("#i-name").textContent = item.item_name;
-    clone.querySelector(
-      "#i-amt"
-    ).textContent = `${item.quantity} ( > ${item.minimum_amount} )`;
+    clone.querySelector("#i-amt").textContent = `≈ ${item.quantity}`; //`≈ ${item.quantity} ( > ${item.minimum_amount} )`;
 
     const iconPlaceholder = clone.querySelector("#icon-placeholder");
 
