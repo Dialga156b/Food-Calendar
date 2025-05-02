@@ -4,7 +4,7 @@ async function showQRCode(mode, ingredients) {
   while (QRContainer.firstChild) {
     QRContainer.removeChild(QRContainer.firstChild);
   }
-  const link = `https://food-calendar-eight.vercel.app/Food-Calendar/web/mobileShopping.html?data=${ingredients}`;
+  const link = `https://food-calendar-eight.vercel.app/mobileShopping.html?data=${ingredients}`;
   if (mode) {
     const qr = await makeQrCode(link);
     console.log(qr);
