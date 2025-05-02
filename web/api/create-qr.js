@@ -79,7 +79,7 @@ export default async function handler(req, res) {
   try {
     const bitlink_id = await shorten(long_url, BITLY_TOKEN);
     const qr_code_id = await createQRCode(bitlink_id, BITLY_TOKEN);
-    const res = fetch(
+    const res = await fetch(
       `https://api-ssl.bitly.com/v4/qr-codes/${qr_code_id}/image?format=`,
       {
         headers: {
@@ -89,6 +89,7 @@ export default async function handler(req, res) {
       }
     );
     console.log(res);
+    return res.status(500);
   } catch (err) {
     console.error("Handler error:", err.message);
     return res.status(500).json({ error: err.message });
