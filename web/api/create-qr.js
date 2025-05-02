@@ -39,40 +39,47 @@ export default async function handler(req, res) {
 }
 
 async function shorten(long_url, token) {
-  const res = fetch("https://api-ssl.bitly.com/v4/shorten", {
+  const res = await fetch("https://api-ssl.bitly.com/v4/shorten", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      long_url: long_url,
+      long_url,
       domain: "bit.ly",
     }),
   });
 
-  if (!res.ok) throw new Error(await res.text());
-  console.log(res);
+  if (!res.ok) {
+    const text = await res.text();
+    console.error("Response Error:", text);
+    throw new Error(text);
+  }
+
   const data = await res.json();
-  return data.id;
+  return data.id; // bitlink_id
 }
 
 async function createQRCode(bitlink_id, token) {
-  const res = fetch("https://api-ssl.bitly.com/v4/qr-codes", {
+  const res = await fetch("https://api-ssl.bitly.com/v4/qr-codes", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      title: "Default QR Code",
-      group_guid: "Bj7giWMNNfg",
-      destination: { bitlink_id: bitlink_id },
-      archived: false,
+      bitlink_id,
+      // Optionally add: title, download, etc.
     }),
   });
-  console.log(res);
-  if (!res.ok) throw new Error(await res.text());
+
+  if (!res.ok) {
+    const text = await res.text();
+    console.error("Response Error:", text);
+    throw new Error(text);
+  }
+
   const data = await res.json();
   return data.qr_code?.link;
 }
