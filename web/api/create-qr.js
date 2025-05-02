@@ -39,13 +39,16 @@ export default async function handler(req, res) {
 }
 
 async function shorten(long_url, token) {
-  const res = await fetch("https://api-ssl.bitly.com/v4/shorten", {
+  const res = fetch("https://api-ssl.bitly.com/v4/shorten", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ long_url }),
+    body: JSON.stringify({
+      long_url: long_url,
+      domain: "bit.ly",
+    }),
   });
 
   if (!res.ok) throw new Error(await res.text());
@@ -55,13 +58,18 @@ async function shorten(long_url, token) {
 }
 
 async function createQRCode(bitlink_id, token) {
-  const res = await fetch("https://api-ssl.bitly.com/v4/qr-codes", {
+  const res = fetch("https://api-ssl.bitly.com/v4/qr-codes", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ bitlink_id }),
+    body: JSON.stringify({
+      title: "Default QR Code",
+      group_guid: "Bj7giWMNNfg",
+      destination: { bitlink_id: bitlink_id },
+      archived: false,
+    }),
   });
   console.log(res);
   if (!res.ok) throw new Error(await res.text());
