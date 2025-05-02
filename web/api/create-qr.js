@@ -37,7 +37,7 @@ async function createQRCode(bitlink_id, token) {
     },
     body: JSON.stringify({
       group_guid,
-      bitlink_id,
+      destination: bitlink_id,
     }),
   });
 
