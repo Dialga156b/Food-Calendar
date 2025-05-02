@@ -2,7 +2,7 @@ async function showQRCode(mode) {
   var ingredients;
   if (localStorage.getItem("shoppinglist") != null) {
     ingredients = minimizeList(
-      localStorage.getItem("shoppinglist").ingredients
+      JSON.parse(localStorage.getItem("shoppinglist")).ingredients
     );
   } else {
     return;
@@ -15,10 +15,9 @@ async function showQRCode(mode) {
   }
   const link = `https://food-calendar-eight.vercel.app/mobileShopping.html?data=${ingredients}`;
   if (mode) {
-    const qr = await makeQrCode(link);
-    const imageUrl = URL.createObjectURL(qr);
+    const qrImgLink = await makeQrCode(link);
     const img = document.createElement("img");
-    img.src = imageUrl;
+    img.src = qrImgLink;
     QRContainer.appendChild(img);
     QRFrame.classList.add("visible");
   } else {
@@ -26,7 +25,7 @@ async function showQRCode(mode) {
   }
 }
 async function makeQrCode(link) {
-  const qrStorage = localStorage.getItem("QR");
+  const qrStorage = sessionStorage.getItem("QR");
   if (qrStorage == null) {
     // no qr code. make one
     const res = await fetch(
@@ -37,10 +36,16 @@ async function makeQrCode(link) {
         body: JSON.stringify({ long_url: link }),
       }
     );
+
     const blob = await res.blob();
-    return blob;
+    const img = URL.createObjectURL(blob);
+    sessionStorage.setItem("QR", img);
+    return img;
   } else {
     return qrStorage;
   }
 }
+window.onload = function () {
+  sessionStorage.clear();
+};
 window.showQRCode = showQRCode;
