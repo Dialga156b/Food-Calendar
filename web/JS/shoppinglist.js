@@ -60,6 +60,7 @@ async function loadShoppingList(list) {
   FontAwesome.config.missing = (icon) => console.warn("Missing icon:", icon);
 
   const iconMap = {
+    //fontawesome icons
     dairy: "egg",
     produce: "lemon",
     meat: "bacon",
@@ -109,4 +110,5 @@ function minimizeList(list) {
   return encodeURIComponent(JSON.stringify(minimal));
 }
 
+window.minimizeList = minimizeList;
 window.genShoppingList = genShoppingList;
