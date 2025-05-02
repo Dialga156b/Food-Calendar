@@ -7,11 +7,10 @@ async function showQRCode(mode, ingredients) {
   const link = `https://food-calendar-eight.vercel.app/mobileShopping.html?data=${ingredients}`;
   if (mode) {
     const qr = await makeQrCode(link);
-    console.log(qr);
-    // const qrcode = new QRCode(
-    //   QRContainer,
-    //   `https://food-calendar-eight.vercel.app/mobileShopping.html?data=${ingredients}`
-    // );
+    const imageUrl = URL.createObjectURL(qr);
+    const img = document.createElement("img");
+    img.src = imageUrl;
+    QRContainer.appendChild(img);
     QRFrame.classList.add("visible");
   } else {
     QRFrame.classList.remove("visible");
@@ -26,8 +25,7 @@ async function makeQrCode(link) {
       body: JSON.stringify({ long_url: link }),
     }
   );
-  const data = await res.json();
-  console.log("Short URL:", data.bitlink_url);
-  console.log("QR Code Image:", data.qr_code_url);
+  const blob = await res.blob();
+  return blob;
 }
 window.showQRCode = showQRCode;
