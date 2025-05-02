@@ -1,5 +1,5 @@
 function setCORSHeaders(res) {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // Or use specific domain
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 }
@@ -51,7 +51,7 @@ async function shorten(long_url, token) {
     }),
   });
 
-  if (!res.ok) throw new Error(await res.text());
+  //if (!res.ok) throw new Error(await res.text());
   console.log(res);
   const data = await res.json();
   return data.id;
