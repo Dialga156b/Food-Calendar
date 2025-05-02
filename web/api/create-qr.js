@@ -24,6 +24,7 @@ async function shorten(long_url, token) {
   }
 
   const data = await res.json();
+  console.log(data);
   return data.id; // e.g., "bit.ly/abc123"
 }
 
@@ -36,7 +37,7 @@ async function createQRCode(bitlink_id, token) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      group_guid,
+      group_guid: group_guid,
       destination: bitlink_id,
     }),
   });
@@ -48,6 +49,7 @@ async function createQRCode(bitlink_id, token) {
   }
 
   const data = await res.json();
+  console.log(data);
   return data.qr_code?.link;
 }
 
