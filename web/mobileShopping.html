@@ -9,6 +9,7 @@
 
             if (data) {
                 const ingredients = JSON.parse(decodeURIComponent(data));
+                ingredients = parseMinimalString(ingredients)
                 console.log(ingredients); // Use as needed
                 var para1 = document.getElementById('element1');
                 para1.textContent = ingredients
@@ -25,6 +26,12 @@
             }
             var para1 = document.getElementById('element1');
             para1.textContent = unescape(params["var1"]); */
+        }
+        function parseMinimalString(str) {
+            return str.split(",").map(entry => {
+                const [item_name, quantity] = entry.split(":").map(part => part.trim());
+                return { item_name, quantity };
+            });
         }
     </script>
 </head>
