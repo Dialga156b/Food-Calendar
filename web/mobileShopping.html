@@ -8,31 +8,23 @@
             const data = params.get("data");
 
             if (data) {
-                const ingredients = JSON.parse(decodeURIComponent(data));
-                ingredients = parseMinimalString(ingredients)
+                var ingredients = JSON.parse(decodeURIComponent(data));
                 console.log(ingredients); // Use as needed
+                ingredients = parseMinimalString(ingredients)
+                console.log(ingredients);
                 var para1 = document.getElementById('element1');
-                para1.textContent = ingredients
+                ingredients.forEach(element => {
+                    console.log(element.item_name)
+                });
             }
-
-            /* var idx = document.URL.indexOf('?');
-            var params = new Array();
-            if (idx != -1) {
-                var pairs = document.URL.substring(idx + 1, document.URL.length).split('&');
-                for (var i = 0; i < pairs.length; i++) {
-                    nameVal = pairs[i].split('=');
-                    params[nameVal[0]] = nameVal[1];
-                }
-            }
-            var para1 = document.getElementById('element1');
-            para1.textContent = unescape(params["var1"]); */
         }
         function parseMinimalString(str) {
-            return str.split(",").map(entry => {
+            return String(str).split(",").map(entry => {
                 const [item_name, quantity] = entry.split(":").map(part => part.trim());
                 return { item_name, quantity };
             });
         }
+
     </script>
 </head>
 
