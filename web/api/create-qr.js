@@ -79,8 +79,9 @@ export default async function handler(req, res) {
   try {
     const bitlink_id = await shorten(long_url, BITLY_TOKEN);
     const qr_code_id = await createQRCode(bitlink_id, BITLY_TOKEN);
-    const res = await fetch(
-      `https://api-ssl.bitly.com/v4/qr-codes/${qr_code_id}/image?format=`,
+
+    const imageRes = await fetch(
+      `https://api-ssl.bitly.com/v4/qr-codes/${qr_code_id}/image?format=png`,
       {
         headers: {
           Authorization: `Bearer ${BITLY_TOKEN}`,
@@ -88,15 +89,21 @@ export default async function handler(req, res) {
         },
       }
     );
-    if (!res.ok) {
-      const text = await res.text();
+
+    if (!imageRes.ok) {
+      const text = await imageRes.text();
       console.error("QR-IMG error:", text);
       throw new Error(text);
     }
-    console.log(res);
-    return res.status(200).json({
-      success: true,
-    });
+
+    const imageBuffer = Buffer.from(await imageRes.arrayBuffer());
+
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader(
+      "Content-Disposition",
+      `inline; filename="${qr_code_id}.png"`
+    );
+    res.status(200).end(imageBuffer);
   } catch (err) {
     console.error("Handler error:", err.message);
     return res.status(500).json({ error: err.message });
