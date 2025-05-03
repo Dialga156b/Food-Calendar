@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="icon" type="./IMG/favicon.ico" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -14,6 +15,7 @@
             const data = params.get("data");
 
             if (data) {
+                const ingredientList = document.getElementById("ingredient-list")
                 var ingredients = JSON.parse(decodeURIComponent(data));
                 console.log(ingredients); // Use as needed
                 ingredients = parseMinimalString(ingredients)
@@ -21,7 +23,15 @@
                 var para1 = document.getElementById('element1');
                 ingredients.forEach(element => {
                     console.log(element.item_name)
+                    const clone = document.getElementById("i-template").cloneNode(true);
+                    clone.classList.remove("i-template");
+                    clone.removeAttribute("id");
+
+                    clone.querySelector("#i-name").textContent = element.item_name;
+                    clone.querySelector("#i-amt").textContent = `≈ ${element.quantity}`;
+                    ingredientList.appendChild(clone);
                 });
+
             }
         }
         function parseMinimalString(str) {
@@ -43,7 +53,7 @@
             display: flex;
             justify-self: center;
             font-size: 5rem;
-            margin: 1vh 0;
+            margin: 2.5vh 0;
             margin-bottom: 1vh;
         }
 
@@ -169,7 +179,7 @@
         }
 
         .i-template {
-            /* display: none; */
+            display: none !important;
         }
 
         .i-left {
@@ -219,24 +229,11 @@
                     <span id="icon-placeholder"></span>
                     <div>
                         <h3 id="i-name">Ingredient</h3>
-                        <h4 id="i-amt">Ingredient Amount ( >Minimum )</h4>
+                        <h4 id="i-amt">Ingredient Amount</h4>
                     </div>
                 </div>
                 <div class="checkbox-div">
-                    <h4>Already Have:</h4>
-                    <input style="cursor: pointer;" type="checkbox"></input>
-                </div>
-            </div>
-            <div class="ingredient flex-row i-template" id="i-template">
-                <div class="i-left">
-                    <span id="icon-placeholder"></span>
-                    <div>
-                        <h3 id="i-name">Ingredient</h3>
-                        <h4 id="i-amt">Ingredient Amount ( >Minimum )</h4>
-                    </div>
-                </div>
-                <div class="checkbox-div">
-                    <h4>Already Have:</h4>
+                    <h4>Complete:</h4>
                     <input style="cursor: pointer;" type="checkbox"></input>
                 </div>
             </div>

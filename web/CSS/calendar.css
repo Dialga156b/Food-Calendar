@@ -76,9 +76,13 @@ td {
   opacity: 0;
   transform: translateY(-10px);
   animation: fadeInSlide 0.5s forwards;
-  /* border-top: none; */
   min-width: 100px;
   min-height: 200px;
+}
+
+.weekdays th {
+  border: 1px solid var(--calendar-border);
+  border-radius: 0%;
 }
 
 td .day-number {
@@ -100,7 +104,7 @@ td .day-number {
 .weekdays th {
   background-color: var(--calendar-top);
   border-radius: 0;
-  border: none;
+  /* border: none; */
   z-index: 15;
 }
 
