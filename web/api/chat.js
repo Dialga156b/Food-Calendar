@@ -70,7 +70,7 @@ function getAIInstructions(type, userMessage) {
                 ingredients: {
                   type: "array",
                   description:
-                    "List of ingredients required for shopping. All ingredients must be **uniquely named** — do not repeat ingredients like 'salt' or 'onion'. Merge duplicates by combining their quantities into one item.",
+                    "Provide a list of ingredients needed for shopping. Each ingredient must have a unique name — do not include duplicates such as 'salt' or 'onion' multiple times. If the same ingredient appears more than once, combine the quantities into a single entry. NOTE: Treat similar items like 'extra virgin olive oil' and 'olive oil' as the same ingredient and merge accordingly.",
                   items: {
                     type: "object",
                     properties: {
@@ -83,11 +83,6 @@ function getAIInstructions(type, userMessage) {
                         description:
                           "The amount of this item needed, that are STORE BUYABLE. this should be bags, boxes, jars, etc. NO MEASUREMENTS! (ex: 2 bags of flour, or one bott of wine, or three stalks of celery)",
                       },
-                      // minimum_amount: {
-                      //   type: "string",
-                      //   description:
-                      //     "A string stating the PRECISE, minimum amount of this item needed (100g, 2/3 cup, 300ml, etc).",
-                      // },
                       category: {
                         type: "string",
                         description:

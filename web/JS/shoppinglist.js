@@ -28,15 +28,16 @@ async function genShoppingList(days) {
   }
 
   if (JSON.stringify(list) != "[]") {
+    document.getElementById("outdated-warning").style.display = "none";
     const response = await sendMessageToChatGPT(
       JSON.stringify(list),
       "ingredients"
     );
-    // put shoppinglist in localstorage to be able to generate qr code
+    sessionStorage.setItem("QR", "");
 
+    // put shoppinglist in localstorage to be able to generate qr code
     localStorage.setItem("shoppinglist", JSON.stringify(response));
     await loadShoppingList(response);
-    const queryString = minimizeList(response.ingredients);
   } else {
     console.log("No recipes present");
   }
@@ -54,8 +55,6 @@ async function loadShoppingList(list) {
     }
     child = next;
   }
-
-  await waitForFontAwesome();
 
   FontAwesome.config.missing = (icon) => console.warn("Missing icon:", icon);
 
@@ -91,24 +90,17 @@ async function loadShoppingList(list) {
   FontAwesome.dom.i2svg({ node: ingredientList });
 }
 
-function waitForFontAwesome(timeout = 2000) {
-  return new Promise((resolve, reject) => {
-    const start = performance.now();
-    const check = () => {
-      if (window.FontAwesome?.dom?.i2svg) return resolve();
-      if (performance.now() - start > timeout)
-        return reject("FontAwesome not ready");
-      requestAnimationFrame(check);
-    };
-    check();
-  });
-}
-
 function minimizeList(list) {
   const minimal = list.map((item) => `${item.item_name}:${item.quantity}`);
-  console.log(minimal);
   return encodeURIComponent(JSON.stringify(minimal));
 }
+
+addEventListener("DOMContentLoaded", (_) => {
+  const ingredients = localStorage.getItem("shoppinglist");
+  if (ingredients != null && ingredients != "") {
+    loadShoppingList(JSON.parse(ingredients));
+  }
+});
 
 window.minimizeList = minimizeList;
 window.genShoppingList = genShoppingList;

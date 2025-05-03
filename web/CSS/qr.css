@@ -20,6 +20,7 @@
     transform: translate(-50%, -50%);
     opacity: 1;
     z-index: 100;
+    box-shadow: 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3);
 }
 
 .qr-frame img {

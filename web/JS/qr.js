@@ -26,7 +26,7 @@ async function showQRCode(mode) {
 }
 async function makeQrCode(link) {
   const qrStorage = sessionStorage.getItem("QR");
-  if (qrStorage == null) {
+  if (qrStorage == null || qrStorage == "") {
     // no qr code. make one
     const res = await fetch(
       "https://food-calendar-eight.vercel.app/api/create-qr",
@@ -36,7 +36,6 @@ async function makeQrCode(link) {
         body: JSON.stringify({ long_url: link }),
       }
     );
-
     const blob = await res.blob();
     const img = URL.createObjectURL(blob);
     sessionStorage.setItem("QR", img);

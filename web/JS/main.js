@@ -165,7 +165,7 @@ function onMoveEnd(event) {
   }
 
   foods[month][newDay].push([foodID]);
-
+  document.getElementById("outdated-warning").style.display = "flex";
   const today = `zone_${new Date().getDate()}`;
   localStorage.setItem("schedule", JSON.stringify(foods));
   if (oldDay == today || newDay == today) {

@@ -67,12 +67,12 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    gap: 5px;
 }
 
 .shoppingListBorder {
     border: 1px solid #acabab;
     display: flex;
-    margin-top: 5px;
     border-radius: 5px;
     padding: 5px;
     gap: 5px;
@@ -147,7 +147,6 @@
 }
 
 .qrGenBtn {
-    margin-top: 5px;
     border-radius: 5px;
     border: 1px solid rgb(148, 148, 148);
     padding: 5px;
