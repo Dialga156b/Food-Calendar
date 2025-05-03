@@ -81,7 +81,7 @@ function getAIInstructions(type, userMessage) {
                       quantity: {
                         type: "string",
                         description:
-                          "The amount of this item needed, that are STORE BUYABLE. this should be bags, boxes, jars, etc. NO MEASUREMENTS! (ex: 2 bags of flour, or one bott of wine, or three stalks of celery)",
+                          "The amount of this item needed, that are STORE BUYABLE. this should be bags, boxes, jars, etc. NO MEASUREMENTS! (ex: 2 bags of flour, or one bott of wine, or three stalks of celery) if the item it to taste or open-ended, respond with '-'.",
                       },
                       category: {
                         type: "string",
