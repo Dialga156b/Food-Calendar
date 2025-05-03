@@ -70,7 +70,7 @@ function getAIInstructions(type, userMessage) {
                 ingredients: {
                   type: "array",
                   description:
-                    "Provide a list of ingredients needed for shopping. Each ingredient must have a unique name — do not include duplicates such as 'salt' or 'onion' multiple times. If the same ingredient appears more than once, combine the quantities into a single entry. NOTE: Treat similar items like 'extra virgin olive oil' and 'olive oil' as the same ingredient and merge accordingly.",
+                    'Generate a consolidated shopping list of ingredients. Each ingredient must appear only once; if an ingredient is repeated, combine the quantities into a single entry. Treat similar items as the same (e.g., "olive oil" and "extra virgin olive oil" should be merged). Exclude insignificant ingredients such as small amounts of spices (like salt or pepper) or water. Use your judgment to determine what is essential.',
                   items: {
                     type: "object",
                     properties: {
@@ -106,7 +106,6 @@ function getAIInstructions(type, userMessage) {
         ],
         function_call: { name: "shopping_list" },
       };
-      break;
     default:
       return {
         model: "gpt-4.1-mini",
@@ -201,6 +200,5 @@ function getAIInstructions(type, userMessage) {
         ],
         function_call: { name: "recipe" },
       };
-      break;
   }
 }
