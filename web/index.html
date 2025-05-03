@@ -42,11 +42,15 @@
   </div>
   <div class="main-content">
     <div class="qr-frame" id="qr-frame">
-      <ion-icon onclick="showQRCode(false)" name="close-outline"></ion-icon>
+      <ion-icon class="qr-icon" onclick="showQRCode(false)" name="close-outline"></ion-icon>
       <div id="qr-container" class="qr-container">
       </div>
-      <h3>Scan to view</h3>
-      <h4>Your Mobile Shopping List</h4>
+      <h3>Scan to view your shopping list</h3>
+      <div class="justify-center flex-row" style="align-items: center; gap: 5px;">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <h4>Bitly may show a quick preview</h4>
+      </div>
+
     </div>
     <div class="title">
       <ion-icon name="chevron-back-outline" onclick="handleMonthOffset(-1)"></ion-icon>
@@ -214,7 +218,9 @@
       </div>
     </div>
     <div class="settingsTab tab" id="settingsTab">
-      <p>Settings tab. Nothing here yet!</p>
+      <div>
+
+      </div>
     </div>
   </div>
 
