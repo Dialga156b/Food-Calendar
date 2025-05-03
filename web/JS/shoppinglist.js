@@ -99,20 +99,6 @@ addEventListener("DOMContentLoaded", (_) => {
   const ingredients = localStorage.getItem("shoppinglist");
   if (ingredients != null && ingredients != "") {
     loadShoppingList(JSON.parse(ingredients));
-  } else {
-    fetch("../default.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((jsonObject) => {
-        console.log(jsonObject);
-      })
-      .catch((error) => {
-        console.error("Error fetching or parsing JSON:", error);
-      });
   }
 });
 

@@ -32,7 +32,7 @@ async function genRecipe() {
 
       localStorage.setItem("recipes", JSON.stringify(foods));
 
-      reloadRecipes(foods);
+      reloadRecipes();
     } else {
       console.log("Recipe generation failed!");
     }
@@ -44,8 +44,9 @@ async function genRecipe() {
   genPopup.classList.remove("popup-animated");
 }
 
-function reloadRecipes() {
-  const recipes = JSON.parse(localStorage.getItem("recipes")) || {};
+async function reloadRecipes() {
+  const recipes =
+    JSON.parse(localStorage.getItem("recipes")) || (await getDefaultRecipes());
   const rList = document.getElementById("recipe-list");
   while (rList.firstChild) {
     rList.removeChild(rList.firstChild);
@@ -79,7 +80,25 @@ function reloadRecipes() {
     container.appendChild(title);
     container.appendChild(paragraph);
   }
+  localStorage.setItem("recipes", JSON.stringify(recipes));
   return true;
 }
+
+async function getDefaultRecipes() {
+  try {
+    const response = await fetch(
+      "https://food-calendar-eight.vercel.app/default.json"
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const jsonObject = await response.json();
+    return jsonObject;
+  } catch (error) {
+    console.error("Error fetching or parsing JSON:", error);
+    return []; // fallback so Object.keys doesn't throw
+  }
+}
+
 window.genRecipe = genRecipe;
 export { reloadRecipes };
