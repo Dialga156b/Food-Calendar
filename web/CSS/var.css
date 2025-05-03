@@ -1,0 +1,18 @@
+:root {
+  --main-bg: #d1d1d199;
+  --main-text: #222222;
+
+  --accent-color: #525252;
+  --sidebar-bg: #f4f4f465;
+  --calendar-bg: #ffffff;
+  --calendar-today: #fffbda85;
+  --calendar-border: #dddddd;
+  --event-color: #f3f3f3;
+  --calendar-top: #dfdfdf;
+  --calendar-blank: #ebebeb;
+  --calendar-top-dropshadow: #b6b6b6;
+}
+
+.ionicon {
+  stroke: var(--main-text);
+}

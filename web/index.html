@@ -16,6 +16,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/js/all.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js" defer></script>
 
+  <link rel="stylesheet" href="CSS/var.css">
   <link rel="stylesheet" href="CSS/calendar.css">
   <link rel="stylesheet" href="CSS/items.css">
   <link rel="stylesheet" href="CSS/qr.css">
@@ -26,6 +27,7 @@
   <link rel="stylesheet" href="CSS/sidebar/right/newRecipe.css">
   <link rel="stylesheet" href="CSS/sidebar/right/todaysRecipe.css">
   <link rel="stylesheet" href="CSS/sidebar/right/shoppingList.css">
+  <link rel="stylesheet" href="CSS/sidebar/right/settings.css">
 
   <script type="module" src="JS/utility.js"></script>
   <link rel="icon" href="./IMG/favicon.ico">
@@ -50,7 +52,6 @@
         <ion-icon name="alert-circle-outline"></ion-icon>
         <h4>Bitly may show a quick preview</h4>
       </div>
-
     </div>
     <div class="title">
       <ion-icon name="chevron-back-outline" onclick="handleMonthOffset(-1)"></ion-icon>
@@ -218,8 +219,24 @@
       </div>
     </div>
     <div class="settingsTab tab" id="settingsTab">
-      <div>
-
+      <h2>Settings</h2>
+      <div class="settingsList">
+        <div class="colorSettings">
+          <h3>Customize Website Colors</h3>
+          <h4 style="margin: -8px 0 -2px 0;">All other colors will be automatically generated</h4>
+          <div class="flex-row">
+            <input type="color" id="primary-color">
+            <h3>Primary Page Color</h3>
+          </div>
+          <div class="flex-row">
+            <input type="color" id="inner-color">
+            <h3>Inner / Popout Color</h3>
+          </div>
+          <div class="flex-row">
+            <input type="color" id="text-color" value="">
+            <h3>Global Text Color</h3>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -230,6 +247,7 @@
   <script src="JS/sidebars.js"></script>
   <script type="module" src="JS/shoppinglist.js"></script>
   <script type="module" src="JS/qr.js"></script>
+  <script src="JS/colorMgr.js"></script>
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
