@@ -233,12 +233,20 @@
         .flex-row {
             display: flex;
         }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
     </style>
 </head>
 
 <body onload="getParams()">
-    <div style="display: flex; justify-content: center;">
+    <div class="header">
         <h2>Shopping List</h2>
+        <h4>Mark if you have these items:</h4>
     </div>
     <div class="shoppingListBorder">
         <div class="shoppingList" id="ingredient-list">
