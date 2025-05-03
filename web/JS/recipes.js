@@ -54,6 +54,9 @@ async function reloadRecipes() {
   let recipeCount = Object.keys(recipes).length;
   for (let index = 0; index < recipeCount; index++) {
     const recipe = recipes[index];
+    if (!recipe) {
+      continue;
+    }
     let imgLink = recipe.image;
     if (imgLink == "") {
       imgLink = "IMG/FoodIcon.png";

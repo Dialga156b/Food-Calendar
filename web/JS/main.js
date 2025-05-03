@@ -104,11 +104,15 @@ async function populateCalendar() {
           const foodGroups = zones[zone];
           foodGroups?.forEach((group) => {
             group.forEach((food) => {
-              const zoneEl = document.getElementById(zone);
-              const foodEl = document.getElementById(food).cloneNode(true);
-              if (zoneEl && foodEl) {
-                foodEl.classList = "item item-placed";
-                zoneEl.appendChild(foodEl);
+              try {
+                const zoneEl = document.getElementById(zone);
+                const foodEl = document.getElementById(food).cloneNode(true);
+                if (zoneEl && foodEl) {
+                  foodEl.classList = "item item-placed";
+                  zoneEl.appendChild(foodEl);
+                }
+              } catch (err) {
+                //do nothing. har har
               }
             });
           });
