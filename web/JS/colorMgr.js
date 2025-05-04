@@ -6,18 +6,19 @@ const root = document.documentElement;
 
 primaryPicker.addEventListener("input", function (event) {
   const selectedColor = event.target.value;
-  const today = hexToRGBA(HexeditSL(selectedColor, 0.8, 0.8), 0.6);
-  const mainColor = hexToRGBA(HexeditSL(selectedColor, 0.8, 0.8), 1);
-  const mainColorDark = hexToRGBA(HexeditSL(selectedColor, 0.5, 1.5), 0.6);
+  const ModifiedColor1 = hexToRGBA(lightenHex(selectedColor, 0.8), 0.6);
+  const mainColorDark = hexToRGBA(darkenHex(selectedColor, 0.7), 0.6);
+  const universalBorderColor = lightenHex(darkenHex(selectedColor, 0.8), 0.3);
   const { h, s, v } = hexToHsv(selectedColor);
   document.body.style.backdropFilter = `
-    hue-rotate(${-h - 10}deg) 
+    hue-rotate(${h}deg) 
     brightness(${v / 100}) 
     saturate(${s / 100})`;
-  root.style.setProperty("--main-bg", today);
-  root.style.setProperty("--main-color", mainColor);
+  root.style.setProperty("--main-bg", ModifiedColor1);
+  root.style.setProperty("--main-border-color", universalBorderColor);
+  root.style.setProperty("--main-color", ModifiedColor1);
   root.style.setProperty("--main-color-dark", mainColorDark);
-  root.style.setProperty("--calendar-today", today);
+  root.style.setProperty("--calendar-today", ModifiedColor1);
 });
 
 textPicker.addEventListener("input", function (event) {
@@ -51,29 +52,52 @@ function hexToRGBA(hex, alpha) {
 }
 
 function lightenHex(hex, percent) {
-  hex = hex.replace("#", "");
+  hex = hex.replace(/^#/, "");
+  // expand shorthand
+  if (hex.length === 3) {
+    hex = hex
+      .split("")
+      .map((c) => c + c)
+      .join("");
+  }
 
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
+  // parse channels
+  let r = parseInt(hex.slice(0, 2), 16);
+  let g = parseInt(hex.slice(2, 4), 16);
+  let b = parseInt(hex.slice(4, 6), 16);
 
-  const newR = Math.min(255, r + (255 - r) * percent);
-  const newG = Math.min(255, g + (255 - g) * percent);
-  const newB = Math.min(255, b + (255 - b) * percent);
+  if (percent >= 0) {
+    // move each channel toward 255
+    r += (255 - r) * percent;
+    g += (255 - g) * percent;
+    b += (255 - b) * percent;
+  } else {
+    // move each channel toward 0
+    r += r * percent;
+    g += g * percent;
+    b += b * percent;
+  }
 
-  const newHex =
-    Math.round(newR).toString(16).padStart(2, "0") +
-    Math.round(newG).toString(16).padStart(2, "0") +
-    Math.round(newB).toString(16).padStart(2, "0");
+  // clamp & round
+  r = Math.round(Math.max(0, Math.min(255, r)));
+  g = Math.round(Math.max(0, Math.min(255, g)));
+  b = Math.round(Math.max(0, Math.min(255, b)));
 
-  return "#" + newHex;
+  // back to hex
+  return (
+    "#" +
+    r.toString(16).padStart(2, "0") +
+    g.toString(16).padStart(2, "0") +
+    b.toString(16).padStart(2, "0")
+  );
 }
-function darkenHex(hex, amount) {
-  const num = parseInt(hex.replace("#", ""), 16);
-  const r = Math.max(0, Math.min(255, (num >> 16) - amount));
-  const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00ff) - amount));
-  const b = Math.max(0, Math.min(255, (num & 0x0000ff) - amount));
-  return "#" + (g | (b << 8) | (r << 16)).toString(16).padStart(6, "0");
+
+/**
+ * Darkens a hex by a relative percent.
+ * Just a thin wrapper around lightenHex.
+ */
+function darkenHex(hex, percent) {
+  return lightenHex(hex, -percent);
 }
 
 function hexToHsv(hex) {

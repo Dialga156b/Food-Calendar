@@ -1,10 +1,13 @@
 .todays-recipe {
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid rgb(141, 141, 141);
+    border: 1px solid var(--main-border-color);
     box-shadow: 0px 0px 20px rgb(136 136 136 / 52%);
     margin-bottom: 5px;
     background: #ffffff6e;
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .todays-recipe h3,
@@ -50,7 +53,7 @@
     border-radius: 5px;
     padding: 5px;
     box-sizing: border-box;
-    border: 1px solid #adadad;
+    border: 1px solid var(--main-border-color);
 }
 
 .recipe-steps {
@@ -94,7 +97,7 @@
     box-sizing: border-box;
     width: auto;
     background-color: #ffffff6e;
-    border: 1px solid #a7a7a7;
+    border: 1px solid var(--main-border-color);
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
@@ -118,7 +121,7 @@
 .todaysRecipeTab details[open]>summary {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    margin-bottom: -3px;
+    margin-bottom: 0;
     padding-bottom: 6px;
     background-color: #e6e6e6;
 }

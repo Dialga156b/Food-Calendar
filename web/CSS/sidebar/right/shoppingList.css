@@ -3,7 +3,7 @@
     border-radius: 5px;
     padding: 10px;
     box-sizing: border-box;
-    border: 1px solid rgba(119, 119, 119, 0.5);
+    border: 1px solid var(--main-border-color);
 }
 
 .timeframe-form .flex-row {
@@ -44,11 +44,11 @@
 .ingredient {
     padding: 5px 10px;
     box-sizing: border-box;
-    border: 1px solid rgb(153, 153, 153);
+    border: 1px solid var(--main-border-color);
     border-radius: 5px;
     height: fit-content;
     width: 100%;
-    background-color: #cbcbcb80;
+    background-color: #ffffff3d;
     gap: 5px;
     justify-content: space-between;
 }
@@ -57,7 +57,7 @@
     margin: 5px;
     box-sizing: border-box;
     width: 20px;
-    border: 1px solid black;
+    border: 1px solid var(--main-border-color);
     height: 100%;
     max-width: 20px;
     min-width: 20px;
@@ -71,7 +71,7 @@
 }
 
 .shoppingListBorder {
-    border: 1px solid #acabab;
+    border: 1px solid var(--main-border-color);
     display: flex;
     border-radius: 5px;
     padding: 5px;

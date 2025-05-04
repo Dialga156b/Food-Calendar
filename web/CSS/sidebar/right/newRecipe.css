@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     border: none;
-    box-shadow: inset 0px 0px 0px 2px #9d9d9d;
     border-radius: 5px;
     padding: 8px;
     font-family: Lato;
@@ -18,7 +17,6 @@
     margin: 0;
     padding: 0;
     border: none;
-    box-shadow: inset 0px 0px 0px 2px #9d9d9d;
     border-radius: 5px;
     padding: 8px;
     font-family: Lato;
@@ -27,6 +25,9 @@
 
 textarea {
     resize: none;
+    background-color: #ffffff57;
+    color: var(--text-color);
+    box-shadow: inset 0px 0px 0px 2px var(--main-border-color);
 }
 
 .blur-border {

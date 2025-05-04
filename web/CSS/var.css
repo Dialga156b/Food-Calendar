@@ -1,11 +1,11 @@
 :root {
   --main-bg: #d1d1d199;
-  --main-text: #222222;
-  --text-dark: #222222;
+  --main-text: #4d2828;
+  --text-dark: #2e1818;
 
   --main-color: #fff0da85;
   --main-color-shadow: #868686bd;
-
+  --main-border-color: #7a5454;
   --accent-color: #525252;
   --sidebar-bg: #f4f4f465;
   --calendar-bg: #ffffff;
