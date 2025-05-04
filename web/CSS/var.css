@@ -1,16 +1,24 @@
 :root {
   --main-bg: #d1d1d199;
   --main-text: #222222;
+  --text-dark: #222222;
+
+  --main-color: #fff0da85;
+  --main-color-shadow: #868686bd;
 
   --accent-color: #525252;
   --sidebar-bg: #f4f4f465;
   --calendar-bg: #ffffff;
   --calendar-today: #fffbda85;
   --calendar-border: #dddddd;
+  --calendar-border-top: #dddddd;
   --event-color: #f3f3f3;
   --calendar-top: #dfdfdf;
   --calendar-blank: #ebebeb;
   --calendar-top-dropshadow: #b6b6b6;
+  --flag: #f4f4f465;
+
+  --sidebar-shadow: #1a1a1a73;
 }
 
 .ionicon {

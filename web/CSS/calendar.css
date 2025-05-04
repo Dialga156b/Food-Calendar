@@ -2,18 +2,22 @@ html,
 body {
   margin: 0;
   height: 100%;
-  overflow: hidden
+  overflow: hidden;
 }
 
 body {
   margin: 0;
   font-family: Lato, sans-serif;
-  background: linear-gradient(#efefef, transparent), linear-gradient(to top left, #0c0c0c, transparent), linear-gradient(to top right, var(--main-bg), transparent);
+  background: linear-gradient(#ff7a7a73, #ffbd40),
+    linear-gradient(to top left, #e8ceff, transparent),
+    linear-gradient(to top right, #ff92004d, transparent);
   color: var(--main-text);
   display: flex;
   height: 100vh;
   background-blend-mode: screen;
   user-select: none;
+  /* backdrop-filter: hue-rotate(270deg) */
+  backdrop-filter: saturate(.5);
 }
 
 .main-content {
@@ -67,8 +71,9 @@ td {
 }
 
 .weekdays th {
-  border: 1px solid var(--calendar-border);
+  border: 1px solid var(--calendar-border-top);
   border-radius: 0%;
+
 }
 
 td .day-number {

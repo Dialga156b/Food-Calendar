@@ -94,16 +94,16 @@
       <div class="flag-right" id="rToggle" onclick="toggleRightSidebar()">
         <ion-icon name="chevron-back-sharp" id="rightSidebarIcon" class="sidebar-hide"></ion-icon>
       </div>
-      <div class="flag-right" id="newRecipe" onclick="setSidebarTab('newRecipe')">
+      <div class="flag-right flag-nt" id="newRecipe" onclick="setSidebarTab('newRecipe')">
         <ion-icon name="add-circle-outline" id="newRecipeTabBtn" class="sidebar-hide"></ion-icon>
       </div>
-      <div class="flag-right" id="todaysRecipe" onclick="setSidebarTab('todaysRecipe')">
+      <div class="flag-right flag-nt" id="todaysRecipe" onclick="setSidebarTab('todaysRecipe')">
         <ion-icon name="today-outline" id="todayTabBtn" class="sidebar-hide"></ion-icon>
       </div>
-      <div class="flag-right" id="shoppingList" onclick="setSidebarTab('shoppingList')">
+      <div class="flag-right flag-nt" id="shoppingList" onclick="setSidebarTab('shoppingList')">
         <ion-icon name="pricetags-outline" id="shoppingListBtn" class="sidebar-hide"></ion-icon>
       </div>
-      <div class="flag-right" id="settings" onclick="setSidebarTab('settings')">
+      <div class="flag-right flag-nt" id="settings" onclick="setSidebarTab('settings')">
         <ion-icon name="settings-outline" id="settingsTabBtn" class="sidebar-hide"></ion-icon>
       </div>
     </div>
@@ -225,12 +225,8 @@
           <h3>Customize Website Colors</h3>
           <h4 style="margin: -8px 0 -2px 0;">All other colors will be automatically generated</h4>
           <div class="flex-row">
-            <input type="color" id="primary-color">
-            <h3>Primary Page Color</h3>
-          </div>
-          <div class="flex-row">
-            <input type="color" id="inner-color">
-            <h3>Inner / Popout Color</h3>
+            <input type="color" value="#ff6bc1" id="primary-color">
+            <h3>Background color shift</h3>
           </div>
           <div class="flex-row">
             <input type="color" id="text-color" value="">
@@ -251,7 +247,6 @@
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
 </body>
 
 </html>

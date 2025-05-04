@@ -2,7 +2,7 @@
     width: 400px;
     background-color: var(--sidebar-bg);
     padding: 1rem;
-    box-shadow: 5px 0 17px 0px rgb(171 171 171);
+    box-shadow: 5px 0 17px 0px var(--sidebar-shadow);
     z-index: 5;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
 
 
 .sidebar h2 {
-    color: var(--accent-color);
+    color: var(--text-dark);
 }
 
 .sidebar ul {
@@ -67,4 +67,9 @@
 
 .nomargin {
     margin: 0;
+}
+
+h2,
+h3 {
+    color: var(--text-dark);
 }

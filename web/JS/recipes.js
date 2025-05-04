@@ -99,7 +99,7 @@ async function getDefaultRecipes() {
     return jsonObject;
   } catch (error) {
     console.error("Error fetching or parsing JSON:", error);
-    return []; // fallback so Object.keys doesn't throw
+    return [];
   }
 }
 
