@@ -1,18 +1,20 @@
 import { sendMessageToChatGPT } from "./utility.js";
 async function genRecipe() {
-  const input = document.getElementById("rdesc").value;
+  const input = document.getElementById("rdesc");
   const containerInner = document.getElementById("gen-container-inner");
   const containerOuter = document.getElementById("gen-container-outer");
   const genPopup = document.getElementById("gen-popup");
+  const recipeImgBox = document.getElementById("recipeimgbox");
   containerInner.classList.add("generate-blur");
   containerOuter.classList.add("blur-border");
   genPopup.classList.add("popup-animated");
+  if (input.value.trim().length < 3 || input.value == "") {
+    return null;
+  }
   try {
-    const chatGptReply = await sendMessageToChatGPT(input, "recipe");
+    const chatGptReply = await sendMessageToChatGPT(input.value, "recipe");
     if (chatGptReply) {
       console.log("Recipe JSON:", chatGptReply);
-      const recipeImgBox = document.getElementById("recipeimgbox");
-      const recipeImgLink = recipeImgBox.value;
       // fun stuff! basically a copy of the stuff in main.js though
       let foods = JSON.parse(localStorage.getItem("recipes")) || {};
       const recipeID = Object.keys(foods).length || 0;
@@ -26,7 +28,7 @@ async function genRecipe() {
         calories: chatGptReply.calories,
         servings: chatGptReply.servings,
         desc: chatGptReply.desc,
-        image: recipeImgLink,
+        image: recipeImgBox.value,
         id: recipeID,
       };
 
@@ -39,6 +41,8 @@ async function genRecipe() {
   } catch (error) {
     console.error("Something went wrong:", error);
   }
+  input.value = "";
+  recipeImgBox.value = "";
   containerInner.classList.remove("generate-blur");
   containerOuter.classList.remove("blur-border");
   genPopup.classList.remove("popup-animated");
