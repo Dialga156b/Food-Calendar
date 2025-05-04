@@ -28,6 +28,7 @@ async function genShoppingList(days) {
   }
 
   if (JSON.stringify(list) != "[]") {
+    console.log(list);
     document.getElementById("outdated-warning").style.display = "none";
     const response = await sendMessageToChatGPT(
       JSON.stringify(list),
