@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       .status(500)
       .json({ error: "OPENAI_KEY not set in environment." });
   }
-
+  //OLD api key was exposed in github history. this comment is for a new redeployment
   try {
     const instructions = getAIInstructions(type, userMessage); // now it's an object
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
