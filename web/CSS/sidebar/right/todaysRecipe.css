@@ -4,7 +4,7 @@
     border: 1px solid var(--main-border-color);
     box-shadow: 0px 0px 20px rgb(136 136 136 / 52%);
     margin-bottom: 5px;
-    background: #ffffff6e;
+    background: #ffffff33;
     border-top: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -49,7 +49,7 @@
 }
 
 .step {
-    background-color: #cdcdcd7c;
+    background-color: #dbdbdb52;
     border-radius: 5px;
     padding: 5px;
     box-sizing: border-box;
@@ -76,8 +76,8 @@
     border-radius: 5px;
     padding: 5px;
     box-sizing: border-box;
-    background-color: #cdcdcd7c;
-    border: 1px solid #a7a7a7;
+    background-color: #ffffff42;
+    border: 1px solid var(--main-border-color);
     flex: 1;
 }
 
@@ -96,7 +96,7 @@
     padding: 5px 10px;
     box-sizing: border-box;
     width: auto;
-    background-color: #ffffff6e;
+    background-color: #e6e6e63d;
     border: 1px solid var(--main-border-color);
     border-radius: 5px;
     display: flex;
@@ -123,7 +123,7 @@
     border-bottom-right-radius: 0;
     margin-bottom: 0;
     padding-bottom: 6px;
-    background-color: #e6e6e6;
+    background-color: #e6e6e63d;
 }
 
 .recipe-scroll {

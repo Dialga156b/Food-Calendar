@@ -1,18 +1,24 @@
-.colorSettings {
+.setting {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: rgba(216, 216, 216, 0.527);
+  background-color: rgb(255 255 255 / 16%);
   padding: 10px;
   box-sizing: border-box;
   border-radius: 5px;
   border: 1px solid var(--main-border-color);
 }
 
-.colorSettings div {
+.setting div {
   gap: 10px;
 }
 
-.colorSettings h3 {
+.setting h3 {
   margin: 0
+}
+
+.settingsList {
+  gap: 7px;
+  display: flex;
+  flex-direction: column;
 }

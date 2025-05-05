@@ -22,6 +22,7 @@
     height: 30px;
     font-family: Lato;
     font-weight: 600;
+    border: 1px solid var(--main-border-color);
 }
 
 .shoppingList {
@@ -149,4 +150,5 @@
 .qrGenBtn {
     margin: 0;
     height: 30px;
+    padding: 1px 20px;
 }

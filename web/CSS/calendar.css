@@ -30,7 +30,7 @@ body {
   border: 1px solid var(--calendar-border);
   padding: 1rem;
   border-radius: 8px;
-  max-width: 800px;
+  /* max-width: 60vw; */
   margin: 0 auto;
   align-self: center;
   width: fit-content;
@@ -73,7 +73,8 @@ td {
 .weekdays th {
   border: 1px solid var(--calendar-border-top);
   border-radius: 0%;
-
+  border-left: none;
+  border-right: none;
 }
 
 td .day-number {
@@ -165,6 +166,14 @@ td .day-number {
   justify-content: center;
   color: #4e4e4e;
 }
+
+/* tr {
+  display: flex;
+   flex: 1; 
+  max-height: fit-content;
+  flex-direction: row;
+} 
+*/
 
 @keyframes fadeInSlide {
   to {
