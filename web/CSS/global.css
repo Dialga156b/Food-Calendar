@@ -33,9 +33,12 @@
 }
 
 .footer {
-  margin-top: 20px;
   display: flex;
+  margin-top: 20px;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .link {
@@ -49,11 +52,11 @@
   transition: all 0.5s;
 }
 
-.link h4 {
-  margin: 0;
-}
-
 .link:hover {
   padding: 5px 15px;
   border: 1px solid var(--main-border-color);
+}
+
+.footer h4 {
+  margin: 0;
 }

@@ -11,6 +11,7 @@ async function genShoppingList(days) {
   let currentDay = today;
   let list = [];
 
+  blurAnim(true);
   for (let i = 0; i < days; i++) {
     const daysInMonth = getDaysInMonth(currentMonth);
     if (currentDay > daysInMonth) {
@@ -35,7 +36,7 @@ async function genShoppingList(days) {
       "ingredients"
     );
     sessionStorage.setItem("QR", "");
-
+    blurAnim(false);
     // put shoppinglist in localstorage to be able to generate qr code
     localStorage.setItem("shoppinglist", JSON.stringify(response));
     await loadShoppingList(response);
@@ -89,6 +90,18 @@ async function loadShoppingList(list) {
   }
   ingredientList.appendChild(fragment);
   FontAwesome.dom.i2svg({ node: ingredientList });
+}
+
+function blurAnim(state) {
+  const ingredientList = document.getElementById("ingredient-list");
+  const reload = document.getElementById("s-list-icon");
+  if (state) {
+    ingredientList.classList.add("list-generating");
+    reload.classList.add("icon-visible");
+  } else {
+    ingredientList.classList.remove("list-generating");
+    reload.classList.remove("icon-visible");
+  }
 }
 
 function minimizeList(list) {

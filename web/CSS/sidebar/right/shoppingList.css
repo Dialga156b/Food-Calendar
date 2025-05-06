@@ -31,6 +31,7 @@
     width: 100%;
     height: 100%;
     gap: 5px;
+    transition: all .5s ease;
 }
 
 .shoppingList h3,
@@ -151,4 +152,35 @@
     margin: 0;
     height: 30px;
     padding: 1px 20px;
+}
+
+.shoppingListBorder ion-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 1.5rem;
+    width: 1.5rem;
+    transform: translate(-50%, -50%);
+    animation: infinite;
+    animation-name: generating;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    transition: all .4s;
+    opacity: 0;
+    z-index: 15;
+}
+
+@keyframes generating {
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateZ(720deg);
+    }
+}
+
+.icon-visible {
+    opacity: 1 !important;
+    display: inline-block !important;
 }
