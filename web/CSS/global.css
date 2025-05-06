@@ -31,3 +31,29 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  border: 0px solid #ffffff00;
+  gap: 5px;
+  transition: all 0.5s;
+}
+
+.link h4 {
+  margin: 0;
+}
+
+.link:hover {
+  padding: 5px 15px;
+  border: 1px solid var(--main-border-color);
+}
