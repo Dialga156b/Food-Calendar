@@ -70,18 +70,19 @@ function getAIInstructions(type, userMessage) {
                 ingredients: {
                   type: "array",
                   description:
-                    'Generate a consolidated shopping list of ingredients. Each ingredient must appear only once; if an ingredient is repeated, combine the quantities into a single entry. Treat similar items as the same (e.g., "olive oil" and "extra virgin olive oil" should be merged). Exclude insignificant ingredients such as small amounts of spices (like salt or pepper) or water. Use your judgment to determine what is essential.',
+                    'Generate a consolidated shopping list of RAW ingredients. Each ingredient must appear only once; if an ingredient is repeated, combine the quantities into a single entry. Treat similar items as the same (e.g., "olive oil" and "extra virgin olive oil" should be merged). Exclude insignificant ingredients such as small amounts of spices (like salt or pepper) or water. Use your judgment to determine what is essential.',
                   items: {
                     type: "object",
                     properties: {
                       item_name: {
                         type: "string",
-                        description: "Name of the ingredient.",
+                        description:
+                          "Name and quantity of the ingredient. exclude non-alphabet characters such as hyphens or commas. this should look something like 'a dozen eggs' or 'one can diced tomatoes'",
                       },
                       quantity: {
                         type: "string",
                         description:
-                          "The amount of this item needed, that are STORE BUYABLE. this should be bags, boxes, jars, etc. NO MEASUREMENTS! (ex: 2 bags of flour, or one bott of wine, or three stalks of celery) if the item it to taste or open-ended, respond with '-'.",
+                          "The amount of this item needed, that are STORE BUYABLE AND RAW. this should be bags, boxes, jars, etc. NO MEASUREMENTS! (ex: 2 bags of flour, or one bott of wine, or three stalks of celery) if the item it to taste or open-ended, respond with '-'.",
                       },
                       category: {
                         type: "string",
