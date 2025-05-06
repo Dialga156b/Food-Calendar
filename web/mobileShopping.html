@@ -37,11 +37,10 @@
         }
         function parseMinimalString(str) {
             return String(str).split(",").map(entry => {
-                const [item_name, quantity] = entry.split("|").map(part => part.trim());
+                const [item_name, quantity] = entry.split(":").map(part => part.trim());
                 return { item_name, quantity };
             });
         }
-
 
         window.addEventListener("DOMContentLoaded", () => {
             const theme = decodeURIComponent(new URLSearchParams(location.search).get('theme'));

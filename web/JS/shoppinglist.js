@@ -112,9 +112,8 @@ function blurAnim(state) {
 }
 
 function minimizeList(list) {
-  const minimal = list.map((item) => `${item.item_name}|${item.quantity}`);
-  const encoded = encodeURIComponent(minimal.join(","));
-  return encoded;
+  const minimal = list.map((item) => `${item.item_name}:${item.quantity}`);
+  return encodeURIComponent(JSON.stringify(minimal));
 }
 
 window.minimizeList = minimizeList;
