@@ -18,6 +18,7 @@ body {
   user-select: none;
   /* backdrop-filter: hue-rotate(270deg) */
   backdrop-filter: saturate(.5);
+  /* background-blend-mode: soft-light; */
 }
 
 .main-content {
@@ -80,7 +81,7 @@ td {
 td .day-number {
   font-size: 0.8rem;
   font-weight: bold;
-  color: #555;
+  color: var(--main-text);
   position: absolute;
   top: 4px;
   left: 6px;

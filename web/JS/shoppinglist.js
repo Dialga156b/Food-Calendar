@@ -4,6 +4,13 @@ import {
   sendMessageToChatGPT,
 } from "./utility.js";
 
+addEventListener("DOMContentLoaded", (_) => {
+  const ingredients = localStorage.getItem("shoppinglist");
+  if (ingredients != null && ingredients != "") {
+    loadShoppingList(JSON.parse(ingredients));
+  }
+});
+
 async function genShoppingList(days) {
   const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
   let today = new Date().getDate();
@@ -37,7 +44,7 @@ async function genShoppingList(days) {
     );
     sessionStorage.setItem("QR", "");
     blurAnim(false);
-    // put shoppinglist in localstorage to be able to generate qr code
+    // put in localstorage
     localStorage.setItem("shoppinglist", JSON.stringify(response));
     await loadShoppingList(response);
   } else {
@@ -108,13 +115,6 @@ function minimizeList(list) {
   const minimal = list.map((item) => `${item.item_name}:${item.quantity}`);
   return encodeURIComponent(JSON.stringify(minimal));
 }
-
-addEventListener("DOMContentLoaded", (_) => {
-  const ingredients = localStorage.getItem("shoppinglist");
-  if (ingredients != null && ingredients != "") {
-    loadShoppingList(JSON.parse(ingredients));
-  }
-});
 
 window.minimizeList = minimizeList;
 window.genShoppingList = genShoppingList;
