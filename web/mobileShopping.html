@@ -44,6 +44,7 @@
 
         window.addEventListener("DOMContentLoaded", () => {
             const theme = decodeURIComponent(new URLSearchParams(location.search).get('theme'));
+            const { h, s, v } = hexToHsv(`#${theme}`);
             document.body.style.backdropFilter = `
                 hue-rotate(${h}deg)
                 brightness(${v / 100}) 

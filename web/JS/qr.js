@@ -14,6 +14,7 @@ async function showQRCode(mode) {
     QRContainer.removeChild(QRContainer.firstChild);
   }
   const theme = document.getElementById("primary-color").value;
+  console.log(theme);
   const params = new URLSearchParams();
   params.set("data", ingredients);
   params.set("theme", theme.replace("#", ""));
