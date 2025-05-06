@@ -77,7 +77,7 @@ function getAIInstructions(type, userMessage) {
                       item_name: {
                         type: "string",
                         description:
-                          "Name and quantity of the ingredient. exclude non-alphabet characters such as hyphens or commas. this should look something like 'a dozen eggs' or 'one can diced tomatoes'",
+                          "Name of the ingredient. exclude non-alphabet characters such as hyphens or commas. this should be the RAW version of whatever ingredient it is. NOT COOKED!",
                       },
                       quantity: {
                         type: "string",
