@@ -112,7 +112,10 @@ function blurAnim(state) {
 }
 
 function minimizeList(list) {
-  const minimal = list.map((item) => `${item.item_name}:${item.quantity}`);
+  const minimal = list.map((item) => ({
+    name: item.item_name,
+    quantity: item.quantity,
+  }));
   return encodeURIComponent(JSON.stringify(minimal));
 }
 

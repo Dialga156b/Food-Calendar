@@ -189,3 +189,5 @@ function hexToHsv(hex) {
 
   return { h: h * 360, s: s * 100, v: v * 100 };
 }
+
+window.hexToHsv = hexToHsv;
