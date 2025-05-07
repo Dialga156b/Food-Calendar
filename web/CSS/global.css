@@ -63,11 +63,15 @@
 
 .delete {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .delete ion-icon {
   height: auto;
+  min-height: 20px;
+  min-width: 20px;
 }
 
 .temp {

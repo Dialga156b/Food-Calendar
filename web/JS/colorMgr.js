@@ -68,6 +68,7 @@ function setColors(selectedColor) {
   const ModifiedColor1 = hexToRGBA(lightenHex(selectedColor, 0.8), 0.6);
   const mainColorDark = hexToRGBA(darkenHex(selectedColor, 0.7), 0.6);
   const universalBorderColor = lightenHex(darkenHex(selectedColor, 0.8), 0.3);
+  const uBC_transparent = hexToRGBA(universalBorderColor, 0.55);
   const calendar_light = HexeditSL(selectedColor, 0.9, 0.2);
   const calendar_dark = HexeditSL(selectedColor, 0.8, 0.3);
   const { h, s, v } = hexToHsv(selectedColor);
@@ -83,6 +84,7 @@ function setColors(selectedColor) {
   root.style.setProperty("--calendar-today", ModifiedColor1);
   root.style.setProperty("--calendar-top", calendar_dark);
   root.style.setProperty("--calendar-blank", calendar_light);
+  root.style.setProperty("--bc-clear", uBC_transparent);
 }
 
 function setTextColor(selectedColor) {

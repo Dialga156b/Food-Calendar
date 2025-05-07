@@ -77,6 +77,7 @@ async function reloadRecipes() {
     img.src = imgLink;
     img.classList.add("food-img");
     container.classList.add("recipe-schedule");
+    container.id = "recipe-schedule";
     title.textContent = recipe.recipe_name;
     paragraph.id = "p";
     paragraph.textContent = recipe.desc;

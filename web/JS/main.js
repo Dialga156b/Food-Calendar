@@ -122,14 +122,36 @@ async function populateCalendar() {
   }
 }
 
+function deleteScheduledRecipe(month, day, id) {
+  console.table(month, day, id);
+  let schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+  if (schedule[month][day]) {
+    const indexToRemove = schedule[month][day].findIndex(
+      (entry) => entry[0] === id
+    );
+
+    if (indexToRemove !== -1) {
+      schedule[month][day].splice(indexToRemove, 1);
+      // only delete first occurence, this was a problem before
+    }
+
+    if (schedule[month][day].length === 0) {
+      console.log("deleted");
+      delete schedule[month][day];
+      //delete day if it's empty
+    }
+  }
+  localStorage.setItem("schedule", JSON.stringify(schedule));
+}
+
 function onMoveEnd(event) {
   if (event.from === event.to) {
     return; // no change
   }
 
   const item = event.item;
-  const oldIndex = event.from.id;
-  const newIndex = event.to.id;
+  const oldDay = event.from.id;
+  const newDay = event.to.id;
   const foodID = item.id;
   const clone = event.clone;
 
@@ -137,41 +159,25 @@ function onMoveEnd(event) {
     clone.id = foodID;
   }
 
-  let foods = JSON.parse(localStorage.getItem("schedule")) || {};
-  const month = newMonth;
-  const oldDay = oldIndex;
-  const newDay = newIndex;
-
-  if (!foods[month]) {
-    foods[month] = {};
+  if (oldDay != "recipe-list") {
+    deleteScheduledRecipe(newMonth, oldDay, foodID);
+  }
+  let schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+  if (!schedule[newMonth]) {
+    schedule[newMonth] = {};
     //create month
   }
-
-  if (foods[month][oldDay]) {
-    const indexToRemove = foods[month][oldDay].findIndex(
-      (entry) => entry[0] === foodID
-    );
-
-    if (indexToRemove !== -1) {
-      foods[month][oldDay].splice(indexToRemove, 1);
-      // only delete first occurence, this was a problem before
-    }
-
-    if (foods[month][oldDay].length === 0) {
-      delete foods[month][oldDay];
-      //delete day if it's empty
-    }
-  }
-
-  if (!foods[month][newDay]) {
-    foods[month][newDay] = [];
+  console.log(schedule);
+  if (!schedule[newMonth][newDay]) {
+    schedule[newMonth][newDay] = [];
     //create day
   }
 
-  foods[month][newDay].push([foodID]);
+  schedule[newMonth][newDay].push([foodID]);
   document.getElementById("outdated-warning").style.display = "flex";
   const today = `zone_${new Date().getDate()}`;
-  localStorage.setItem("schedule", JSON.stringify(foods));
+  localStorage.setItem("schedule", JSON.stringify(schedule));
+  item.classList.add("item-placed");
   if (oldDay == today || newDay == today) {
     const currentDay = today;
     const currentMonth = new Date().getMonth();
@@ -220,10 +226,82 @@ function handleMonthOffset(int) {
   updateMonthName(m);
 }
 
+let currentActive = null;
+async function manageItemClick(itemElement) {
+  const target = itemElement;
+  console.log(target);
+  if (!target) return;
+
+  if (currentActive === target) return;
+
+  if (currentActive) {
+    const existing = currentActive.querySelector(".del-active");
+    if (existing) existing.remove();
+    const prevRs = currentActive.querySelector("#recipe-schedule");
+    if (prevRs) prevRs.style.display = "";
+  }
+
+  currentActive = target;
+
+  const delTemplate = document.getElementById("delete");
+  const delContainer = delTemplate.cloneNode(true);
+  delContainer.classList.add("del-active");
+  delContainer.removeAttribute("id");
+  target.appendChild(delContainer);
+
+  const rs = target.querySelector("#recipe-schedule");
+  if (rs) rs.style.display = "none";
+
+  const closeBtn = delContainer.querySelector("#close-btn");
+  const delBtn = delContainer.querySelector("#del-btn");
+
+  const options = new Promise((resolve) => {
+    // wait for close or delete button pressed
+    const handleClose = () => {
+      console.log("closed");
+      cleanup();
+      resolve("closed");
+    };
+
+    const handleDelete = () => {
+      console.log("deleted");
+      cleanup();
+
+      deleteScheduledRecipe(
+        newMonth,
+        rs.parentElement.parentElement.id,
+        target.id
+      );
+      target.remove();
+      resolve("deleted");
+    };
+
+    function cleanup() {
+      closeBtn.removeEventListener("click", handleClose);
+      delBtn.removeEventListener("click", handleDelete);
+    }
+
+    closeBtn.addEventListener("click", handleClose);
+    delBtn.addEventListener("click", handleDelete);
+  });
+
+  await options;
+
+  delContainer.remove();
+  if (document.body.contains(target) && rs) {
+    rs.style.display = "";
+  }
+
+  currentActive = null;
+}
+document.addEventListener("click", async function (event) {
+  manageItemClick(event.target.closest(".item"));
+});
+
 var currentMonthOffset = 0;
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth();
-var newMonth = currentMonth; // newMonth isn't defined???? WHAT???
+var newMonth = currentMonth;
 
 addEventListener("DOMContentLoaded", () => {
   handleMonthOffset(0);
@@ -239,3 +317,4 @@ document.addEventListener(
   false
 );
 window.handleMonthOffset = handleMonthOffset;
+window.manageItemClick = manageItemClick;
