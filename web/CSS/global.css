@@ -60,3 +60,16 @@
 .footer h4 {
   margin: 0;
 }
+
+.delete {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete ion-icon {
+  height: auto;
+}
+
+.temp {
+  display: none;
+}

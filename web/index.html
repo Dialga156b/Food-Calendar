@@ -34,6 +34,12 @@
 </head>
 
 <body>
+  <div class="temp" id="temp">
+    <div class="delete" id="delete">
+      <ion-icon name="trash-outline"></ion-icon>
+      <ion-icon name="close-outline"></ion-icon>
+    </div>
+  </div>
   <div class="sidebar" id="sidebarL">
     <h2>Recipe Book</h2>
     <div class="recipe-list" id="recipe-list">
@@ -248,26 +254,6 @@
             <h3>Text Color</h3>
           </div>
         </div>
-        <!--<div class="sidebarSettings setting">
-          <h3>Customize Sidebar Width</h3>
-          <h4 style="margin: -8px 0 -2px 0;">Modifies how far each sidebar sticks out from the side</h4>
-          <div class="flex-row">
-            <select id="width-select">
-              <option value="450">Default</option>
-              <option value="400">Smaller</option>
-              <option value="500">Larger</option>
-            </select>
-            <h3>Left Sidebar</h3>
-          </div>
-          <div class="flex-row">
-            <select id="width-select">
-              <option value="450">Default</option>
-              <option value="400">Smaller</option>
-              <option value="500">Larger</option>
-            </select>
-            <h3>Right Sidebar</h3>
-          </div>
-        </div> -->
         <button class="button btn-danger" onclick="localStorage.clear(); location.reload();">
           Delete all save data
         </button>
