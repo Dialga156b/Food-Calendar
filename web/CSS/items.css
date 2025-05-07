@@ -19,7 +19,6 @@
 
 .recipe-list h2 {
     margin: 0;
-    /* height: 30px; */
     z-index: 5;
 }
 
@@ -49,7 +48,7 @@
     padding: 4px 6px;
     font-size: 8px;
     cursor: grab;
-    box-shadow: -3px 3px 13px 0px #8f8f8f;
+    box-shadow: -3px 3px 13px 0px var(--dropshadow);
     max-width: 100%;
     height: fit-content;
     width: 100%;
@@ -117,9 +116,12 @@
     cursor: default;
     border-radius: 0px;
     font-size: 8px;
-    border: 1px solid var(--bc-clear);
     transition: all 0.5s;
     box-sizing: border-box;
+}
+
+.item {
+    border: 1px solid var(--bc-clear);
 }
 
 
@@ -170,7 +172,7 @@ td p {
 
 
 .recipe-list .item:hover {
-    transform: rotateZ(1deg);
+    transform: rotateZ(1deg) translateX(1px);
     transform-origin: 0% 0%;
     z-index: 5;
 }
