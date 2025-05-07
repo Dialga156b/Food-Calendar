@@ -21,7 +21,3 @@
   --dropshadow: #00000061;
   --sidebar-shadow: #1a1a1a73;
 }
-
-.ionicon {
-  stroke: var(--main-text);
-}

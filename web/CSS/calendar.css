@@ -168,14 +168,6 @@ td .day-number {
   color: #4e4e4e;
 }
 
-/* tr {
-  display: flex;
-   flex: 1; 
-  max-height: fit-content;
-  flex-direction: row;
-} 
-*/
-
 @keyframes fadeInSlide {
   to {
     opacity: 1;

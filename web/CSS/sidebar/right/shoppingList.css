@@ -176,6 +176,11 @@
     z-index: 15;
 }
 
+.icon-visible {
+    opacity: 1 !important;
+    display: inline-block !important;
+}
+
 @keyframes generating {
     from {
         transform: rotateZ(0deg);
@@ -184,9 +189,4 @@
     to {
         transform: rotateZ(720deg);
     }
-}
-
-.icon-visible {
-    opacity: 1 !important;
-    display: inline-block !important;
 }

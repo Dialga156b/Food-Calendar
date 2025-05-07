@@ -24,7 +24,7 @@ async function shorten(long_url, token) {
   }
 
   const data = await res.json();
-  return data.id; // e.g., "bit.ly/abc123"
+  return data.id;
 }
 
 async function createQRCode(bitlink_id, token) {
@@ -55,7 +55,7 @@ async function createQRCode(bitlink_id, token) {
 }
 
 export default async function handler(req, res) {
-  setCORSHeaders(res);
+  //setCORSHeaders(res);
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
