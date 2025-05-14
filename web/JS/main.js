@@ -230,6 +230,7 @@ let currentActive = null;
 async function manageItemClick(itemElement) {
   const target = itemElement;
   console.log(target);
+  if (!target.classList.contains("item-placed")) return;
   if (!target) return;
 
   if (currentActive === target) return;
