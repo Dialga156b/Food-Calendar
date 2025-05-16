@@ -97,8 +97,13 @@ async function loadShoppingList(list) {
 
     iconPlaceholder.replaceWith(icon);
 
-    fragment.appendChild(clone);
+    // Append directly to DOM instead of fragment
+    ingredientList.appendChild(clone);
+
+    // Update icon SVG after each addition
+    await FontAwesome.dom.i2svg({ node: clone });
   }
+
   ingredientList.appendChild(fragment);
   FontAwesome.dom.i2svg({ node: ingredientList }); // refresh icons
 }

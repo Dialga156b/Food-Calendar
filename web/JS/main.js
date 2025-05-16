@@ -228,11 +228,12 @@ function handleMonthOffset(int) {
 
 let currentActive = null;
 async function manageItemClick(itemElement) {
+  //for deletion of items on the calendar
   const target = itemElement;
   console.log(target);
-  if (!target.classList.contains("item-placed")) return;
-  if (!target) return;
 
+  if (!target) return;
+  if (!target.classList.contains("item-placed")) return;
   if (currentActive === target) return;
 
   if (currentActive) {
