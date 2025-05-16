@@ -65,6 +65,7 @@ function saveColors(newPrimary, newText) {
 // about half are mine. guess which ones!!!
 
 function setColors(selectedColor) {
+  //manage like every property ever for 'efficiency'
   const ModifiedColor1 = hexToRGBA(lightenHex(selectedColor, 0.8), 0.6);
   const mainColorDark = hexToRGBA(darkenHex(selectedColor, 0.7), 0.6);
   const universalBorderColor = lightenHex(darkenHex(selectedColor, 0.8), 0.3);

@@ -230,7 +230,6 @@ let currentActive = null;
 async function manageItemClick(itemElement) {
   //for deletion of items on the calendar
   const target = itemElement;
-  console.log(target);
 
   if (!target) return;
   if (!target.classList.contains("item-placed")) return;

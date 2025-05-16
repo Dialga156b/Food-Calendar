@@ -80,10 +80,13 @@ async function loadShoppingList(list) {
   const fragment = document.createDocumentFragment();
 
   for (const item of list) {
+    //actually loop through and create each ingredient element.
+    console.log("goon!");
     await delay(70);
 
     const clone = document.getElementById("i-template").cloneNode(true);
     clone.classList.remove("i-template");
+    clone.classList.add("i-active");
     clone.removeAttribute("id");
 
     clone.querySelector("#i-name").textContent = item.item_name;
@@ -96,11 +99,8 @@ async function loadShoppingList(list) {
     icon.classList.add(`fa-${iconMap[item.category] || "star"}`);
 
     iconPlaceholder.replaceWith(icon);
-
-    // Append directly to DOM instead of fragment
     ingredientList.appendChild(clone);
 
-    // Update icon SVG after each addition
     await FontAwesome.dom.i2svg({ node: clone });
   }
 
