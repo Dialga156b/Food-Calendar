@@ -9,6 +9,7 @@ addEventListener("DOMContentLoaded", (_) => {
   if (ingredients != null && ingredients != "") {
     loadShoppingList(JSON.parse(ingredients));
   }
+  //load shopping list if it exists
 });
 
 async function genShoppingList(days) {
@@ -19,6 +20,7 @@ async function genShoppingList(days) {
   let list = [];
 
   blurAnim(true);
+  //go n get all recipes in timeframe
   for (let i = 0; i < days; i++) {
     const daysInMonth = getDaysInMonth(currentMonth);
     if (currentDay > daysInMonth) {
@@ -42,9 +44,9 @@ async function genShoppingList(days) {
       JSON.stringify(list),
       "ingredients"
     );
-    sessionStorage.setItem("QR", "");
+    sessionStorage.setItem("QR", ""); // clear qr storage
     blurAnim(false);
-    // put in localstorage
+    // put shoppinglist in localstorage
     localStorage.setItem("shoppinglist", JSON.stringify(response));
     await loadShoppingList(response);
   } else {
@@ -78,27 +80,31 @@ async function loadShoppingList(list) {
   const fragment = document.createDocumentFragment();
 
   for (const item of list) {
+    await delay(70);
+
     const clone = document.getElementById("i-template").cloneNode(true);
     clone.classList.remove("i-template");
     clone.removeAttribute("id");
 
     clone.querySelector("#i-name").textContent = item.item_name;
-    clone.querySelector("#i-amt").textContent = `≈ ${item.quantity}`; //`≈ ${item.quantity} ( > ${item.minimum_amount} )`;
+    clone.querySelector("#i-amt").textContent = `≈ ${item.quantity}`;
 
     const iconPlaceholder = clone.querySelector("#icon-placeholder");
 
     const icon = document.createElement("i");
     icon.classList.add("fa-solid");
-
     icon.classList.add(`fa-${iconMap[item.category] || "star"}`);
+
     iconPlaceholder.replaceWith(icon);
 
     fragment.appendChild(clone);
   }
   ingredientList.appendChild(fragment);
-  FontAwesome.dom.i2svg({ node: ingredientList });
+  FontAwesome.dom.i2svg({ node: ingredientList }); // refresh icons
 }
-
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 function blurAnim(state) {
   const ingredientList = document.getElementById("ingredient-list");
   const reload = document.getElementById("s-list-icon");
@@ -112,7 +118,7 @@ function blurAnim(state) {
 }
 
 function minimizeList(list) {
-  const minimal = list.map((item) => `${item.item_name}:${item.quantity}`);
+  const minimal = list.map((item) => `${item.item_name}:${item.quantity}`); // get list ready for encoding
   return encodeURIComponent(JSON.stringify(minimal));
 }
 

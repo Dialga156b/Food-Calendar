@@ -14,12 +14,12 @@ async function showQRCode(mode) {
     QRContainer.removeChild(QRContainer.firstChild);
   }
   const theme = document.getElementById("primary-color").value;
-  console.log(theme);
+
   const params = new URLSearchParams();
   params.set("data", ingredients);
   params.set("theme", theme.replace("#", ""));
-  const link = `https://food-calendar-eight.vercel.app/mobileShopping.html?${params.toString()}`;
-  console.log(link);
+  const link = `../mobileShopping.html?${params.toString()}`;
+
   if (mode) {
     const qrImgLink = await makeQrCode(link);
     const img = document.createElement("img");

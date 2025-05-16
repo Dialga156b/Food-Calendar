@@ -1,5 +1,6 @@
 function setCORSHeaders(res) {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // Adjust for production
+  //not used. just for debugging on local port (vscode live servers)
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 }
@@ -28,7 +29,7 @@ async function shorten(long_url, token) {
 }
 
 async function createQRCode(bitlink_id, token) {
-  const group_guid = process.env.BITLY_GUID;
+  const group_guid = process.env.BITLY_GUID; // get ID from secure Vercel servers
   const res = await fetch("https://api-ssl.bitly.com/v4/qr-codes", {
     method: "POST",
     headers: {
@@ -39,7 +40,7 @@ async function createQRCode(bitlink_id, token) {
       title: "Default QR Code",
       group_guid: group_guid,
       destination: { bitlink_id: bitlink_id },
-      render_customizations: { dot_pattern_type: "horizontal" },
+      render_customizations: { dot_pattern_type: "horizontal" }, // stylize the code!
     }),
   });
 
@@ -80,7 +81,7 @@ export default async function handler(req, res) {
   try {
     const bitlink_id = await shorten(long_url, BITLY_TOKEN);
     const qr_code_id = await createQRCode(bitlink_id, BITLY_TOKEN);
-
+    //if both requests are OK, give the go-ahead and generate the QR code image
     const imageRes = await fetch(
       `https://api-ssl.bitly.com/v4/qr-codes/${qr_code_id}/image?format=png`,
       {
@@ -96,7 +97,8 @@ export default async function handler(req, res) {
       console.error("QR-IMG error:", text);
       throw new Error(text);
     }
-
+    //the qr code image actually returns a blob so we have to a bunch of extra crap
+    //blobs also son't save between sessions, so a new img has to be generated
     const imageBuffer = Buffer.from(await imageRes.arrayBuffer());
 
     res.setHeader("Content-Type", "image/png");

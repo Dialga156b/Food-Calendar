@@ -313,7 +313,7 @@ document.addEventListener(
     var img = new Image();
     img.src =
       "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=";
-    event.dataTransfer.setDragImage(img, 0, 0);
+    event.dataTransfer.setDragImage(img, 0, 0); // get rid of ugly dragging image
   },
   false
 );

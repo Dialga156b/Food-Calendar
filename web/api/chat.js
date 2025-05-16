@@ -1,8 +1,4 @@
 export default async function handler(req, res) {
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  // res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
@@ -10,8 +6,8 @@ export default async function handler(req, res) {
   const userMessage = req.body.message;
   const type = req.body.type;
 
-  console.log("Received user message:", userMessage);
-  const key = process.env.OPENAI_KEY;
+  console.log("Received user message:", userMessage); //debug
+  const key = process.env.OPENAI_KEY; // get openai key from secure vercel servers
   console.log(key);
   if (!key) {
     return res
@@ -46,6 +42,7 @@ export default async function handler(req, res) {
 }
 
 function getAIInstructions(type, userMessage) {
+  //... modify instructions based on method
   console.log("getAIInstructions full");
   switch (type) {
     case "ingredients":
