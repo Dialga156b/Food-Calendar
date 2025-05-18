@@ -34,6 +34,7 @@ async function makeQrCode(link) {
   const qrStorage = sessionStorage.getItem("QR");
   if (qrStorage == null || qrStorage == "") {
     // no qr code. make one
+    console.log(link);
     const res = await fetch(
       "https://food-calendar-eight.vercel.app/api/create-qr",
       {
