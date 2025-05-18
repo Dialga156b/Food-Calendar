@@ -42,24 +42,25 @@ export default async function handler(req, res) {
 }
 
 function getAIInstructions(type, userMessage) {
-  //... modify instructions based on method
-  console.log("getAIInstructions full");
   switch (type) {
     case "ingredients":
       return {
         model: "gpt-4.1-mini",
+        temperature: 0.2, // low temp for consistent structure
         messages: [
           {
             role: "system",
-            content: `You are an expert assistant helping users generate shopping lists from recipes. Respond only in JSON using the required schema. 
-Every ingredient must:
-- Be raw (not cooked or processed)
-- Use whole, store-buyable units (e.g., '1 bag', '2 jars', '3 stalks')
-- NOT include the item name in the quantity
-- NOT use measurements like grams, cups, tbsp, or ml
-- Include a valid 'category': one of 'produce', 'meat', 'dairy', 'spice', or 'other'
-- Exclude minor items like salt, pepper, or water
-All fields must be filled; no empty or partial responses.`,
+            content: `You are an assistant generating structured shopping lists. Follow these strict rules:
+
+- Output only structured JSON using the required schema.
+- Each item must be RAW and store-buyable. No cooked or processed foods.
+- Quantities must be formatted as full descriptive units like: '2 bags', '1 bottle', '3 stalks'.
+- Do NOT include the ingredient name in the quantity.
+- NEVER return a plain number like '1' or '8' — it must include the unit.
+- Do NOT use units like grams, ml, cups, tbsp, teaspoons, etc.
+- Exclude minor items like salt, pepper, or water.
+- Categorize each item using one of: 'produce', 'meat', 'dairy', 'spice', or 'other'.
+- All required fields must be provided. No empty values.`,
           },
           {
             role: "user",
@@ -75,24 +76,24 @@ All fields must be filled; no empty or partial responses.`,
                 ingredients: {
                   type: "array",
                   description:
-                    "A list of unique, raw ingredients for a shopping list with required metadata.",
+                    "A list of unique raw ingredients for a shopping list with descriptive quantities and category info.",
                   items: {
                     type: "object",
                     properties: {
                       item_name: {
                         type: "string",
                         description:
-                          "The raw ingredient name. No symbols, commas, or cooked forms.",
+                          "The raw name of the ingredient (e.g., 'onion', 'flour'). No symbols, commas, or cooked/prepared variants.",
                       },
                       quantity: {
                         type: "string",
                         description:
-                          "Only whole, store-buyable, raw units. Do not include the item name. Formats like '2 bags', '1 bottle', '3 stalks'. No fractions or measurements like grams or cups.",
+                          "A descriptive string with only whole, store-buyable units. Do not include the item name. Do not use measurements like grams, cups, or ml. Valid examples: '2 bags', '1 bottle', '3 stalks'. NEVER return a plain number like '1' or '8'.",
                       },
                       minimum_amount: {
                         type: "string",
                         description:
-                          "A precise string value representing the absolute minimum raw amount needed, e.g., '400g', '2 liters'. This may differ from store-buyable quantity.",
+                          "The precise raw amount required, such as '400g', '2 liters', if known.",
                       },
                       category: {
                         type: "string",
@@ -118,13 +119,15 @@ All fields must be filled; no empty or partial responses.`,
         ],
         function_call: { name: "shopping_list" },
       };
+
     default:
       return {
         model: "gpt-4.1-mini",
+        temperature: 0.2,
         messages: [
           {
             role: "system",
-            content: "generate a recipe in structured JSON format",
+            content: "Generate a recipe in structured JSON format.",
           },
           {
             role: "user",
@@ -140,8 +143,7 @@ All fields must be filled; no empty or partial responses.`,
               properties: {
                 recipe_name: {
                   type: "string",
-                  description:
-                    "The most basic, commonly known name of the recipe.",
+                  description: "Basic name of the recipe.",
                 },
                 ingredients: {
                   type: "array",
@@ -149,7 +151,10 @@ All fields must be filled; no empty or partial responses.`,
                   items: {
                     type: "object",
                     properties: {
-                      name: { type: "string", description: "Ingredient name" },
+                      name: {
+                        type: "string",
+                        description: "Ingredient name",
+                      },
                       amount: {
                         type: "string",
                         description: "Amount required",
@@ -161,11 +166,11 @@ All fields must be filled; no empty or partial responses.`,
                 },
                 cook_time_minutes: {
                   type: "number",
-                  description: "Cooking time in minutes, as a number only",
+                  description: "Cooking time in minutes",
                 },
                 prep_time_minutes: {
                   type: "number",
-                  description: "Prep time in minutes, as a number only",
+                  description: "Prep time in minutes",
                 },
                 instructions: {
                   type: "array",
@@ -175,7 +180,7 @@ All fields must be filled; no empty or partial responses.`,
                     properties: {
                       description: {
                         type: "string",
-                        description: "Step description",
+                        description: "Instruction step",
                       },
                     },
                     required: ["description"],
@@ -184,16 +189,16 @@ All fields must be filled; no empty or partial responses.`,
                 },
                 calories: {
                   type: "string",
-                  description: "Calories per serving, as a number only",
+                  description: "Calories per serving",
                 },
                 servings: {
                   type: "string",
-                  description: "Number of servings, as a number only",
+                  description: "Number of servings",
                 },
                 desc: {
                   type: "string",
                   description:
-                    "Short description (under 10 words OR 72 characters)",
+                    "Short description (under 10 words or 72 characters)",
                 },
               },
               required: [
