@@ -79,7 +79,7 @@ function getAIInstructions(type, userMessage) {
                       quantity: {
                         type: "string",
                         description:
-                          "The amount of this item needed, that are STORE BUYABLE AND RAW. Do not use measurements! absolutely no cups, tbsp, or cooking measurements. USE ITEM SUCH AS: bags, boxes, jars, etc.  (ex: 2 bags of flour, or one bott of wine, or three stalks of celery)",
+                          "List only the amount of this item needed using whole, store-buyable, raw units. Do not include the item name. Do not use measurements like grams, cups, or tablespoons. Only use formats such as '2 bags', '1 bottle', or '3 stalks'. No partial units or processed forms.",
                       },
                       category: {
                         type: "string",
