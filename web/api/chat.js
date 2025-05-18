@@ -42,25 +42,25 @@ export default async function handler(req, res) {
 }
 
 function getAIInstructions(type, userMessage) {
+  //gpt 4.1 mini isn't a rule follower. very rebellious! need LOTS of instructions to make it work properly.
   switch (type) {
     case "ingredients":
       return {
         model: "gpt-4.1-mini",
-        temperature: 0.2, // low temp for consistent structure
+        temperature: 0.2,
         messages: [
           {
             role: "system",
             content: `You are an assistant generating structured shopping lists. Follow these strict rules:
-
-- Output only structured JSON using the required schema.
-- Each item must be RAW and store-buyable. No cooked or processed foods.
-- Quantities must be formatted as full descriptive units like: '2 bags', '1 bottle', '3 stalks'.
-- Do NOT include the ingredient name in the quantity.
-- NEVER return a plain number like '1' or '8' — it must include the unit.
-- Do NOT use units like grams, ml, cups, tbsp, teaspoons, etc.
-- Exclude minor items like salt, pepper, or water.
-- Categorize each item using one of: 'produce', 'meat', 'dairy', 'spice', or 'other'.
-- All required fields must be provided. No empty values.`,
+            - Output only structured JSON using the required schema.
+            - Each item must be RAW and store-buyable. No cooked or processed foods.
+            - Quantities must be formatted as full descriptive units like: '2 bags', '1 bottle', '3 stalks'.
+            - Do NOT include the ingredient name in the quantity.
+            - NEVER return a plain number like '1' or '8' — it must include the unit.
+            - Do NOT use units like grams, ml, cups, tbsp, teaspoons, etc.
+            - Exclude minor items like salt, pepper, or water.
+            - Categorize each item using one of: 'produce', 'meat', 'dairy', 'spice', or 'other'.
+            - All required fields must be provided. No empty values.`,
           },
           {
             role: "user",
@@ -89,11 +89,6 @@ function getAIInstructions(type, userMessage) {
                         type: "string",
                         description:
                           "A descriptive string with only whole, store-buyable units. Do not include the item name. Do not use measurements like grams, cups, or ml. Valid examples: '2 bags', '1 bottle', '3 stalks'. NEVER return a plain number like '1' or '8'.",
-                      },
-                      minimum_amount: {
-                        type: "string",
-                        description:
-                          "The precise raw amount required, such as '400g', '2 liters', if known.",
                       },
                       category: {
                         type: "string",
