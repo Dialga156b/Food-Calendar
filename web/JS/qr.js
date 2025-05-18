@@ -18,7 +18,7 @@ async function showQRCode(mode) {
   const params = new URLSearchParams();
   params.set("data", ingredients);
   params.set("theme", theme.replace("#", ""));
-  const link = `../mobileShopping.html?${params.toString()}`;
+  const link = `https://food-calendar-eight.vercel.app/mobileShopping.html?${params.toString()}`;
 
   if (mode) {
     const qrImgLink = await makeQrCode(link);
