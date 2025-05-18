@@ -51,7 +51,15 @@ function getAIInstructions(type, userMessage) {
         messages: [
           {
             role: "system",
-            content: "generate a shopping list in structured JSON format",
+            content: `You are an expert assistant helping users generate shopping lists from recipes. Respond only in JSON using the required schema. 
+Every ingredient must:
+- Be raw (not cooked or processed)
+- Use whole, store-buyable units (e.g., '1 bag', '2 jars', '3 stalks')
+- NOT include the item name in the quantity
+- NOT use measurements like grams, cups, tbsp, or ml
+- Include a valid 'category': one of 'produce', 'meat', 'dairy', 'spice', or 'other'
+- Exclude minor items like salt, pepper, or water
+All fields must be filled; no empty or partial responses.`,
           },
           {
             role: "user",
@@ -67,24 +75,30 @@ function getAIInstructions(type, userMessage) {
                 ingredients: {
                   type: "array",
                   description:
-                    'Generate a consolidated shopping list of RAW ingredients. Each ingredient must appear only once; if an ingredient is repeated, combine the quantities into a single entry. Treat similar items as the same (e.g., "olive oil" and "extra virgin olive oil" should be merged). Exclude insignificant ingredients such as small amounts of spices (like salt or pepper) or water. Use your judgment to determine what is essential.',
+                    "A list of unique, raw ingredients for a shopping list with required metadata.",
                   items: {
                     type: "object",
                     properties: {
                       item_name: {
                         type: "string",
                         description:
-                          "Name of the ingredient. exclude non-alphabet characters such as hyphens or commas. this should be the RAW version of whatever ingredient it is. NOT COOKED!",
+                          "The raw ingredient name. No symbols, commas, or cooked forms.",
                       },
                       quantity: {
                         type: "string",
                         description:
-                          "List only the amount of this item needed using whole, store-buyable, raw units. Do not include the item name. Do not use measurements like grams, cups, or tablespoons. Only use formats such as '2 bags', '1 bottle', or '3 stalks'. No partial units or processed forms.",
+                          "Only whole, store-buyable, raw units. Do not include the item name. Formats like '2 bags', '1 bottle', '3 stalks'. No fractions or measurements like grams or cups.",
+                      },
+                      minimum_amount: {
+                        type: "string",
+                        description:
+                          "A precise string value representing the absolute minimum raw amount needed, e.g., '400g', '2 liters'. This may differ from store-buyable quantity.",
                       },
                       category: {
                         type: "string",
+                        enum: ["produce", "meat", "dairy", "spice", "other"],
                         description:
-                          "string describing the type of ingredient: dairy, produce, meat, spice, other",
+                          "Ingredient category. Must be one of: produce, meat, dairy, spice, other.",
                       },
                     },
                     required: [
@@ -97,13 +111,7 @@ function getAIInstructions(type, userMessage) {
                   },
                 },
               },
-              required: [
-                "ingredients",
-                "item_name",
-                "quantity",
-                "minimum_amount",
-                "category",
-              ],
+              required: ["ingredients"],
               additionalProperties: false,
             },
           },
