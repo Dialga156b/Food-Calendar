@@ -117,7 +117,7 @@ function getAIInstructions(type, userMessage) {
 
     default:
       return {
-        model: "gpt-4.1-mini",
+        model: "gpt-4o-search-preview",
         temperature: 0.2,
         messages: [
           {
