@@ -253,7 +253,8 @@
             <h3>Text Color</h3>
           </div>
         </div>
-        <button class="button btn-danger" onclick="localStorage.clear(); location.reload();">
+        <button class="button btn-danger"
+          onclick="var e = confirm('Are you sure?'); if (e) {localStorage.clear(); location.reload();} ">
           Delete all save data
         </button>
       </div>

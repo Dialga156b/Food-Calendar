@@ -27,9 +27,23 @@ export default async function handler(req, res) {
     });
     const data = await response.json();
     console.log(data);
-    const args = JSON.parse(
-      data.choices?.[0]?.message?.function_call?.arguments || false
-    );
+
+    let args;
+    try {
+      const raw =
+        data.choices?.[0]?.message?.function_call?.arguments ??
+        data.choices?.[0]?.message?.content ??
+        "{}";
+      args = JSON.parse(raw);
+    } catch (err) {
+      console.error("Failed to parse response:", err);
+      return res.status(500).json({
+        error: "AI response was not valid JSON.",
+        detail: err.message,
+        raw: data.choices?.[0]?.message,
+      });
+    }
+
     console.log(data.choices?.[0]?.message);
     console.log(args);
     return res.status(200).json({ message: args });
