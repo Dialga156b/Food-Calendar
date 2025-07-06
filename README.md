@@ -1,3 +1,3 @@
 # Food Calendar
- Meal planner for the 2025 Maya Prep Hackathon. 
- Don't expect good commit notes.
+Intelligent meal planning application.  
+3rd Place winner for the 2025 Maya Prep Hackathon.
