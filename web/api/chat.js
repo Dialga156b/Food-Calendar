@@ -42,7 +42,6 @@ export default async function handler(req, res) {
 }
 
 function getAIInstructions(type, userMessage) {
-  //gpt 4.1 mini isn't a rule follower. very rebellious! need LOTS of instructions to make it work properly.
   switch (type) {
     case "ingredients":
       return {
@@ -117,100 +116,35 @@ function getAIInstructions(type, userMessage) {
 
     default:
       return {
-        model: "gpt-4o",
+        model: "gpt-4o-mini-search-preview",
         temperature: 0.2,
         messages: [
           {
             role: "system",
-            content: "Generate a recipe in structured JSON format.",
+            content: `You are a helpful assistant that returns only valid JSON using the following schema:
+
+{
+  "recipe_name": string,
+  "ingredients": [{ "name": string, "amount": string }],
+  "cook_time_minutes": number,
+  "prep_time_minutes": number,
+  "instructions": [{ "description": string }],
+  "calories": string,
+  "servings": string,
+  "desc": string
+}
+
+Strict rules:
+- Only respond with valid, parsable JSON.
+- Do not include any explanation, markdown, or extra text.
+- Use double quotes around all keys and values.
+- Do not include trailing commas.`,
           },
           {
             role: "user",
             content: userMessage,
           },
         ],
-        functions: [
-          {
-            name: "recipe",
-            description: "Structured recipe generator",
-            parameters: {
-              type: "object",
-              properties: {
-                recipe_name: {
-                  type: "string",
-                  description: "Basic name of the recipe.",
-                },
-                ingredients: {
-                  type: "array",
-                  description: "List of ingredients.",
-                  items: {
-                    type: "object",
-                    properties: {
-                      name: {
-                        type: "string",
-                        description: "Ingredient name",
-                      },
-                      amount: {
-                        type: "string",
-                        description: "Amount required",
-                      },
-                    },
-                    required: ["name", "amount"],
-                    additionalProperties: false,
-                  },
-                },
-                cook_time_minutes: {
-                  type: "number",
-                  description: "Cooking time in minutes",
-                },
-                prep_time_minutes: {
-                  type: "number",
-                  description: "Prep time in minutes",
-                },
-                instructions: {
-                  type: "array",
-                  description: "Step-by-step instructions",
-                  items: {
-                    type: "object",
-                    properties: {
-                      description: {
-                        type: "string",
-                        description: "Instruction step",
-                      },
-                    },
-                    required: ["description"],
-                    additionalProperties: false,
-                  },
-                },
-                calories: {
-                  type: "string",
-                  description: "Calories per serving",
-                },
-                servings: {
-                  type: "string",
-                  description: "Number of servings",
-                },
-                desc: {
-                  type: "string",
-                  description:
-                    "Short description (under 10 words or 72 characters)",
-                },
-              },
-              required: [
-                "recipe_name",
-                "ingredients",
-                "cook_time_minutes",
-                "prep_time_minutes",
-                "instructions",
-                "calories",
-                "servings",
-                "desc",
-              ],
-              additionalProperties: false,
-            },
-          },
-        ],
-        function_call: { name: "recipe" },
       };
   }
 }
