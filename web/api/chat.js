@@ -134,7 +134,7 @@ function getAIInstructions(type, userMessage) {
         messages: [
           {
             role: "system",
-            content: `You are a helpful assistant that returns only valid JSON using the following schema:
+            content: `You are a helpful assistant that returns only valid JSON (in the english language) using the following schema:
 {
   "recipe_name": string,
   "ingredients": [{ "name": string, "amount": string }],
