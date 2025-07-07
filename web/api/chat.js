@@ -145,6 +145,7 @@ function getAIInstructions(type, userMessage) {
   "calories": string,
   "servings": string,
   "desc": string
+  "img": string (URL to an image representing this recipe)
 }
 
 Strict rules:

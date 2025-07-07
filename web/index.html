@@ -253,8 +253,16 @@
             <h3>Text Color</h3>
           </div>
         </div>
+        <div class="setting">
+          <h3>Generation Settings</h3>
+          <h4 style="margin: -8px 0 -2px 0;">Options having to do with recipe creation</h4>
+          <div class="flex-row">
+            <input type="checkbox">
+            <h3>Find relevant images</h3>
+          </div>
+        </div>
         <button class="button btn-danger"
-          onclick="var e = confirm('Are you sure?'); if (e) {localStorage.clear(); location.reload();} ">
+          onclick="if (confirm('Are you sure?')) {localStorage.clear(); location.reload();} ">
           Delete all save data
         </button>
       </div>

@@ -17,6 +17,13 @@
   margin: 0
 }
 
+.flex-row input[type="checkbox" i] {
+  display: flex;
+  aspect-ratio: 1;
+  height: 100%;
+  margin: 0;
+}
+
 .settingsList {
   gap: 7px;
   display: flex;
