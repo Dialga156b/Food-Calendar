@@ -30,7 +30,9 @@ async function showQRCode(mode) {
 
     QRContainer.appendChild(img);
     img.onload = () => {
-      img.classList.add("visible");
+      setTimeout(() => {
+        img.classList.add("visible");
+      }, 300);
     };
 
     QRFrame.classList.add("visible");
