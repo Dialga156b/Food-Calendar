@@ -135,17 +135,15 @@ function getAIInstructions(type, userMessage) {
           {
             role: "system",
             content: `You are a helpful assistant that returns only valid JSON using the following schema:
-
 {
   "recipe_name": string,
   "ingredients": [{ "name": string, "amount": string }],
   "cook_time_minutes": number,
   "prep_time_minutes": number,
   "instructions": [{ "description": string }],
-  "calories": string,
-  "servings": string,
-  "desc": string,
-  "img": string (valid IMAGE URL to a picture of this recipe.)
+  "calories": number/short string (per serving),
+  "servings": number,
+  "desc": string
 }
 
 Strict rules:
