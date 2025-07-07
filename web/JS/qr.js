@@ -35,29 +35,29 @@ async function showQRCode(mode) {
   } else {
     QRFrame.classList.remove("visible");
   }
-
-  async function makeQrCode(link) {
-    const qrStorage = sessionStorage.getItem("QR");
-    if (qrStorage == null || qrStorage == "") {
-      // no qr code. make one
-      console.log(link);
-      const res = await fetch(
-        "https://food-calendar-eight.vercel.app/api/create-qr",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ long_url: link }),
-        }
-      );
-      const blob = await res.blob();
-      const img = URL.createObjectURL(blob);
-      sessionStorage.setItem("QR", img);
-      return img;
-    } else {
-      return qrStorage;
-    }
+}
+async function makeQrCode(link) {
+  const qrStorage = sessionStorage.getItem("QR");
+  if (qrStorage == null || qrStorage == "") {
+    // no qr code. make one
+    console.log(link);
+    const res = await fetch(
+      "https://food-calendar-eight.vercel.app/api/create-qr",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ long_url: link }),
+      }
+    );
+    const blob = await res.blob();
+    const img = URL.createObjectURL(blob);
+    sessionStorage.setItem("QR", img);
+    return img;
+  } else {
+    return qrStorage;
   }
-  window.onload = function () {
-    sessionStorage.clear();
-  };
-  window.showQRCode = showQRCode;
+}
+window.onload = function () {
+  sessionStorage.clear();
+};
+window.showQRCode = showQRCode;
