@@ -32,7 +32,7 @@ async function showQRCode(mode) {
     img.onload = () => {
       setTimeout(() => {
         img.classList.add("visible");
-      }, 300);
+      }, 150);
     };
 
     QRFrame.classList.add("visible");
