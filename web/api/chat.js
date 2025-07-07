@@ -141,7 +141,7 @@ function getAIInstructions(type, userMessage) {
   "cook_time_minutes": number,
   "prep_time_minutes": number,
   "instructions": [{ "description": string }],
-  "calories": number/short string (per serving),
+  "calories": number (per serving),
   "servings": number,
   "desc": string
 }
