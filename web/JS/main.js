@@ -76,6 +76,12 @@ function initSortable() {
     onEnd: function (event) {
       onMoveEnd(event);
     },
+    onMove: function (event) {
+      const settingsButton = event.dragged.querySelector(".settings-item");
+      if (settingsButton) {
+        settingsButton.remove();
+      }
+    },
   });
 
   document.querySelectorAll(".drop-zone").forEach((zone) => {
@@ -157,6 +163,7 @@ function onMoveEnd(event) {
 
   if (clone && item && foodID) {
     clone.id = foodID;
+    attatchSettingsCheck(clone); // recipes.js
   }
 
   if (oldDay != "recipe-list") {
@@ -295,6 +302,54 @@ async function manageItemClick(itemElement) {
 
   currentActive = null;
 }
+function deleteRecipe() {
+  const recipeId = window.CR_ID;
+  const itemElements = document.querySelectorAll(
+    `[id="${recipeId}"].item, [id="${recipeId}"].item-placed`
+  );
+  itemElements.forEach((element) => {
+    element.remove();
+  });
+
+  let schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+
+  for (const monthIndex in schedule) {
+    const month = schedule[monthIndex];
+
+    for (const dayIndex in month) {
+      const day = month[dayIndex];
+      const filteredDay = day.filter((recipeEntry) => {
+        return recipeEntry[0] !== recipeId;
+      });
+      if (filteredDay.length > 0) {
+        month[dayIndex] = filteredDay;
+      } else {
+        delete month[dayIndex];
+      }
+    }
+    if (Object.keys(month).length === 0) {
+      delete schedule[monthIndex];
+    }
+  }
+  localStorage.setItem("schedule", JSON.stringify(schedule));
+
+  let recipes = JSON.parse(localStorage.getItem("recipes")) || {};
+
+  if (typeof recipes === "object" && recipes !== null) {
+    if (Array.isArray(recipes)) {
+      const updatedRecipes = recipes.filter((recipe) => recipe.id !== recipeId);
+      localStorage.setItem("recipes", JSON.stringify(updatedRecipes));
+    } else {
+      delete recipes[recipeId];
+      localStorage.setItem("recipes", JSON.stringify(recipes));
+    }
+  }
+  reloadRecipes();
+  populateCalendar();
+
+  console.log(`Recipe with ID ${recipeId} has been completely deleted`);
+}
+
 document.addEventListener("click", async function (event) {
   manageItemClick(event.target.closest(".item"));
 });
@@ -317,5 +372,6 @@ document.addEventListener(
   },
   false
 );
+window.deleteRecipe = deleteRecipe;
 window.handleMonthOffset = handleMonthOffset;
 window.manageItemClick = manageItemClick;

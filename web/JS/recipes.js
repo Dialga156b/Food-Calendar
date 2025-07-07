@@ -1,4 +1,5 @@
 import { sendMessageToChatGPT } from "./utility.js";
+
 async function genRecipe() {
   const input = document.getElementById("rdesc");
   const containerInner = document.getElementById("gen-container-inner");
@@ -47,14 +48,50 @@ async function genRecipe() {
   containerOuter.classList.remove("blur-border");
   genPopup.classList.remove("popup-animated");
 }
+async function attatchSettingsCheck(item) {
+  item.addEventListener("mouseenter", () => {
+    const currentSettingsIcon = item.querySelector(".settings-item");
+    if (currentSettingsIcon) {
+      currentSettingsIcon.style.display = "flex";
+      currentSettingsIcon.style.opacity = "1";
+    }
+  });
+
+  item.addEventListener("mouseleave", () => {
+    const currentSettingsIcon = item.querySelector(".settings-item");
+    if (currentSettingsIcon) {
+      currentSettingsIcon.style.opacity = "0";
+    }
+  });
+
+  const settingsIcon = item.querySelector(".settings-item");
+  if (settingsIcon) {
+    settingsIcon.addEventListener("click", (e) => {
+      e.stopPropagation();
+      console.log(item.id);
+      showRS(true, item.id);
+    });
+  }
+}
 
 async function reloadRecipes() {
+  const allPlacedItems = document.querySelectorAll(".item-placed");
+  allPlacedItems.forEach((item) => {
+    item.remove();
+  });
+
   const recipes =
     JSON.parse(localStorage.getItem("recipes")) || (await getDefaultRecipes());
   const rList = document.getElementById("recipe-list");
   while (rList.firstChild) {
     rList.removeChild(rList.firstChild);
   }
+
+  const allSettingsIcons = document.querySelectorAll(".settings-item");
+  allSettingsIcons.forEach((icon) => {
+    icon.style.opacity = "0";
+  });
+
   let recipeCount = Object.keys(recipes).length;
   for (let index = 0; index < recipeCount; index++) {
     const recipe = recipes[index];
@@ -71,6 +108,7 @@ async function reloadRecipes() {
     const container = document.createElement("div");
     const title = document.createElement("h2");
     const paragraph = document.createElement("p");
+    const settingsIcon = document.createElement("div");
 
     item.classList.add("item");
     item.id = recipe.id;
@@ -82,11 +120,23 @@ async function reloadRecipes() {
     paragraph.id = "p";
     paragraph.textContent = recipe.desc;
 
+    settingsIcon.classList.add("settings-item");
+    settingsIcon.innerHTML = '<ion-icon name="settings"></ion-icon>';
+
+    settingsIcon.style.opacity = "0";
+    settingsIcon.style.display = "none";
+
+    item.style.position = "relative";
+
     rList.appendChild(item);
     item.appendChild(img);
     item.appendChild(container);
+    item.appendChild(settingsIcon);
     container.appendChild(title);
     container.appendChild(paragraph);
+
+    // This will now handle both hover and click events
+    attatchSettingsCheck(item);
   }
   localStorage.setItem("recipes", JSON.stringify(recipes));
   return true;
@@ -109,4 +159,5 @@ async function getDefaultRecipes() {
 }
 
 window.genRecipe = genRecipe;
+window.attatchSettingsCheck = attatchSettingsCheck;
 export { reloadRecipes };

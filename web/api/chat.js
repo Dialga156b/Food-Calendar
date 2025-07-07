@@ -143,7 +143,8 @@ function getAIInstructions(type, userMessage) {
   "instructions": [{ "description": string }],
   "calories": number (per serving),
   "servings": number,
-  "desc": string
+  "desc": string,
+  "site": string (URL of the website in which this info was found, if present.)
 }
 
 Strict rules:

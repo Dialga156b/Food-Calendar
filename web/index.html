@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="CSS/calendar.css">
   <link rel="stylesheet" href="CSS/items.css">
   <link rel="stylesheet" href="CSS/qr.css">
+  <link rel="stylesheet" href="CSS/recipe_settings.css">
   <link rel="stylesheet" href="CSS/sidebar/sb_main.css">
 
   <link rel="stylesheet" href="CSS/global.css">
@@ -41,7 +42,11 @@
     </div>
   </div>
   <div class="sidebar" id="sidebarL">
-    <h2>Recipe Book</h2>
+    <div class="book-title">
+      <ion-icon name="book"></ion-icon>
+      <h2>Recipe Book</h2>
+    </div>
+
     <div class="recipe-list" id="recipe-list">
     </div>
     <div class="flag" id="lToggle" onclick="toggleLeftSidebar()">
@@ -52,12 +57,19 @@
     <div class="qr-frame" id="qr-frame">
       <ion-icon class="qr-icon" onclick="showQRCode(false)" name="close-outline" style="z-index: 500;"></ion-icon>
       <div id="qr-container" class="qr-container">
+        <!--qr code goes here-->
       </div>
       <h3>Scan to view your shopping list</h3>
       <div class="justify-center flex-row" style="align-items: center; gap: 5px;">
         <ion-icon name="alert-circle-outline"></ion-icon>
         <h4>Bitly may show a quick preview</h4>
       </div>
+    </div>
+    <div class="recipe-settings-frame" id="rs-frame" style="display: none;">
+      <ion-icon class="rs-icon" onclick="showRS(false)" name="close-outline" style="z-index: 500;"></ion-icon>
+      <h3 id="rs-title">Recipe Settings</h3>
+      <button class="button" onclick="deleteRecipe()" style="padding-inline: 20px;">Delete This
+        Recipe</button>
     </div>
     <div class="logoTitle">
       <div>
@@ -268,7 +280,7 @@
       </div>
     </div>
   </div>
-
+  <script src="JS/recipeSettings.js"></script>
   <script type="module" src="JS/recipes.js"></script>
   <script type="module" src="JS/main.js"></script>
   <script src="JS/todaysRecipe.js"></script>
