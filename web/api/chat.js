@@ -144,8 +144,8 @@ function getAIInstructions(type, userMessage) {
   "instructions": [{ "description": string }],
   "calories": string,
   "servings": string,
-  "desc": string
-  "img": string (URL to an image representing this recipe)
+  "desc": string,
+  "img": string (valid IMAGE URL to a picture of this recipe.)
 }
 
 Strict rules:
