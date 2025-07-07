@@ -11,6 +11,7 @@ async function showQRCode(mode) {
   const QRFrame = document.getElementById("qr-frame");
   const QRContainer = document.getElementById("qr-container");
 
+  // Clear previous QR code
   while (QRContainer.firstChild) {
     QRContainer.removeChild(QRContainer.firstChild);
   }
@@ -26,18 +27,18 @@ async function showQRCode(mode) {
     const qrImgLink = await makeQrCode(link);
     const img = document.createElement("img");
     img.src = qrImgLink;
-    img.onload = () => {
-      QRContainer.appendChild(img);
-      requestAnimationFrame(() => {
-        img.classList.add("visible");
-      });
-    };
+
     QRContainer.appendChild(img);
+    img.onload = () => {
+      img.classList.add("visible");
+    };
+
     QRFrame.classList.add("visible");
   } else {
     QRFrame.classList.remove("visible");
   }
 }
+
 async function makeQrCode(link) {
   const qrStorage = sessionStorage.getItem("QR");
   if (qrStorage == null || qrStorage == "") {
