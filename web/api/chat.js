@@ -151,7 +151,8 @@ Strict rules:
 - Only respond with valid, parsable JSON.
 - Do not include any explanation, markdown, or extra text.
 - Use double quotes around all keys and values.
-- Do not include trailing commas.`,
+- Do not include trailing commas.
+- Keep the description concise (less than 70 characters)`,
           },
           {
             role: "user",

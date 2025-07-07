@@ -344,7 +344,6 @@ function deleteRecipe() {
       localStorage.setItem("recipes", JSON.stringify(recipes));
     }
   }
-  reloadRecipes();
   populateCalendar();
 
   console.log(`Recipe with ID ${recipeId} has been completely deleted`);

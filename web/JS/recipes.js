@@ -92,12 +92,14 @@ async function reloadRecipes() {
     icon.style.opacity = "0";
   });
 
-  let recipeCount = Object.keys(recipes).length;
-  for (let index = 0; index < recipeCount; index++) {
-    const recipe = recipes[index];
+  // Or use this approach:
+  const recipeValues = Object.values(recipes);
+  for (let i = 0; i < recipeValues.length; i++) {
+    const recipe = recipeValues[i];
     if (!recipe) {
       continue;
     }
+    console.log("successful creation: " + recipe.recipe_name);
     let imgLink = recipe.image;
     if (imgLink == "") {
       imgLink = "IMG/FoodIcon.png";
