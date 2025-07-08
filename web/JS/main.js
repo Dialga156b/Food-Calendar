@@ -382,3 +382,4 @@ document.addEventListener(
 window.deleteRecipe = deleteRecipe;
 window.handleMonthOffset = handleMonthOffset;
 window.manageItemClick = manageItemClick;
+export { populateCalendar };
