@@ -361,6 +361,23 @@ function deleteRecipe() {
   console.log(`Recipe with ID ${recipeId} has been completely deleted`);
 }
 
+function changeRecipeImg() {
+  const recipeId = window.CR_ID;
+  const reply = prompt("Please insert new image address:");
+
+  if (reply) {
+    const recipes = JSON.parse(localStorage.getItem("recipes") || "{}");
+
+    if (recipes.hasOwnProperty(recipeId)) {
+      recipes[recipeId].image = reply;
+      localStorage.setItem("recipes", JSON.stringify(recipes));
+      reloadRecipes();
+    } else {
+      alert("Recipe not found.");
+    }
+  }
+}
+
 document.addEventListener("click", async function (event) {
   manageItemClick(event.target.closest(".item"));
 });
@@ -384,6 +401,7 @@ document.addEventListener(
   false
 );
 window.deleteRecipe = deleteRecipe;
+window.changeRecipeImg = changeRecipeImg;
 window.handleMonthOffset = handleMonthOffset;
 window.manageItemClick = manageItemClick;
 export { populateCalendar };
