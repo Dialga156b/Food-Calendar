@@ -117,7 +117,9 @@ async function populateCalendar() {
                   foodEl.classList = "item item-placed";
                   zoneEl.appendChild(foodEl);
                 }
+                console.log("edit success");
               } catch (err) {
+                console.warn(err);
                 //do nothing. har har
               }
             });
