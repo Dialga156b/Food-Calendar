@@ -44,6 +44,8 @@
 
 .recipe-settings-frame h4 {
     margin: 0;
+    margin-bottom: 5px;
+    text-align: center;
 }
 
 .rs-icon {
