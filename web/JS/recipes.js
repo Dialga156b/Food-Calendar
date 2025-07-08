@@ -46,8 +46,7 @@ async function genRecipe() {
 
       localStorage.setItem("recipes", JSON.stringify(foods));
 
-      // You should call reloadRecipes() here to update the UI
-      // populateCalendar();
+      reloadRecipes();
     } else {
       console.log("Recipe generation failed!");
     }
@@ -90,10 +89,6 @@ async function attatchSettingsCheck(item) {
 
 async function reloadRecipes() {
   console.log("reloading recipes...");
-  const allPlacedItems = document.querySelectorAll(".item-placed");
-  allPlacedItems.forEach((item) => {
-    item.remove();
-  });
 
   const recipes =
     JSON.parse(localStorage.getItem("recipes")) || (await getDefaultRecipes());

@@ -101,6 +101,10 @@ function initSortable() {
 }
 async function populateCalendar() {
   const done = await reloadRecipes();
+  const allPlacedItems = document.querySelectorAll(".item-placed");
+  allPlacedItems.forEach((item) => {
+    item.remove();
+  });
   if (done) {
     console.log("reload recipes finished");
     const foods = JSON.parse(localStorage.getItem("schedule")) || {};
