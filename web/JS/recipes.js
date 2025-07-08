@@ -35,7 +35,7 @@ async function genRecipe() {
 
       localStorage.setItem("recipes", JSON.stringify(foods));
 
-      populateCalendar();
+      //populateCalendar();
     } else {
       console.log("Recipe generation failed!");
     }
