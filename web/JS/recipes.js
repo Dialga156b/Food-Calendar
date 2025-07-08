@@ -47,6 +47,7 @@ async function genRecipe() {
   containerInner.classList.remove("generate-blur");
   containerOuter.classList.remove("blur-border");
   genPopup.classList.remove("popup-animated");
+  console.warn("genRecipe Fucntion complete");
 }
 async function attatchSettingsCheck(item) {
   item.addEventListener("mouseenter", () => {
@@ -93,7 +94,6 @@ async function reloadRecipes() {
     icon.style.opacity = "0";
   });
 
-  // Or use this approach:
   const recipeValues = Object.values(recipes);
   for (let i = 0; i < recipeValues.length; i++) {
     const recipe = recipeValues[i];
