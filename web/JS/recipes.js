@@ -1,5 +1,5 @@
 import { sendMessageToChatGPT } from "./utility.js";
-
+import { populateCalendar } from "./main.js";
 async function genRecipe() {
   const input = document.getElementById("rdesc");
   const containerInner = document.getElementById("gen-container-inner");
@@ -35,7 +35,7 @@ async function genRecipe() {
 
       localStorage.setItem("recipes", JSON.stringify(foods));
 
-      reloadRecipes();
+      populateCalendar();
     } else {
       console.log("Recipe generation failed!");
     }
