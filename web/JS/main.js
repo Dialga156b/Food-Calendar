@@ -102,11 +102,15 @@ function initSortable() {
 async function populateCalendar() {
   const done = await reloadRecipes();
   if (done) {
+    console.log("reload recipes finished");
     const foods = JSON.parse(localStorage.getItem("schedule")) || {};
     for (const monthIndex in foods) {
+      console.log("month");
       if (monthIndex == newMonth) {
+        // current month
         const zones = foods[monthIndex];
         for (const zone in zones) {
+          console.log("zone 1");
           const foodGroups = zones[zone];
           foodGroups?.forEach((group) => {
             group.forEach((food) => {
