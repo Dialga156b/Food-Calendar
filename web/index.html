@@ -149,11 +149,7 @@
           <h3 id="gen-text">Generating..</h3>
         </div>
         <div class="gen-inner" id="gen-container-inner">
-          <h3>Recipe Description</h3>
-          <div class="flex-row" style="align-items: center; gap: 5px;">
-            <ion-icon name="alert-circle-outline"></ion-icon>
-            <h4>Quality or safety not guaranteed if generated without a recipe.</h4>
-          </div>
+          <h3 style="margin-bottom: 5px;">Recipe Description</h3>
           <textarea type="text" class="recipe-gen-box" id="rdesc" name="rdesc"
             placeholder="Paste your recipe's name, instructions, and ingredients here. Based on these instructions, a new recipe will be generated and added to the recipe book. If using a link, place ONLY the link here."></textarea>
           <h3 style="margin: 5px 0 5px 0">Recipe Image (Optional)</h3>
@@ -164,52 +160,62 @@
       </div>
     </div>
     <div class="todaysRecipeTab tab" id="todaysRecipeTab">
-      <h2 id="tr-header">Today</h2>
-      <div class="recipe-scroll" id="recipe-scroll">
-        <div class="tr-template" id="tr-template">
-          <details name="exclusive">
-            <summary id="summary">Recipe Name</summary>
-            <div class="todays-recipe">
-              <div class="flex-row" style="margin-bottom: 8px;">
-                <img src="IMG/FoodIcon.png" id="tr-img"></img>
-                <div>
-                  <h3 id="tr-name">Recipe Name</h3>
-                  <p id="tr-desc">Recipe Description</p>
+      <div>
+        <h2 id="tr-header">Today</h2>
+        <div class="recipe-scroll" id="recipe-scroll">
+          <div class="tr-template" id="tr-template">
+            <details name="exclusive">
+              <summary id="summary">Recipe Name</summary>
+              <div class="todays-recipe">
+                <div class="flex-row" style="margin-bottom: 8px;">
+                  <img src="IMG/FoodIcon.png" id="tr-img"></img>
+                  <div>
+                    <h3 id="tr-name">Recipe Name</h3>
+                    <p id="tr-desc">Recipe Description</p>
+                  </div>
+                </div>
+                <div class="recipe-info flex-row">
+                  <div class="factoid">
+                    <h4>Calories</h4>
+                    <p id="f-cal">500</p>
+                  </div>
+                  <div class="factoid">
+                    <h4>Prep Time</h4>
+                    <p id="f-prep">15m</p>
+                  </div>
+                  <div class="factoid">
+                    <h4>Cook Time</h4>
+                    <p id="f-cook">25m</p>
+                  </div>
+                  <div class="factoid">
+                    <h4>Servings</h4>
+                    <p id="f-serv">2 - 5</p>
+                  </div>
+                </div>
+                <div class="ingredients">
+                  <h3>Ingredients</h3>
+                  <ul id="ingredients">
+                    <li id="ingredient" style="display: none; margin-bottom: 3px;">(Half Cup) Flour</li>
+                  </ul>
+                </div>
+                <div class="recipe-steps" id="instructions">
+                  <div class="step flex-row" style="display: none;" id="step">
+                    <h3>1</h3>
+                    <p>Recipe Step Description</p>
+                  </div>
                 </div>
               </div>
-              <div class="recipe-info flex-row">
-                <div class="factoid">
-                  <h4>Calories</h4>
-                  <p id="f-cal">500</p>
-                </div>
-                <div class="factoid">
-                  <h4>Prep Time</h4>
-                  <p id="f-prep">15m</p>
-                </div>
-                <div class="factoid">
-                  <h4>Cook Time</h4>
-                  <p id="f-cook">25m</p>
-                </div>
-                <div class="factoid">
-                  <h4>Servings</h4>
-                  <p id="f-serv">2 - 5</p>
-                </div>
-              </div>
-              <div class="ingredients">
-                <h3>Ingredients</h3>
-                <ul id="ingredients">
-                  <li id="ingredient" style="display: none; margin-bottom: 3px;">(Half Cup) Flour</li>
-                </ul>
-              </div>
-              <div class="recipe-steps" id="instructions">
-                <div class="step flex-row" style="display: none;" id="step">
-                  <h3>1</h3>
-                  <p>Recipe Step Description</p>
-                </div>
-              </div>
-            </div>
-          </details>
+            </details>
+          </div>
         </div>
+      </div>
+
+      <div class="recipe-footer">
+        <ion-icon name="sparkles"></ion-icon>
+        <h4>
+          Summarized with AI
+          <a href="https://openai.com/api/">Learn more</a>
+        </h4>
       </div>
     </div>
     <div class="shoppingListTab tab" id="shoppingListTab">

@@ -1,5 +1,5 @@
 import { sendMessageToChatGPT } from "./utility.js";
-import { populateCalendar } from "./main.js";
+
 async function genRecipe() {
   const input = document.getElementById("rdesc");
   const containerInner = document.getElementById("gen-container-inner");
@@ -59,7 +59,6 @@ async function genRecipe() {
   containerInner.classList.remove("generate-blur");
   containerOuter.classList.remove("blur-border");
   genPopup.classList.remove("popup-animated");
-  console.warn("genRecipe Function complete");
 }
 async function attatchSettingsCheck(item) {
   item.addEventListener("mouseenter", () => {
@@ -108,7 +107,7 @@ async function reloadRecipes() {
     if (!recipe) {
       continue;
     }
-    console.log("successful creation: " + recipe.recipe_name);
+
     let imgLink = recipe.image;
     if (imgLink == "") {
       imgLink = "IMG/FoodIcon.png";

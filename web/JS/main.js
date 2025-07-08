@@ -106,15 +106,12 @@ async function populateCalendar() {
     item.remove();
   });
   if (done) {
-    console.log("reload recipes finished");
     const foods = JSON.parse(localStorage.getItem("schedule")) || {};
     for (const monthIndex in foods) {
-      console.log("month");
       if (monthIndex == newMonth) {
         // current month
         const zones = foods[monthIndex];
         for (const zone in zones) {
-          console.log("zone 1");
           const foodGroups = zones[zone];
           foodGroups?.forEach((group) => {
             group.forEach((food) => {
@@ -125,7 +122,6 @@ async function populateCalendar() {
                   foodEl.classList = "item item-placed";
                   zoneEl.appendChild(foodEl);
                 }
-                console.log("edit success");
               } catch (err) {
                 console.warn(err);
                 //do nothing. har har

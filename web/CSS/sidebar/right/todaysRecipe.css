@@ -136,4 +136,26 @@
 .todaysRecipeTab {
     height: 100vh;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.recipe-footer {
+    margin: 15px 0;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    top: 100%
+}
+
+.recipe-footer h4 {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-footer a {
+    font-weight: lighter;
+    color: var(--main-text);
 }
