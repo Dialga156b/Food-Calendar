@@ -163,4 +163,5 @@ async function getDefaultRecipes() {
 
 window.genRecipe = genRecipe;
 window.attatchSettingsCheck = attatchSettingsCheck;
+window.reloadRecipes = reloadRecipes;
 export { reloadRecipes };
