@@ -4,7 +4,7 @@ const clostBtn = document.getElementById("rs-icon");
 
 async function showRS(mode, id = false) {
   if (mode) {
-    QRFrame.style.display = "block";
+    QRFrame.style.display = "flex";
     if (id) {
       console.log(id);
       window.CR_ID = id;
