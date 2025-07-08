@@ -125,6 +125,8 @@ async function populateCalendar() {
         }
       }
     }
+  } else {
+    console.log("FAILED!");
   }
 }
 

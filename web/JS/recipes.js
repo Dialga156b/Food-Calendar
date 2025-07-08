@@ -75,6 +75,7 @@ async function attatchSettingsCheck(item) {
 }
 
 async function reloadRecipes() {
+  console.log("reloading recipes...");
   const allPlacedItems = document.querySelectorAll(".item-placed");
   allPlacedItems.forEach((item) => {
     item.remove();
