@@ -6,19 +6,30 @@ async function genRecipe() {
   const containerOuter = document.getElementById("gen-container-outer");
   const genPopup = document.getElementById("gen-popup");
   const recipeImgBox = document.getElementById("recipeimgbox");
+
   containerInner.classList.add("generate-blur");
   containerOuter.classList.add("blur-border");
   genPopup.classList.add("popup-animated");
+
   if (input.value.trim().length < 3 || input.value == "") {
     return null;
   }
+
   try {
     const chatGptReply = await sendMessageToChatGPT(input.value, "recipe");
     if (chatGptReply) {
       console.log("Recipe JSON:", chatGptReply);
-      // fun stuff! basically a copy of the stuff in main.js though
+
       let foods = JSON.parse(localStorage.getItem("recipes")) || {};
-      const recipeID = Object.keys(foods).length || 0;
+
+      // Find the next available ID
+      const existingIds = Object.keys(foods).map((id) => parseInt(id));
+      let recipeID = 0;
+
+      // Keep incrementing until we find an unused ID
+      while (existingIds.includes(recipeID)) {
+        recipeID++;
+      }
 
       foods[recipeID] = {
         recipe_name: chatGptReply.recipe_name,
@@ -35,19 +46,21 @@ async function genRecipe() {
 
       localStorage.setItem("recipes", JSON.stringify(foods));
 
-      //populateCalendar();
+      // You should call reloadRecipes() here to update the UI
+      // populateCalendar();
     } else {
       console.log("Recipe generation failed!");
     }
   } catch (error) {
     console.error("Something went wrong:", error);
   }
+
   input.value = "";
   recipeImgBox.value = "";
   containerInner.classList.remove("generate-blur");
   containerOuter.classList.remove("blur-border");
   genPopup.classList.remove("popup-animated");
-  console.warn("genRecipe Fucntion complete");
+  console.warn("genRecipe Function complete");
 }
 async function attatchSettingsCheck(item) {
   item.addEventListener("mouseenter", () => {
