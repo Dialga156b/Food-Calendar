@@ -42,6 +42,7 @@ async function genRecipe() {
         desc: chatGptReply.desc,
         image: recipeImgBox.value,
         id: recipeID,
+        site: chatGptReply.site,
       };
 
       localStorage.setItem("recipes", JSON.stringify(foods));
