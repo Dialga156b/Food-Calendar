@@ -39,6 +39,16 @@ function loadRecipe(ids) {
         img.src = "IMG/FoodIcon.png";
       }
       thisRecipe.querySelector("summary").textContent = recipe.recipe_name;
+      const site = recipe.site;
+      if (site) {
+        console.log(site);
+        thisRecipe.querySelector("summary").onclick = () => {
+          window.TD_SITE = site;
+        };
+      } else {
+        console.log(site);
+        thisRecipe.querySelector("#td-site").style.display = "none";
+      }
 
       for (let index = 0; index < recipe.ingredients.length; index++) {
         const thisIngredientEl = ingredient.cloneNode(true);

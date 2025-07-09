@@ -64,5 +64,13 @@ function setSidebarTab(tab) {
   }
 }
 
+function openWebsite() {
+  const site = window.TD_SITE;
+  if (site) {
+    window.open(site);
+  }
+}
+
+window.openWebsite = openWebsite;
 setLeftSidebarState(true);
 setRightSidebarState(true);

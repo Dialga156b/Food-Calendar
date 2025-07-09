@@ -159,3 +159,31 @@
     font-weight: lighter;
     color: var(--main-text);
 }
+
+.td-website {
+    margin-top: 10px;
+    padding: 5px 15px;
+    border: 1px solid var(--main-border-color);
+    width: fit-content;
+    align-self: center;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0px 4px 4px var(--dropshadow);
+    transition: all .3s ease-out;
+}
+
+.td-website:hover {
+    padding: 5px 20px;
+    box-shadow: 0px 7px 7px var(--dropshadow);
+    transform: translateY(-1px);
+}
+
+.td-website:active {
+    transform: translateY(2px);
+}
+
+.td-website ion-icon {
+    display: flex;
+}
