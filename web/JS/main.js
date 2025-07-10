@@ -39,6 +39,8 @@ function createDayCell(day) {
   const cell = document.createElement("td");
   const dayLabel = document.createElement("div");
   const today = new Date();
+  let hoverTimeout;
+
   if (day == today.getDate() && newMonth == today.getMonth()) {
     //let mon = today.getMonth();
     cell.className = "today";
@@ -60,6 +62,34 @@ function createDayCell(day) {
   cell.appendChild(dayLabel);
   cell.appendChild(dropZone);
 
+  const note = document.createElement("div");
+  note.className = "note";
+  note.id = "note";
+  note.innerHTML = "<ion-icon name='document-outline'></ion-icon>";
+
+  cell.addEventListener("mouseenter", () => {
+    hoverTimeout = setTimeout(() => {
+      note.style.display = "flex";
+      setTimeout(() => {
+        note.classList.add("visible");
+      }, 50);
+    }, 700);
+  });
+
+  cell.addEventListener("mouseleave", () => {
+    clearTimeout(hoverTimeout);
+    note.classList.remove("visible");
+    setTimeout(() => {
+      note.style.display = "none";
+    }, 300);
+  });
+
+  note.addEventListener("click", () => {
+    window.DAY_NAME = day;
+    noteUI(true);
+  });
+
+  cell.appendChild(note);
   return cell;
 }
 
@@ -99,6 +129,7 @@ function initSortable() {
     });
   });
 }
+
 async function populateCalendar() {
   const done = await reloadRecipes();
   const allPlacedItems = document.querySelectorAll(".item-placed");
@@ -117,13 +148,25 @@ async function populateCalendar() {
             group.forEach((food) => {
               try {
                 const zoneEl = document.getElementById(zone);
-                const foodEl = document.getElementById(food).cloneNode(true);
-                if (zoneEl && foodEl) {
-                  foodEl.classList = "item item-placed";
-                  zoneEl.appendChild(foodEl);
+                console.log(food);
+                // Check if this is a note (not a recipe ID)
+                const isNote = !document.getElementById(food);
+
+                if (isNote) {
+                  // This is a note - set the zone's text content
+                  if (zoneEl) {
+                    zoneEl.textContent = food;
+                  }
+                } else {
+                  // This is a recipe - clone and append as before
+                  const foodEl = document.getElementById(food).cloneNode(true);
+                  if (zoneEl && foodEl) {
+                    foodEl.classList = "item item-placed";
+                    zoneEl.appendChild(foodEl);
+                  }
                 }
               } catch (err) {
-                console.warn(err);
+                //console.warn(err);
                 //do nothing. har har
               }
             });
@@ -374,6 +417,78 @@ function changeRecipeImg() {
   }
 }
 
+function noteUI(mode) {
+  const noteFrame = document.getElementById("note-frame");
+  const noteText = document.getElementById("nf-name");
+  const day = window.DAY_NAME;
+
+  if (mode) {
+    noteFrame.style.display = "flex";
+
+    const today = new Date();
+    const date = new Date(today.getFullYear(), today.getMonth(), day);
+    const dateString = date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    noteText.textContent = `Day of ${dateString}`;
+
+    setTimeout(() => {
+      noteFrame.classList.add("visible");
+    }, 50);
+  } else {
+    noteFrame.classList.remove("visible");
+    setTimeout(() => {
+      noteFrame.style.display = "none";
+    }, 400);
+  }
+}
+
+function submitNote() {
+  const day = window.DAY_NAME; // 1-31, day number
+  const text = document.getElementById("nf-textarea")?.value; // note text
+
+  if (!text || text.trim() === "") {
+    noteUI(false); // close UI
+    return;
+  }
+
+  let schedule = {};
+  try {
+    const storedSchedule = localStorage.getItem("schedule");
+    if (storedSchedule) {
+      schedule = JSON.parse(storedSchedule);
+    }
+  } catch (error) {
+    console.error("Error parsing schedule from localStorage:", error);
+    schedule = {};
+  }
+
+  const currentMonth = new Date().getMonth();
+  if (!schedule[currentMonth]) {
+    schedule[currentMonth] = {};
+  }
+
+  const zoneKey = `zone_${day}`;
+  if (!schedule[currentMonth][zoneKey]) {
+    schedule[currentMonth][zoneKey] = [];
+  }
+
+  schedule[currentMonth][zoneKey] = schedule[currentMonth][zoneKey].filter(
+    (group) => {
+      return group.every((item) => !isNaN(item) && item.trim() !== "");
+    }
+  );
+
+  schedule[currentMonth][zoneKey].push([text]);
+  localStorage.setItem("schedule", JSON.stringify(schedule));
+
+  document.getElementById(zoneKey).textContent = text;
+  noteUI(false);
+}
 document.addEventListener("click", async function (event) {
   manageItemClick(event.target.closest(".item"));
 });
@@ -400,4 +515,6 @@ window.deleteRecipe = deleteRecipe;
 window.changeRecipeImg = changeRecipeImg;
 window.handleMonthOffset = handleMonthOffset;
 window.manageItemClick = manageItemClick;
+window.noteUI = noteUI;
+window.submitNote = submitNote;
 export { populateCalendar };

@@ -73,6 +73,13 @@
         image</button>
       <button class="button" onclick="deleteRecipe()" style="padding-inline: 20px;">Delete this recipe</button>
     </div>
+    <div class="note-frame" id="note-frame" style="display: none;">
+      <ion-icon class="nf-icon" onclick="noteUI(false)" name="close-outline" style="z-index: 500;"></ion-icon>
+      <h3 id="nf-title">Change this day's note</h3>
+      <h4 id="nf-name">Day of -</h4>
+      <textarea id="nf-textarea" placeholder="put your text here..."></textarea>
+      <button class="button" onclick="submitNote()" style="padding-inline: 20px;">Done</button>
+    </div>
     <div class="logoTitle">
       <div>
         <img class="logo-img" id="logo" src="./IMG/Logo.png">
