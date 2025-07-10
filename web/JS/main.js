@@ -149,16 +149,13 @@ async function populateCalendar() {
               try {
                 const zoneEl = document.getElementById(zone);
                 console.log(food);
-                // Check if this is a note (not a recipe ID)
                 const isNote = !document.getElementById(food);
 
                 if (isNote) {
-                  // This is a note - set the zone's text content
                   if (zoneEl) {
-                    zoneEl.textContent = food;
+                    zoneEl.textContent = "★ " + food;
                   }
                 } else {
-                  // This is a recipe - clone and append as before
                   const foodEl = document.getElementById(food).cloneNode(true);
                   if (zoneEl && foodEl) {
                     foodEl.classList = "item item-placed";
@@ -448,11 +445,11 @@ function noteUI(mode) {
 }
 
 function submitNote() {
-  const day = window.DAY_NAME; // 1-31, day number
-  const text = document.getElementById("nf-textarea")?.value; // note text
+  const day = window.DAY_NAME;
+  const text = document.getElementById("nf-textarea")?.value;
 
   if (!text || text.trim() === "") {
-    noteUI(false); // close UI
+    noteUI(false);
     return;
   }
 
@@ -486,7 +483,7 @@ function submitNote() {
   schedule[currentMonth][zoneKey].push([text]);
   localStorage.setItem("schedule", JSON.stringify(schedule));
 
-  document.getElementById(zoneKey).textContent = text;
+  document.getElementById(zoneKey).textContent = "★ " + text;
   noteUI(false);
 }
 document.addEventListener("click", async function (event) {
