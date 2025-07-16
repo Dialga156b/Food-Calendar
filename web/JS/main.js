@@ -399,7 +399,7 @@ function deleteRecipe() {
     }
   }
   populateCalendar();
-
+  showRS(false);
   console.log(`Recipe with ID ${recipeId} has been completely deleted`);
 }
 
