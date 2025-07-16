@@ -39,16 +39,16 @@
     height: 100%;
 }
 
-.recipe-settings-frame,
+.recipe-settings-frame h3,
 .note-frame h3 {
     margin: 5px;
     font-size: 25px;
 }
 
-.recipe-settings-frame,
+.recipe-settings-frame h4,
 .note-frame h4 {
     margin: 0;
-    margin-bottom: 5px;
+    margin-bottom: 5px !important;
     text-align: center;
 }
 

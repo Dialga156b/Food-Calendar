@@ -9,6 +9,13 @@ async function showRS(mode, id = false) {
     if (id) {
       const recipes = JSON.parse(localStorage.getItem("recipes")) || {};
       const recipe = recipes[id];
+      const site = recipe.site;
+
+      if (site) {
+        document.getElementById("btn-web").style.display = "block";
+      } else {
+        document.getElementById("btn-web").style.display = "none";
+      }
 
       if (recipe && recipe.recipe_name) {
         RSName.textContent = recipe.recipe_name;
@@ -28,4 +35,17 @@ async function showRS(mode, id = false) {
   }
 }
 
+function website() {
+  const recipeId = window.CR_ID;
+
+  const recipes = JSON.parse(localStorage.getItem("recipes") || "{}");
+
+  if (recipes.hasOwnProperty(recipeId) && recipes[recipeId].site) {
+    window.open(recipes[recipeId].site);
+  } else {
+    alert("You're screwing with me arent ya");
+  }
+}
+
 window.showRS = showRS;
+window.website = website;
