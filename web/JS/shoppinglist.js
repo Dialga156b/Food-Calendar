@@ -31,8 +31,11 @@ async function genShoppingList(days) {
     const recipes = schedule[currentMonth]?.[`zone_${currentDay}`];
     for (let foodIndex = 0; foodIndex < recipes?.length; foodIndex++) {
       const recipeID = recipes[foodIndex][0];
-      var recipeIngredients = getRecipeInfoFromID(recipeID).ingredients;
-      list.push(...recipeIngredients);
+      var recipe = getRecipeInfoFromID(recipeID);
+      if (recipe) {
+        var recipeIngredients = getRecipeInfoFromID(recipeID).ingredients;
+        list.push(...recipeIngredients);
+      }
     }
     currentDay++;
   }
