@@ -10,11 +10,13 @@ async function showRS(mode, id = false) {
       const recipes = JSON.parse(localStorage.getItem("recipes")) || {};
       const recipe = recipes[id];
       const site = recipe.site;
-
-      if (site) {
-        document.getElementById("btn-web").style.display = "block";
-      } else {
-        document.getElementById("btn-web").style.display = "none";
+      const siteBtn = document.getElementById("btn-web");
+      if (siteBtn) {
+        if (site) {
+          siteBtn.style.display = "block";
+        } else {
+          siteBtn.style.display = "none";
+        }
       }
 
       if (recipe && recipe.recipe_name) {
