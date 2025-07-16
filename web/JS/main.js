@@ -144,28 +144,35 @@ async function populateCalendar() {
         const zones = foods[monthIndex];
         for (const zone in zones) {
           const foodGroups = zones[zone];
+          const zoneEl = document.getElementById(zone);
+
+          // note placement has to go first due to textcontent removing all html when setting it
+
           foodGroups?.forEach((group) => {
             group.forEach((food) => {
               try {
-                const zoneEl = document.getElementById(zone);
-                console.log(food);
                 const isNote = !document.getElementById(food);
+                if (isNote && zoneEl) {
+                  console.log(zoneEl.textContent);
+                  zoneEl.textContent = "★ " + food;
+                  console.log(zoneEl.textContent);
+                }
+              } catch {}
+            });
+          });
 
-                if (isNote) {
-                  if (zoneEl) {
-                    zoneEl.textContent = "★ " + food;
-                  }
-                } else {
+          foodGroups?.forEach((group) => {
+            group.forEach((food) => {
+              try {
+                const isNote = !document.getElementById(food);
+                if (!isNote) {
                   const foodEl = document.getElementById(food).cloneNode(true);
                   if (zoneEl && foodEl) {
                     foodEl.classList = "item item-placed";
                     zoneEl.appendChild(foodEl);
                   }
                 }
-              } catch (err) {
-                //console.warn(err);
-                //do nothing. har har
-              }
+              } catch {}
             });
           });
         }
@@ -175,7 +182,6 @@ async function populateCalendar() {
     console.log("FAILED!");
   }
 }
-
 function deleteScheduledRecipe(month, day, id) {
   console.table(month, day, id);
   let schedule = JSON.parse(localStorage.getItem("schedule")) || {};
@@ -469,18 +475,30 @@ function submitNote() {
     schedule[currentMonth][zoneKey] = [];
   }
 
+  // Filter out existing notes (keep only recipe IDs - numeric items)
   schedule[currentMonth][zoneKey] = schedule[currentMonth][zoneKey].filter(
     (group) => {
       return group.every((item) => !isNaN(item) && item.trim() !== "");
     }
   );
 
-  schedule[currentMonth][zoneKey].push([text]);
-  localStorage.setItem("schedule", JSON.stringify(schedule));
+  // Handle empty input - delete existing note
+  if (!text || text.trim() === "") {
+    // Note is already deleted by the filter above
+    // Set textContent to empty string (no star)
+    document.getElementById(zoneKey).textContent = "";
+  } else {
+    // Add the new note
+    schedule[currentMonth][zoneKey].push([text]);
+    // Update UI to show star + note
+    document.getElementById(zoneKey).textContent = "★ " + text;
+  }
 
-  document.getElementById(zoneKey).textContent = "★ " + text;
+  localStorage.setItem("schedule", JSON.stringify(schedule));
+  populateCalendar();
   noteUI(false);
 }
+
 document.addEventListener("click", async function (event) {
   manageItemClick(event.target.closest(".item"));
 });
