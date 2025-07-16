@@ -448,11 +448,6 @@ function submitNote() {
   const day = window.DAY_NAME;
   const text = document.getElementById("nf-textarea")?.value;
 
-  if (!text || text.trim() === "") {
-    noteUI(false);
-    return;
-  }
-
   let schedule = {};
   try {
     const storedSchedule = localStorage.getItem("schedule");
