@@ -13,6 +13,10 @@ function loadRecipe(ids) {
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];
       const recipe = recipes[id];
+      console.warn(recipe);
+      if (!recipe) {
+        continue;
+      }
       const thisRecipe = rTemplate.cloneNode(true);
       const rName = thisRecipe.querySelector("#tr-name");
       const rDesc = thisRecipe.querySelector("#tr-desc");
@@ -63,7 +67,8 @@ function loadRecipe(ids) {
         thisRecipe.querySelector("#instructions").appendChild(thisStepEl);
         const thisStep = recipe.instructions[index];
         thisStepEl.children[0].textContent = index + 1;
-        thisStepEl.children[1].textContent = thisStep.description;
+        var description = thisStep.description || thisStep;
+        thisStepEl.children[1].textContent = description;
       }
     }
   }
