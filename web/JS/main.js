@@ -429,7 +429,7 @@ function noteUI(mode) {
     noteFrame.style.display = "flex";
 
     const today = new Date();
-    const date = new Date(today.getFullYear(), today.getMonth(), day);
+    const date = new Date(today.getFullYear(), newMonth, day);
     const dateString = date.toLocaleDateString("en-US", {
       weekday: "long",
       year: "numeric",
@@ -438,6 +438,18 @@ function noteUI(mode) {
     });
 
     noteText.textContent = `Day of ${dateString}`;
+
+    const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+    const zoneKey = `zone_${day}`;
+    const existingNote =
+      schedule[newMonth]?.[zoneKey]?.find((group) =>
+        group.some((item) => isNaN(item))
+      )?.[0] || "";
+
+    const textarea = document.getElementById("nf-textarea");
+    if (textarea) {
+      textarea.value = existingNote;
+    }
 
     setTimeout(() => {
       noteFrame.classList.add("visible");
