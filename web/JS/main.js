@@ -465,32 +465,26 @@ function submitNote() {
     schedule = {};
   }
 
-  const currentMonth = new Date().getMonth();
-  if (!schedule[currentMonth]) {
-    schedule[currentMonth] = {};
+  // ✅ FIX: Use newMonth instead of new Date().getMonth()
+  if (!schedule[newMonth]) {
+    schedule[newMonth] = {};
   }
 
   const zoneKey = `zone_${day}`;
-  if (!schedule[currentMonth][zoneKey]) {
-    schedule[currentMonth][zoneKey] = [];
+  if (!schedule[newMonth][zoneKey]) {
+    schedule[newMonth][zoneKey] = [];
   }
 
-  // Filter out existing notes (keep only recipe IDs - numeric items)
-  schedule[currentMonth][zoneKey] = schedule[currentMonth][zoneKey].filter(
-    (group) => {
-      return group.every((item) => !isNaN(item) && item.trim() !== "");
-    }
-  );
+  // Filter out existing notes
+  schedule[newMonth][zoneKey] = schedule[newMonth][zoneKey].filter((group) => {
+    return group.every((item) => !isNaN(item) && item.trim() !== "");
+  });
 
   // Handle empty input - delete existing note
   if (!text || text.trim() === "") {
-    // Note is already deleted by the filter above
-    // Set textContent to empty string (no star)
     document.getElementById(zoneKey).textContent = "";
   } else {
-    // Add the new note
-    schedule[currentMonth][zoneKey].push([text]);
-    // Update UI to show star + note
+    schedule[newMonth][zoneKey].push([text]);
     document.getElementById(zoneKey).textContent = "★ " + text;
   }
 
