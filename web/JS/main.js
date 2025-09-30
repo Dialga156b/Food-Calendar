@@ -465,7 +465,6 @@ function submitNote() {
     schedule = {};
   }
 
-  // ✅ FIX: Use newMonth instead of new Date().getMonth()
   if (!schedule[newMonth]) {
     schedule[newMonth] = {};
   }
@@ -475,12 +474,12 @@ function submitNote() {
     schedule[newMonth][zoneKey] = [];
   }
 
-  // Filter out existing notes
+  // filter out existing notes
   schedule[newMonth][zoneKey] = schedule[newMonth][zoneKey].filter((group) => {
     return group.every((item) => !isNaN(item) && item.trim() !== "");
   });
 
-  // Handle empty input - delete existing note
+  // Hempty input, delete existing note
   if (!text || text.trim() === "") {
     document.getElementById(zoneKey).textContent = "";
   } else {
