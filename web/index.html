@@ -74,9 +74,13 @@
       <button class="button" id="btn-web" onclick="website()" style="padding-inline: 20px; display: none;">Go to this
         recipe's
         website</button>
+      <button class="button" id="btn-viewISP" onclick="viewISP()" style="padding-inline: 20px;">View recipe in right
+        side
+        panel</button>
       <button class="button" id="btn-add-web" onclick="addRecipeWebsite()"
         style="padding-inline: 20px; display: none;">Add an
         associated website to this recipe</button>
+      </button>
       <button class="button" onclick="deleteRecipe()" style="padding-inline: 20px;">Delete this recipe</button>
     </div>
     <div class="note-frame" id="note-frame" style="display: none;">
@@ -94,10 +98,14 @@
       </div>
     </div>
     <div class="title">
-      <ion-icon name="chevron-back-outline" onclick="handleMonthOffset(-1)"></ion-icon>
-      <h3 id="monthName">May 2025</h3>
-      <ion-icon name="chevron-forward-outline" onclick="handleMonthOffset(1)"></ion-icon>
+      <div class="title-row">
+        <ion-icon name="chevron-back-outline" onclick="handleMonthOffset(-1)"></ion-icon>
+        <h3 id="monthName">May 2025</h3>
+        <ion-icon name="chevron-forward-outline" onclick="handleMonthOffset(1)"></ion-icon>
+      </div>
+      <h4 id="year" class="year">2025</h4>
     </div>
+
     <div class="calendar">
       <table>
         <thead>
@@ -301,7 +309,7 @@
           </div>
         </div>
         <button class="button btn-danger"
-          onclick="if (confirm('Are you sure?')) {localStorage.clear(); location.reload();} ">
+          onclick="if (confirm('Are you sure?')) {if (confirm('Are you REEEALY sure?')) { localStorage.clear(); location.reload();}} ">
           Delete all save data
         </button>
       </div>

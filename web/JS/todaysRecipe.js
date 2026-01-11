@@ -1,13 +1,36 @@
-function loadRecipe(ids) {
+function loadDay(date) {
+  const currentMonth = date.getMonth();
+  const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+  const monthSchedule = schedule[date.getFullYear()][currentMonth];
+  const currentDay = date.getDate();
+  const recipes = monthSchedule?.[`zone_${currentDay}`];
+
+  const day = date.toLocaleString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  if (recipes) {
+    loadRecipe(recipes, day);
+  } else {
+    loadRecipe(false, day);
+  }
+  setSidebarTab("todaysRecipe");
+}
+
+function loadRecipe(ids, day) {
+  console.log(JSON.stringify(ids));
   const recipes = JSON.parse(localStorage.getItem("recipes")) || {};
   document.querySelectorAll("#tr-active").forEach((element) => {
     element.remove();
   });
   const headerLbl = document.getElementById("tr-header");
   if (!ids) {
-    headerLbl.textContent = "Nothing scheduled for today";
+    headerLbl.textContent = `Nothing scheduled for ${day}`;
   } else {
-    headerLbl.textContent = "Today";
+    headerLbl.textContent = day;
     const tab = document.getElementById("recipe-scroll");
     const rTemplate = document.getElementById("tr-template");
     for (let index = 0; index < ids.length; index++) {
@@ -73,3 +96,5 @@ function loadRecipe(ids) {
     }
   }
 }
+
+loadDay(new Date());

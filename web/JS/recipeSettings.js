@@ -3,6 +3,8 @@ const RSTitle = document.getElementById("rs-title");
 const closeBtn = document.getElementById("rs-icon");
 const RSName = document.getElementById("rs-name");
 
+const viewBtn = document.getElementById("btn-viewISP");
+
 async function showRS(mode, id = false) {
   if (mode) {
     QRFrame.style.display = "flex";
@@ -69,6 +71,18 @@ function addRecipeWebsite() {
   }
   showRS(false);
 }
+
+function viewISP() {
+  //isp means in side panel not internet service provider hahaha im so funny
+  loadRecipe(
+    [[window.CR_ID]],
+    JSON.parse(localStorage.getItem("recipes"))[window.CR_ID].recipe_name
+  );
+  setSidebarTab("todaysRecipe");
+  showRS(false);
+}
+
+window.viewISP = viewISP;
 window.showRS = showRS;
 window.website = website;
 window.addRecipeWebsite = addRecipeWebsite;

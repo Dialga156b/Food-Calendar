@@ -63,15 +63,22 @@ function createDayCell(day) {
   cell.appendChild(dropZone);
 
   const note = document.createElement("div");
-  note.className = "note";
+  note.className = "dayActionBtn note";
   note.id = "note";
   note.innerHTML = "<ion-icon name='document-outline'></ion-icon>";
+
+  const importIcon = document.createElement("div");
+  importIcon.className = "dayActionBtn importIcon";
+  importIcon.id = "importIcon";
+  importIcon.innerHTML = "<ion-icon name='arrow-forward-outline'></ion-icon>";
 
   cell.addEventListener("mouseenter", () => {
     hoverTimeout = setTimeout(() => {
       note.style.display = "flex";
+      importIcon.style.display = "flex";
       setTimeout(() => {
         note.classList.add("visible");
+        importIcon.classList.add("visible");
       }, 50);
     }, 700);
   });
@@ -79,8 +86,10 @@ function createDayCell(day) {
   cell.addEventListener("mouseleave", () => {
     clearTimeout(hoverTimeout);
     note.classList.remove("visible");
+    importIcon.classList.remove("visible");
     setTimeout(() => {
       note.style.display = "none";
+      importIcon.style.display = "none";
     }, 300);
   });
 
@@ -88,8 +97,13 @@ function createDayCell(day) {
     window.DAY_NAME = day;
     noteUI(true);
   });
+  importIcon.addEventListener("click", () => {
+    window.DAY_NAME = day;
+    loadDay(new Date(currentYear, newMonth, day));
+  });
 
   cell.appendChild(note);
+  cell.appendChild(importIcon);
   return cell;
 }
 
@@ -137,7 +151,8 @@ async function populateCalendar() {
     item.remove();
   });
   if (done) {
-    const foods = JSON.parse(localStorage.getItem("schedule")) || {};
+    const foods =
+      JSON.parse(localStorage.getItem("schedule"))[currentYear] || {};
     for (const monthIndex in foods) {
       if (monthIndex == newMonth) {
         // current month
@@ -185,19 +200,19 @@ async function populateCalendar() {
 function deleteScheduledRecipe(month, day, id) {
   console.table(month, day, id);
   let schedule = JSON.parse(localStorage.getItem("schedule")) || {};
-  if (schedule[month][day]) {
-    const indexToRemove = schedule[month][day].findIndex(
+  if (schedule[currentYear][month][day]) {
+    const indexToRemove = schedule[currentYear][month][day].findIndex(
       (entry) => entry[0] === id
     );
 
     if (indexToRemove !== -1) {
-      schedule[month][day].splice(indexToRemove, 1);
+      schedule[currentYear][month][day].splice(indexToRemove, 1);
       // only delete first occurence, this was a problem before
     }
 
-    if (schedule[month][day].length === 0) {
+    if (schedule[currentYear][month][day].length === 0) {
       console.log("deleted");
-      delete schedule[month][day];
+      delete schedule[currentYear][month][day];
       //delete day if it's empty
     }
   }
@@ -224,31 +239,27 @@ function onMoveEnd(event) {
     deleteScheduledRecipe(newMonth, oldDay, foodID);
   }
   let schedule = JSON.parse(localStorage.getItem("schedule")) || {};
-  if (!schedule[newMonth]) {
-    schedule[newMonth] = {};
+  if (!schedule[currentYear][newMonth]) {
+    schedule[currentYear][newMonth] = {};
     //create month
   }
   console.log(schedule);
-  if (!schedule[newMonth][newDay]) {
-    schedule[newMonth][newDay] = [];
+  if (!schedule[currentYear][newMonth][newDay]) {
+    schedule[currentYear][newMonth][newDay] = [];
     //create day
   }
 
-  schedule[newMonth][newDay].push([foodID]);
+  schedule[currentYear][newMonth][newDay].push([foodID]);
   document.getElementById("outdated-warning").style.display = "flex";
   const today = `zone_${new Date().getDate()}`;
   localStorage.setItem("schedule", JSON.stringify(schedule));
   item.classList.add("item-placed");
   if (oldDay == today || newDay == today) {
-    const currentDay = today;
-    const currentMonth = new Date().getMonth();
-    const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
-    const recipes = schedule[currentMonth][currentDay];
-    loadRecipe(recipes);
+    loadDay(new Date());
   }
 }
 
-function updateMonthName(index) {
+function updateDateDetails(index, year) {
   let monthNames = [
     "January",
     "February",
@@ -264,8 +275,12 @@ function updateMonthName(index) {
     "December",
   ];
   const title = document.getElementById("monthName");
+  const titleY = document.getElementById("year");
   if (title) {
     title.innerHTML = monthNames[index] ?? null;
+  }
+  if (titleY) {
+    titleY.innerHTML = year;
   }
 }
 
@@ -276,15 +291,25 @@ function handleMonthOffset(int) {
   tempDate.setMonth(currentMonth + currentMonthOffset);
   var y = tempDate.getFullYear();
   var m = tempDate.getMonth();
+  currentYear = y;
 
   var daysInMonth = new Date(y, m + 1, 0).getDate();
   var firstDate = new Date(y, m, 1);
   var firstDayIndex = firstDate.getDay();
-  console.log(m);
+  console.log(m, y);
+
+  var schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+  if (!schedule[currentYear]) {
+    schedule[currentYear] = {};
+  }
+
+  window.currentYear = currentYear;
+  localStorage.setItem("schedule", JSON.stringify(schedule));
+
   newMonth = m;
   generateCalendar(firstDayIndex, daysInMonth);
   populateCalendar();
-  updateMonthName(m);
+  updateDateDetails(m, y);
 }
 
 let currentActive = null;
@@ -367,8 +392,8 @@ function deleteRecipe() {
 
   let schedule = JSON.parse(localStorage.getItem("schedule")) || {};
 
-  for (const monthIndex in schedule) {
-    const month = schedule[monthIndex];
+  for (const monthIndex in schedule[currentYear]) {
+    const month = schedule[currentYear][monthIndex];
 
     for (const dayIndex in month) {
       const day = month[dayIndex];
@@ -382,7 +407,7 @@ function deleteRecipe() {
       }
     }
     if (Object.keys(month).length === 0) {
-      delete schedule[monthIndex];
+      delete schedule[currentYear][monthIndex];
     }
   }
   localStorage.setItem("schedule", JSON.stringify(schedule));
@@ -442,7 +467,7 @@ function noteUI(mode) {
     const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
     const zoneKey = `zone_${day}`;
     const existingNote =
-      schedule[newMonth]?.[zoneKey]?.find((group) =>
+      schedule[currentYear][newMonth]?.[zoneKey]?.find((group) =>
         group.some((item) => isNaN(item))
       )?.[0] || "";
 
@@ -477,17 +502,19 @@ function submitNote() {
     schedule = {};
   }
 
-  if (!schedule[newMonth]) {
-    schedule[newMonth] = {};
+  if (!schedule[currentYear][newMonth]) {
+    schedule[currentYear][newMonth] = {};
   }
 
   const zoneKey = `zone_${day}`;
-  if (!schedule[newMonth][zoneKey]) {
-    schedule[newMonth][zoneKey] = [];
+  if (!schedule[currentYear][newMonth][zoneKey]) {
+    schedule[currentYear][newMonth][zoneKey] = [];
   }
 
   // filter out existing notes
-  schedule[newMonth][zoneKey] = schedule[newMonth][zoneKey].filter((group) => {
+  schedule[currentYear][newMonth][zoneKey] = schedule[currentYear][newMonth][
+    zoneKey
+  ].filter((group) => {
     return group.every((item) => !isNaN(item) && item.trim() !== "");
   });
 
@@ -495,7 +522,7 @@ function submitNote() {
   if (!text || text.trim() === "") {
     document.getElementById(zoneKey).textContent = "";
   } else {
-    schedule[newMonth][zoneKey].push([text]);
+    schedule[currentYear][newMonth][zoneKey].push([text]);
     document.getElementById(zoneKey).textContent = "★ " + text;
   }
 
@@ -511,11 +538,13 @@ document.addEventListener("click", async function (event) {
 var currentMonthOffset = 0;
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth();
+var currentYear = currentDate.getFullYear();
 var newMonth = currentMonth;
 
 addEventListener("DOMContentLoaded", () => {
   handleMonthOffset(0);
 });
+
 document.addEventListener(
   "dragstart",
   function (event) {
@@ -526,6 +555,7 @@ document.addEventListener(
   },
   false
 );
+
 window.deleteRecipe = deleteRecipe;
 window.changeRecipeImg = changeRecipeImg;
 window.handleMonthOffset = handleMonthOffset;

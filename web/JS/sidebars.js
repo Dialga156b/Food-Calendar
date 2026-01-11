@@ -50,18 +50,6 @@ function setSidebarTab(tab) {
   shoppingListTab.style.display = "none";
   newRecipeTab.style.display = "none";
   document.getElementById(`${tab}Tab`).style.display = "flex";
-  if (tab === "todaysRecipe") {
-    const currentDay = new Date().getDate();
-    const currentMonth = new Date().getMonth();
-    const schedule = JSON.parse(localStorage.getItem("schedule")) || {};
-    const monthSchedule = schedule[currentMonth];
-    const recipes = monthSchedule?.[`zone_${currentDay}`];
-    if (recipes) {
-      loadRecipe(recipes);
-    } else {
-      loadRecipe(false);
-    }
-  }
 }
 
 function openWebsite() {

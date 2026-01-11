@@ -28,7 +28,8 @@ async function genShoppingList(days) {
       currentMonth += 1;
     }
 
-    const recipes = schedule[currentMonth]?.[`zone_${currentDay}`];
+    const recipes =
+      schedule[window.currentYear][currentMonth]?.[`zone_${currentDay}`];
     for (let foodIndex = 0; foodIndex < recipes?.length; foodIndex++) {
       const recipeID = recipes[foodIndex][0];
       var recipe = getRecipeInfoFromID(recipeID);
