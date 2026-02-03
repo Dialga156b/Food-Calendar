@@ -10,6 +10,7 @@
     margin-right: 0;
     transition: margin-right .6s ease;
     height: 100vh;
+    box-sizing: border-box;
 }
 
 .flag-right {
