@@ -1,3 +1,14 @@
+@media print {
+  .print-hide {
+    display: none !important;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 0mm;
+}
+
 .logo-img {
   aspect-ratio: 1;
   width: 50px;
